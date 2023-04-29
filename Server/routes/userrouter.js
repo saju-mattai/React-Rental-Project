@@ -1,0 +1,16 @@
+var express = require('express');
+var router = express.Router();
+const protect = require('../Middleware/jwt')
+
+const signup = require('../Controller/UserController/userlogin')
+const login = require('../Controller/UserController/userlogin')
+// const home = require('../Controller/UserController/userlogin')
+
+/* GET users listing. */ 
+router.route('/signup').post(signup.signup)
+router.route('/login').post(login.login)
+// router.route('/home').get(protect,home.home)
+
+
+
+module.exports = router;
