@@ -1,14 +1,18 @@
 var express = require('express');
 var router = express.Router();
 const protect = require('../Middleware/jwt')
+const upload = require('../Utils/multer')
+
 
 const signup = require('../Controller/UserController/userlogin')
 const login = require('../Controller/UserController/userlogin')
+const updataprofile = require('../Controller/UserController/adduserProfile')
 // const home = require('../Controller/UserController/userlogin')
 
-/* GET users listing. */ 
+/* GET users listing. */
 router.route('/signup').post(signup.signup)
 router.route('/login').post(login.login)
+router.route('/addprofile').post(upload.single('image'), updataprofile.uploadprofile)
 // router.route('/home').get(protect,home.home)
 
 

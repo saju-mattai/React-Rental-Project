@@ -9,7 +9,7 @@ const UserInfo = JSON.parse(localStorage.getItem("UserInfo"))
 
 
 const initialstate = {
-    adminLoginReducer: { adminLoginData: AdminInfo },
+    AdminLoginReducer: { adminLoginData: AdminInfo },
     UserLoginReducer:{loginuserdata :UserInfo}
 }
 

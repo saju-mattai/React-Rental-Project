@@ -1,6 +1,7 @@
 import { Admin_Action_Types } from "../../Constants/Admin_Constants/AdminConstants";
 
 export const AdminLoginReducer = (state = {}, { type, payload }) => {
+    console.log('payload', payload);
     switch (type) {
         case Admin_Action_Types.ADMIN_LOGIN_REQUEST:
             return {
@@ -17,6 +18,10 @@ export const AdminLoginReducer = (state = {}, { type, payload }) => {
             return {
                 loading: false,
                 adminLoginErr: payload
+            }
+        case Admin_Action_Types.ADMIN_LOGOUT:
+            return {
+                loading: false
             }
 
         default: return state

@@ -30,6 +30,7 @@ import SummarizeIcon from '@mui/icons-material/Summarize';
 
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { LogOutAction } from '../../Redux/Actions/Admin_Action/AdminLogoutAction';
 // import { adminLogoutAction } from '../../redux/Actions/ADMIN_ACTIONS/LogoutAction';
 
 const drawerWidth = 240;
@@ -114,15 +115,15 @@ export default function AdminDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  
+
   const handleLogout = () => {
-    // dispatch(adminLogoutAction())
+    dispatch(LogOutAction())
   }
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open} style = {{backgroundColor : "#fed250" , color : "black"}}>
+      <AppBar position="fixed" open={open} style={{ backgroundColor: "#f6f0e7", color: "black" }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -150,16 +151,16 @@ export default function AdminDrawer() {
         <Divider />
         <List>
           {[
-            {name : "Dashboard" , icon : <DashboardIcon/>},
-            {name : "Users" , icon : <UsersIcon/>},
+            { name: "Dashboard", icon: <DashboardIcon /> },
+            { name: "Users", icon: <UsersIcon /> },
             // {name : "Bikes" , icon : <TwoWheelerIcon/>},
             // {name : "Bookings" , icon : <SportsMotorsportsIcon/>},
-            // {name : "Add Bikes" , icon : <AddIcon/>},
+            { name: "Add Bikes", icon: <AddIcon /> },
             // {name : "Rent Requests" , icon : <RequestPageIcon/>},
             // {name : "Locations" , icon : <LocationOnIcon/>},
             // {name : "Coupons" , icon : <LocalOfferIcon/>},
             // {name : "Sales Report", icon : <SummarizeIcon/>},
-            // {name : "Logout" , icon : <LogoutIcon/>}
+            { name: "Logout", icon: <LogoutIcon /> }
 
           ].map((text, index) => (
             <ListItem key={text.name} disablePadding sx={{ display: 'block' }}>
@@ -170,7 +171,7 @@ export default function AdminDrawer() {
                   px: 2.5,
                 }}
               >
-               
+
                 <ListItemIcon
                   sx={{
                     minWidth: 0,
@@ -178,30 +179,30 @@ export default function AdminDrawer() {
                     justifyContent: 'center',
                   }}
                 >
-                   {text.icon}
-      
+                  {text.icon}
+
                 </ListItemIcon>
-                <ListItemText primary={text.name} sx={{ opacity: open ? 1 : 0 }} 
-                 onClick = {() => {
-                  let text2 = text.name.toLowerCase()
-                  text2 === "dashboard" && navigate('/adminhome')
-                  text2 === 'users' && navigate('/showalluser')
-                //   text2 === 'bikes' && navigate('/admin/bikes')
-                //   text2 === 'add bikes' && navigate('/admin/add-bikes')
-                //   text2 === 'bookings' && navigate('/admin/bookings')
-                //   text2 === 'rent requests' && navigate('/admin/rent-requests')
-                //   text2 === 'locations' && navigate('/admin/locations')
-                //   text2 === 'add location' && navigate('/admin/add-location')
-                //   text2 === 'coupons' && navigate('/admin/coupons')
-                //   text2 === 'sales report' && navigate('/admin/sales-report')
-                //   text2 === 'logout' && handleLogout()
-                 }}
+                <ListItemText primary={text.name} sx={{ opacity: open ? 1 : 0 }}
+                  onClick={() => {
+                    let text2 = text.name.toLowerCase()
+                    text2 === "dashboard" && navigate('/adminhome')
+                    text2 === 'users' && navigate('/showalluser')
+                    //   text2 === 'bikes' && navigate('/admin/bikes')
+                    text2 === 'add bikes' && navigate('/admin/add-bikes')
+                    //   text2 === 'bookings' && navigate('/admin/bookings')
+                    //   text2 === 'rent requests' && navigate('/admin/rent-requests')
+                    //   text2 === 'locations' && navigate('/admin/locations')
+                    //   text2 === 'add location' && navigate('/admin/add-location')
+                    //   text2 === 'coupons' && navigate('/admin/coupons')
+                    //   text2 === 'sales report' && navigate('/admin/sales-report')
+                    text2 === 'logout' && handleLogout()
+                  }}
                 />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
-       
+
       </Drawer>
     </Box>
   );

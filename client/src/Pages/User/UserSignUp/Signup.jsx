@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Signup.css'
-// import TextField from '@mui/material/TextField'
+import TextField from '@mui/material/TextField'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { UserSignUp } from '../../../Redux/Actions/User_Action/SignUpAction';
@@ -56,12 +56,22 @@ function Signup() {
 
                 <MDBCol col='4' md='6'>
 
-                    <MDBInput onChange={(e) => setName(e.target.value)} label='Name' id='formControlLg' type='text' size="md" />
+                    {/* <MDBInput onChange={(e) => setName(e.target.value)} label='Name' id='formControlLg' type='text' size="md" />
                     <MDBInput onChange={(e) => setEmail(e.target.value)} label='Email address' id='formControlLg' type='email' size="md" />
+
                     <MDBInput onChange={(e) => setPlace(e.target.value)} label='Place' id='formControlLg' type='text' size="md" />
                     <MDBInput onChange={(e) => setPhone(e.target.value)} label='Phone' id='formControlLg' type='number' size="md" />
                     <MDBInput onChange={(e) => setPassword(e.target.value)} label='Password' id='formControlLg' type='password' size="md" />
-                    <MDBInput onChange={(e) => setConfirmPassword(e.target.value)} label='confirm password' id='formControlLg' type='password' size="md" />
+                    <MDBInput onChange={(e) => setConfirmPassword(e.target.value)} label='confirm password' id='formControlLg' type='password' size="md" /> */}
+
+                    <TextField onChange={(e) => setName(e.target.value)} style={{ marginBottom: "15px", width: "90%" }} id="outlined-basic" type="text" label="Name" variant="outlined" />
+                    <TextField onChange={(e) => setEmail(e.target.value)} style={{ marginBottom: "15px", width: "90%" }} id="outlined-basic" type="email" label="Email" variant="outlined" />
+                    <TextField onChange={(e) => setPlace(e.target.value)} style={{ marginBottom: "15px", width: "90%" }} id="outlined-basic" type="text" label="Place" variant="outlined" />
+                    <TextField onChange={(e) => setPhone(e.target.value)} style={{ marginBottom: "15px", width: "90%" }} id="outlined-basic" type="number" label="Phone" variant="outlined" />
+                    <TextField onChange={(e) => setPassword(e.target.value)} style={{ marginBottom: "15px", width: "90%" }} id="outlined-basic" type="password" label="Password" variant="outlined" />
+                    <TextField onChange={(e) => setConfirmPassword(e.target.value)} style={{ marginBottom: "15px", width: "90%" }} id="outlined-basic" type="password" label="Confirm Password" variant="outlined" />
+
+
                     {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" style={{width:10px}} /> */}
 
 
@@ -71,15 +81,18 @@ function Signup() {
                     </div> */}
 
                     {/* <button onClick={handleSubmit} className="mb-4 w-100" size="lg">Sign Up</button> */}
-                    <Button onClick={handleSubmit}  variant="outlined" color="success">
+                    {/* <Button onClick={handleSubmit} variant="outlined" color="success">
+                        Sign Up
+                    </Button> */}
+                    <Button onClick={handleSubmit} style={{ marginBottom: "4px", width: "50%", marginLeft: "9em" }} variant="outlined">
                     Sign Up
-                </Button>
+                    </Button>
 
-                {/* <div className="divider d-flex align-items-center my-4">
+                    {/* <div className="divider d-flex align-items-center my-4">
                         <p className="text-center fw-bold mx-3 mb-0">OR</p>
                     </div> */}
 
-                {/* <MDBBtn className="mb-4 w-100" size="lg" style={{ backgroundColor: '#3b5998' }}>
+                    {/* <MDBBtn className="mb-4 w-100" size="lg" style={{ backgroundColor: '#3b5998' }}>
                         <MDBIcon fab icon="facebook-f" className="mx-2" />
                         Continue with facebook
                     </MDBBtn>
@@ -89,9 +102,9 @@ function Signup() {
                         Continue with twitter
                     </MDBBtn> */}
 
-            </MDBCol>
+                </MDBCol>
 
-        </MDBRow>
+            </MDBRow>
 
         </MDBContainer >
         // </div>

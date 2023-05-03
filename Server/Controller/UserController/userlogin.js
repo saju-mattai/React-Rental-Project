@@ -20,21 +20,16 @@ exports.signup = async (req, res) => {
         }
 
         let emailExists = await UserModel.findOne({ email: details.email })
-
         let phoneExist = await UserModel.findOne({ phone: details.phone })
 
-        console.log(emailExists, 'userExists');
-        console.log(phoneExist, 'phoneExist');
+
 
         if (emailExists && phoneExist) {
             res.status(400).json("Email  AND Phone Already Exist")
-            console.log('Email  AND Phone Already Exist');
         } else if (emailExists && !phoneExist) {
             res.status(400).json("Email Already Exist")
-            console.log('Email Already Exi');
         } else if (!emailExists && phoneExist) {
             res.status(400).json("Phone Number Already Exist")
-            console.log('phone Already Exist');
         } else {
             UserModel.create(details).then((data) => {
                 let result = {
@@ -108,26 +103,41 @@ exports.signup = async (req, res) => {
 exports.login = (req, res) => {
     try {
         UserModel.findOne({ email: req.body.email }).then((response) => {
-            if (response) {
-                bcrypt.compare(req.body.password, response.password, function (err, result) {
-                    if (result) {
-                        let data = {
-                            name: response.name,
-                            email: response.email,
-                            token: generateToken(response._id)
-                        }
+            // console.log(response);
 
-                        res.status(201).json({ data, MESSAGE: "login successfully" })
-                    }
-                    else {
-                        res.status(400).json("Incorrect password")
-                    }
-                });
+            if (response) {
+                const { status } = response
+
+                if (status === true) {
+                    bcrypt.compare(req.body.password, response.password, function (err, result) {
+                        if (result) {
+                            let data = {
+                                name: response.name,
+                                email: response.email,
+                                place: response.place,
+                                phone: response.phone,
+                                image: response.image,
+                                id: response._id,
+                                token: generateToken(response._id)
+                            }
+
+                            res.status(201).json({ data, MESSAGE: "login successfully" })
+                        }
+                        else {
+                            res.status(400).json("Incorrect password")
+                        }
+                    });
+                } else {
+                    res.status(400).json("Admin Restricted")
+                }
+
             } else {
                 res.status(400).json("Invalid Email")
             }
+
         })
     } catch (error) {
+        console.log('error', error);
         res.status(400).json(error)
     }
 }

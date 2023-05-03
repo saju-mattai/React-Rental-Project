@@ -38,17 +38,15 @@ exports.Adminlogin = (req, res) => {
                         res.status(200).json(data)
                     } 
                     else {
-                        console.log('cc');
+                        console.log('cc'); 
                         res.status(400).json({msg:"Incorrect password"})
                     }
                 });
             } else {
-                console.log('xxxxxxxxx');
                 res.status(400).json({msg:"Invalid Email"})
             }
         })
     } catch (error) {
-        console.log('llllllllll');
         res.status(400).json(error)
     }
 }

@@ -4,6 +4,8 @@ const fs = require('fs')
 const cloudinary = require('../../Utils/cloudinary')
 
 exports.addvehicle = async (req, res) => {
+    console.log("sasasas",req.body);
+    console.log("file",req.files);
     try {
         const uploader = async (path) => await cloudinary.uploads(path, 'Images');
         if (req.method === 'POST') {
@@ -17,13 +19,12 @@ exports.addvehicle = async (req, res) => {
                 fs.unlinkSync(path)
             }
 
-
-            const { Vname, Vmodel, Vbrand, VengineNumber, Vcolor, Vfuel, Vdesc, Vphoto } = req.body
+            const { Vname, Vmodel, Vbrand, Vprice, Vcolor, Vfuel, Vdesc, Vphoto } = req.body
             const vehicleDetails = {
                 Vname,
                 Vmodel,
                 Vbrand,
-                VengineNumber,
+                Vprice,
                 Vcolor,
                 Vfuel,
                 Vdesc,

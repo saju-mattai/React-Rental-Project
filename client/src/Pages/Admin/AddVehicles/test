@@ -1,0 +1,73 @@
+  <Box
+            component="form"
+            sx={{  border: 1,
+                '& .MuiTextField-root': { m: 1, width: '25ch'  },
+            }}
+            noValidate
+            autoComplete="off"
+        >
+
+
+
+            <Box className="col-md-8"  >
+                <TextField
+                    id="outlined-multiline-flexible"
+                    label="Multiline"
+                    multiline
+                    // maxRows={3}
+                    style={{ marginTop: '4rem', marginLeft: '4rem', float: 'left', width: '40%' }}
+                />
+            </Box>
+            <Box className="col-md-8">
+                <TextField
+                    id="outlined-multiline-flexible"
+                    label="Multiline"
+                    multiline
+                    // maxRows={3}
+                    style={{ marginTop: '4rem', marginLeft: '2rem', float: 'left', width: '40%' }}
+                />
+            </Box>
+            <Box className="col-md-8 mb-">
+                <TextField
+                    id="outlined-multiline-flexible"
+                    label="Multiline"
+                    multiline
+                    // maxRows={3}
+                    style={{ marginLeft: '4rem', float: 'left', width: '40%' }}
+                />
+            </Box>
+            <Box className="col-md-8">
+                <TextField
+                    id="outlined-multiline-flexible"
+                    label="Multiline"
+                    multiline
+                    // maxRows={3}
+                    style={{ marginLeft: '2rem', float: 'left', width: '40%' }}
+
+                />
+            </Box>
+            <Box className="col-md-8">
+                <TextField
+                    id="outlined-multiline-flexible"
+                    label="Multiline"
+                    multiline
+                    // maxRows={3}
+                    style={{ marginLeft: '4rem', float: 'left', width: '40%' }}
+
+                />
+            </Box>
+            <Box className="col-md-8">
+                <TextField
+                    id="outlined-multiline-flexible"
+                    label="Multiline"
+                    multiline
+                    // maxRows={3}
+                    style={{ marginLeft: '2rem', float: 'left', width: '40%' }}
+
+                />
+            </Box>
+
+
+                
+
+        </Box>

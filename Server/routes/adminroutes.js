@@ -15,7 +15,7 @@ const ShowAllUSer = require('../Controller/AdminController/ShowAllUser')
 router.route('/adminsignup').post(adminsignup.Adminsignup)
 router.route('/adminlogin').post(adminsignup.Adminlogin)
 router.route('/blockunblock').put(blockunblock.blockunblock)
-router.route('/addvehicle').post(upload.array('image'), addvehicle.addvehicle)
+router.route('/addvehicle').post(upload.array('images'), addvehicle.addvehicle)
 router.route('/ShowAllUSer').get(ShowAllUSer.ShowAllUSer)
 
 

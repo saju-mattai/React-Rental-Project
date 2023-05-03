@@ -27,15 +27,15 @@ export default function ShowAllUser() {
 
     return (
 
-        <div className="container">
+        <div className='mt-5  col-md-6"  container ' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }} >
             <AdminDrawer />
-            <div style={{ marginTop: '6em' }} className="maintable">
+            <div style={{ marginTop: '6em', width: '75%' }} className="maintable">
                 <MDBTable bordered>
                     <MDBTableHead>
 
 
                         <tr>
-                            <th scope='col'>#</th>
+                            <th scope='col'>No</th>
                             <th scope='col'>Name</th>
                             <th scope='col'>Email</th>
                             <th scope='col'>Place</th>
