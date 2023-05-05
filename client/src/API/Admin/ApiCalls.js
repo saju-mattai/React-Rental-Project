@@ -22,3 +22,4 @@ export const AdminLoginApi = (email, password) => API.post('/adminlogin', { emai
 export const ShowAllUSerApi = () => API.get('/ShowAllUSer', {}, config)
 export const BlockUnblockApi = (id) => API.put(`/blockunblock?id=${id}`, config)
 export const AdminAddVehicleApi = (formData) => API.post('/addvehicle', formData, configFormData)
+export const ShowAllVehicleApi = () => API.get('/showvehicle', config)

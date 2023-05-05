@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-// import './ProfileSection.css'
+import React, { useEffect, useState } from 'react'
 import Button from '@mui/material/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -9,19 +8,24 @@ import { MDBCardImage } from 'mdb-react-ui-kit';
 function ProfileSection() {
     const [photo, setPhoto] = useState('')
     const navigate = useNavigate()
-    const dispacth = useDispatch()
+    const dispatch = useDispatch()
 
-    const UserData = useSelector((state) => state.UserLoginReducer.loginuserdata)
+    // const UserData = useSelector((state) => state.UserLoginReducer.loginuserdata)
 
-    const image = useSelector((state) => state.ProfileUploadReducer.ImageData)
+    // const image = useSelector((state) => state.ProfileUploadReducer.ImageData)
+    const userData = JSON.parse(localStorage.getItem('UserInfo'))
+    useEffect(() => {
+        JSON.parse(localStorage.getItem('UserInfo'))
+    }, [dispatch])
+
+
     const handleUpload = (id) => {
+        console.log('IDd', id);
         const formData = new FormData
         formData.append("image", photo)
 
-        for (const [key, value] of formData.entries()) {
-            console.log(`${key}: ${value}`);
-        }
-        dispacth(uploadprofileAction(id, formData))
+
+        dispatch(uploadprofileAction(id, formData))
     }
 
 
@@ -35,8 +39,8 @@ function ProfileSection() {
                     <MDBCardImage
                         type="file"
                         src={
-                            image
-                                ? image?.image
+                            userData
+                                ? userData?.image
                                 : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
                         }
                         alt="avatar"
@@ -51,13 +55,13 @@ function ProfileSection() {
                         fluid
                     />
                 </div>
-                <div className="profile-name ">{UserData.data.name}</div>
+                <div className="profile-name ">{userData ? userData?.name : ""}</div>
                 <div className="rental-history ">
-                    <h2 className='ms-5 '>{UserData.data.email}</h2>
+                    <h2 className='ms-5 '>{userData ? userData?.email : ""}</h2>
                 </div>
                 <input onChange={(e) => setPhoto(e.target.files[0])} class="form-control form-control-sm" id="formFileSm" type="file" />
                 <div className="button mt-3">
-                    <Button onClick={() => { handleUpload(UserData.data.id) }} variant="outlined" size="small" >
+                    <Button onClick={() => { handleUpload(userData ? userData?.id : "") }} variant="outlined" size="small" >
                         Upload
                     </Button>
                 </div>

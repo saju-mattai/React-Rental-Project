@@ -37,6 +37,7 @@ exports.signup = async (req, res) => {
                     email: data.email,
                     place: data.place,
                     phone: data.phone,
+                    // image : data.image
                 }
                 res.status(200).json(result)
 
@@ -110,6 +111,7 @@ exports.login = (req, res) => {
 
                 if (status === true) {
                     bcrypt.compare(req.body.password, response.password, function (err, result) {
+                        console.log('RESPONSE',response);
                         if (result) {
                             let data = {
                                 name: response.name,
@@ -121,7 +123,7 @@ exports.login = (req, res) => {
                                 token: generateToken(response._id)
                             }
 
-                            res.status(201).json({ data, MESSAGE: "login successfully" })
+                            res.status(201).json(data)
                         }
                         else {
                             res.status(400).json("Incorrect password")

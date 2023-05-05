@@ -29,6 +29,7 @@ exports.uploadprofile = async (req, res) => {
                     UserModel.findOne({ _id: req.query.id }).then((data) => {
                         const { id, name, email, place, phone, image } = data
                         let result = { id, name, email, place, phone, image }
+                        console.log(result);
                         res.status(200).json(result)
                     })
                 })

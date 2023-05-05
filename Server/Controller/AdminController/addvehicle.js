@@ -3,7 +3,7 @@ const path = require('path')
 const fs = require('fs')
 const cloudinary = require('../../Utils/cloudinary')
 
-exports.addvehicle = async (req, res) => {
+exports.npmaddvehicle = async (req, res) => {
     console.log("sasasas",req.body);
     console.log("file",req.files);
     try {

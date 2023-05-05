@@ -10,7 +10,6 @@ export const LoginAction = (email, password) => async (dispatch) => {
         AdminLoginApi(email, password)
         .then((data) => {
             
-            console.log('jeeeeeeeeeeeeeeeeeeeeeeeeeeee',data,'ll');
             dispatch({
                 type: Admin_Action_Types.ADMIN_LOGIN_SUCCESS,
                 payload: data.data

@@ -25,9 +25,12 @@ export default function Usernavbar() {
     const navigate = useNavigate()
     const dispacth = useDispatch()
     const UserData = useSelector((state) => state.UserLoginReducer.loginuserdata)
+    // const userData = JSON.parse(localStorage.getItem('UserInfo'))
+    console.log(UserData);
 
     const handleLogOut = () => {
         dispacth(UserLogOutAction())
+        navigate('/')
     }
     const handleLogin = () => {
         navigate('/login')
@@ -82,9 +85,8 @@ export default function Usernavbar() {
 
                         <Menu shadow="md" width={200}>
                             <Menu.Target>
-                                {/* <Button>HI {UserData ? UserData.data.name : ''}</Button> */}
                                 {
-                                    UserData ? <Button> Hi {UserData.data.name}</Button> : <Button onClick={handleLogin} >Login</Button>
+                                    UserData ? <Button> Hi {UserData?.name}</Button> : <Button onClick={handleLogin} >Login</Button>
                                 }
                             </Menu.Target>
 

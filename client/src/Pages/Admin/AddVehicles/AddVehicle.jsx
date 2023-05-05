@@ -37,13 +37,13 @@ export default function AddVehicle() {
             formData.append("images", image)
         })
 
-        formData.append("name", name);
-        formData.append("model", model);
-        formData.append("brand", brand);
-        formData.append("fuel", fuel);
-        formData.append("rate", rate);
-        formData.append("color", color);
-        formData.append("description", description);
+        formData.append("Vname", name);
+        formData.append("Vmodel", model);
+        formData.append("Vbrand", brand);
+        formData.append("Vfuel", fuel);
+        formData.append("Vprice", rate);
+        formData.append("Vcolor", color);
+        formData.append("Vdesc", description);
         for (const [key, value] of formData.entries()) {
             console.log(`${key}: ${value}`);
         }
@@ -58,7 +58,7 @@ export default function AddVehicle() {
 
 
     return (
-        <div className='mt-5 col-6 col-md-4"  ' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }} >
+        <div className='mt-5 ms-5 col-10 col-md-4"  ' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }} >
             <AdminDrawer />
             <form className='container  mt-4 ms-5' style={divStyle}  >
                 <h3 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} >Add Details</h3>

@@ -10,7 +10,7 @@ function WalletSection() {
 
             </div>
             <Button style={{ marginBottom: "4px", width: "40%", marginLeft: "9em" }} variant="outlined">
-                Login
+                My Wallet
             </Button>
         </div>
     )

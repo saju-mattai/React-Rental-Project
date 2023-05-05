@@ -21,6 +21,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import UsersIcon from '@mui/icons-material/Group';
 import RequestPageIcon from '@mui/icons-material/RequestPage';
 import TwoWheelerIcon from '@mui/icons-material/TwoWheeler';
+import TwoWheelerRoundedIcon from '@mui/icons-material/TwoWheelerRounded';
 import SportsMotorsportsIcon from '@mui/icons-material/SportsMotorsports';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
@@ -153,7 +154,7 @@ export default function AdminDrawer() {
           {[
             { name: "Dashboard", icon: <DashboardIcon /> },
             { name: "Users", icon: <UsersIcon /> },
-            // {name : "Bikes" , icon : <TwoWheelerIcon/>},
+            { name: "Bikes", icon: <TwoWheelerRoundedIcon /> },
             // {name : "Bookings" , icon : <SportsMotorsportsIcon/>},
             { name: "Add Bikes", icon: <AddIcon /> },
             // {name : "Rent Requests" , icon : <RequestPageIcon/>},
@@ -187,8 +188,8 @@ export default function AdminDrawer() {
                     let text2 = text.name.toLowerCase()
                     text2 === "dashboard" && navigate('/adminhome')
                     text2 === 'users' && navigate('/showalluser')
-                    //   text2 === 'bikes' && navigate('/admin/bikes')
-                    text2 === 'add bikes' && navigate('/admin/add-bikes')
+                      text2 === 'bikes' && navigate('/showallvehicle')
+                    text2 === 'add bikes' && navigate('/addvehicle')
                     //   text2 === 'bookings' && navigate('/admin/bookings')
                     //   text2 === 'rent requests' && navigate('/admin/rent-requests')
                     //   text2 === 'locations' && navigate('/admin/locations')

@@ -10,6 +10,7 @@ export const UserLoginAction = (email, password) => async (dispatch) => {
 
     UserLoginApi(email, password)
         .then((data) => {
+            console.log(data);
                 dispatch({
                 type: User_Action_Types.USER_LOGIN_SUCCESS,
                 payload: data.data

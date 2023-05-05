@@ -1,16 +1,16 @@
 import React from 'react'
 import Usernavbar from '../../../Components/UserNavBar/Usernavbar'
 import ProfileSection from './ProfileSection'
-import ProfileUserSection from './ProfileUserSection'
 import WalletSection from './WalletSection'
+import ProfileDetailSection from './ProfileDetailsSection'
 
 function Profile() {
     return (
         <div>
             <Usernavbar />
             <ProfileSection />
-            <ProfileUserSection />
-            <WalletSection />
+            <ProfileDetailSection />
+            {/* <WalletSection /> */}
         </div>
     )
 }

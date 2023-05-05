@@ -7,7 +7,7 @@ exports.ShowAllUSer = (req, res) => {
             if (data) {
                 res.status(200).json(data)
             } else {
-                res.status(500).json({ msg: "oopz.. something went wrong !" })
+                res.status(500).json({ msg: "oopz.. Can't Find User !" })
             }
         })
     } catch (error) {
