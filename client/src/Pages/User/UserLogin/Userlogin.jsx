@@ -11,9 +11,7 @@ import {
   MDBCol,
   MDBRow,
   MDBBtn,
- 
   MDBInput,
- 
 } from "mdb-react-ui-kit";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -34,7 +32,6 @@ const schema = yup.object().shape({
 
 function Userlogin() {
   const navigate = useNavigate();
-  
 
   const {
     register,
@@ -45,7 +42,6 @@ function Userlogin() {
   });
 
   const submitHandler = async (data) => {
-    
     const Email = data.email;
     const Password = data.password;
 
@@ -123,10 +119,7 @@ function Userlogin() {
               {...register("password")}
               variant="outlined"
             />
-            {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" style={{width:10px}} /> */}
 
-            {/* <MDBBtn onClick={handleLogin} className="mb-4 w-100" size="lg">Login</MDBBtn> */}
-            {/* <Button style={{ "mb-4 w-100"}} variant="outlined">Outlined</Button> */}
             <Button type="submit" className="w-75 mt-2" variant="outlined">
               Login
             </Button>
