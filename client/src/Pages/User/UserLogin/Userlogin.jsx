@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -16,6 +16,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { UserLoginAction } from "../../../Redux/Actions/User_Action/UserLoginAction";
+import UserHome from "../UserHome/UserHome";
 
 const schema = yup.object().shape({
   email: yup
@@ -61,6 +62,21 @@ function Userlogin() {
   const handleSignup = () => {
     navigate("/signup");
   };
+
+  const handleLoginOtp = () => {
+    navigate('/otplogin')
+  };
+
+  // const [value, setValue] = useState("");
+  // const handleClick = () => {
+  //   signInWithPopup(auth, provider).then((data) => {
+  //     setValue(data.user.email);
+  //     localStorage.setItem("email", data.user.email);
+  //   });
+  // };
+  // useEffect(() => {
+  //   setValue(localStorage.getItem("email"));
+  // });
 
   return (
     <MDBContainer fluid className="p-3 my-5">
@@ -134,6 +150,23 @@ function Userlogin() {
           >
             Don't have an account? Sign Up Here
           </Button>
+          
+
+          <Button
+            onClick={handleLoginOtp}
+            className="w-75 mt-2"
+            variant="outlined"
+          >
+            Login With OTP
+          </Button>
+          {/* https://www.youtube.com/watch?v=pdd04JzJrDw&t=106s */}
+          {/* 
+          {value ? (
+           <UserHome />
+          ) : (
+            <button onClick={handleClick}>Signin With Google</button>
+          )} */}
+
           {/* <div className="d-flex justify-content-between mx-4 mb-4">
                         <a href="!#" wrapperClass='ml-2' >Don't Have an Account?</a>
 

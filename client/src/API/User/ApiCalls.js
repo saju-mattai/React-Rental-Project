@@ -21,6 +21,13 @@ const configFormData = {
 
 export const UserSignUpApi = (name, email, place, password, phone) => API.post('/signup', { name, email, place, password, phone }, config)
 export const UserLoginApi = (email, password) => API.post('/login', { email, password }, config)
-export const uploadprofileApi = (id, formData) => API.post('/addprofile?id=' + id, formData, configFormData)
-export const EditUserApi = (name, email, phone, place, id) => API.post('/edituser?id=' + id, { name, email, phone, place }, config)
+export const uploadprofileApi = (id, formData) => API.post('/addprofile?id=' + ID, formData, configFormData)
+export const EditUserApi = (name, email, phone, place, id) => API.post('/edituser?id=' + ID, { name, email, phone, place }, config)
+export const LoginOtpApi = (phone) => API.post('/otplogin?phone='+phone,config)
+    // return(
+    //     console.log(phone,'apisadsadad')
+       
+    // )
+   
+
 

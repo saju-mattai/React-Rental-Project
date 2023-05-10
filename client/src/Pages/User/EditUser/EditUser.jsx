@@ -28,7 +28,7 @@ function EditUser() {
             <div className='mt-5 ms-5 col-8 col-md-4"  ' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }} >
 
                 <form className='container  mt-4 ms-5' style={divStyle}  >
-                    <h3 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} >Edit USer Details</h3>
+                    <h3 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} >Edit User Details</h3>
                     <MDBRow className='mt-1  '>
                         <MDBCol>
                             <MDBInput id='form3Example2' label='Vehicle Name' />

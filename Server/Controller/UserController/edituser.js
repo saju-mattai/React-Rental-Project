@@ -3,7 +3,6 @@ const generateToken = require('../../Utils/generateToken')
 
 
 exports.edituser = async (req, res) => {
-
     const { name, email, phone, place } = req.body
     try {
 
@@ -29,7 +28,6 @@ exports.edituser = async (req, res) => {
                         image : result.image,
                         token: generateToken(result._id)
                     }
-
 
                     res.status(200).json(details)
                 })

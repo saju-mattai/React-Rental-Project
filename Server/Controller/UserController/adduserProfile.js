@@ -5,9 +5,7 @@ const cloudinary = require('../../Utils/cloudinary')
 
 
 exports.uploadprofile = async (req, res) => {
-    console.log(req.body);
-    console.log('himsafiniiiiiiiiiiiii');
-    console.log(req.file);
+  
     try {
         const uploader = async (path) => await cloudinary.uploads(path, 'Images');
         if (req.method === 'POST') {

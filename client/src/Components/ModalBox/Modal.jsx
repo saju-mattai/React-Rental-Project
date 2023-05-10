@@ -61,7 +61,6 @@ function Modal({ closeModal, details }) {
   //   const [phone, setPhone] = useState(details.phone);
   //   const [place, setPlace] = useState(details.place);
   const submitHandler = async (data) => {
-    console.log(data, "lll");
     // setLoading(true);
     const Name = data.name;
     const Email = data.email;
@@ -98,7 +97,6 @@ function Modal({ closeModal, details }) {
               onSubmit={handleSubmit(submitHandler)}
               sx={{ mt: 1 }}
             >
-            {/* <form onSubmit={handleSubmit(submitHandler)}> */}
               <MDBModalBody>
                 <TextField
                   className="mt-1"
@@ -166,7 +164,6 @@ function Modal({ closeModal, details }) {
                 >
                   Close
                 </Button>
-
                 <Button className="ms-2" type="submit" variant="outlined">
                   Save changes
                 </Button>

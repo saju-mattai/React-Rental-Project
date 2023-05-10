@@ -7,12 +7,12 @@ export const addVehicleAction = (formData) => async (dispatch) => {
         type: Admin_Action_Types.ADMIN_ADDVEHICLE_REQUEST
     })
     try {
-        AdminAddVehicleApi(formData).then((data) => {
+        // AdminAddVehicleApi(formData).then((data) => {
             dispatch({
                 type: Admin_Action_Types.ADMIN_ADDVEHICLE_SUCCESS,
-                payload: data.data
+                payload: formData
             })
-        })
+        // })
             .catch((err) => {
                 dispatch({
                     type: Admin_Action_Types.ADMIN_ADDVEHICLE_FAIL,

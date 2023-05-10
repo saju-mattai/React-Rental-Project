@@ -11,6 +11,8 @@ import Profile from './Pages/User/Profile/Profile';
 import AddVehicle from './Pages/Admin/AddVehicles/AddVehicle';
 import EditUser from './Pages/User/EditUser/EditUser';
 import ShowVehicles from './Pages/Admin/ShowVehicles/ShowVehicles';
+import OtpLogin from './Pages/User/OtpLogin/OtpLogin';
+import EditVehicle from './Pages/Admin/EditVehicle/EditVehicle';
 
 function App() {
   const UserData = useSelector((state) => state.UserLoginReducer.loginuserdata)
@@ -27,6 +29,7 @@ function App() {
           <Route path="/" element={<UserHome />} />
           <Route path="/profile" element={UserData ? <Profile /> : <Navigate to='/' />} />
           <Route path='/edituser' element={<EditUser />} />
+          <Route path='/otplogin' element={<OtpLogin />} />
 
 
 
@@ -37,8 +40,9 @@ function App() {
           <Route path="/adminlogin" element={Admindata ? <Navigate to='/adminhome' /> : <Login />} />
           <Route path='/adminhome' element={Admindata ? <Adminhome /> : <Login />} />
           <Route path='/showalluser' element={Admindata ? <ShowAllUser /> : <Navigate to='/adminlogin' />} />
-          <Route path='/addvehicle' element={<AddVehicle />} />
-          <Route path='/showallvehicle' element={<ShowVehicles/>} />
+          <Route path='/addvehicle' element={Admindata ? <AddVehicle /> :<Navigate to='/adminlogin' /> } />
+          <Route path='/showallvehicle' element={Admindata ? <ShowVehicles/> :<Navigate to='/adminlogin' /> } />
+          <Route path='/editvehicle' element={<EditVehicle/> } />
 
         </Routes>
       </BrowserRouter>

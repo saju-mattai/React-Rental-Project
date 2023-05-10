@@ -61,8 +61,6 @@ function ProfileDetailSection() {
                     <TextField className='mt-2' style={{ width: "100%" }} id="outlined-basic" type="text" label="Phone" value={UserData?.phone} variant="outlined" size='small' />
                     <TextField className='mt-2' style={{ width: "100%" }} id="outlined-basic" type="text" label="Place" value={UserData?.place} variant="outlined" size='small' />
 
-
-
                     <Button onClick={handlemodal} className='mt-2 ms-5  ' style={{ width: "80%" }} variant="outlined">Edit User</Button>
 
 
