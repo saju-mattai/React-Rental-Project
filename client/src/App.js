@@ -13,6 +13,7 @@ import EditUser from './Pages/User/EditUser/EditUser';
 import ShowVehicles from './Pages/Admin/ShowVehicles/ShowVehicles';
 import OtpLogin from './Pages/User/OtpLogin/OtpLogin';
 import EditVehicle from './Pages/Admin/EditVehicle/EditVehicle';
+import DisplayBikes from './Pages/User/UserHome/Displaybikes/DisplayBikes';
 
 function App() {
   const UserData = useSelector((state) => state.UserLoginReducer.loginuserdata)
@@ -30,6 +31,8 @@ function App() {
           <Route path="/profile" element={UserData ? <Profile /> : <Navigate to='/' />} />
           <Route path='/edituser' element={<EditUser />} />
           <Route path='/otplogin' element={<OtpLogin />} />
+          <Route path='/bikes' element={<DisplayBikes />} />
+          
 
 
 

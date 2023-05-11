@@ -9,6 +9,7 @@ import { UserSignUpReducer } from "./Reducers/User/SignUpReducer";
 import { UserLoginReducer } from "./Reducers/User/UserLoginReducer";
 import { ProfileUploadReducer } from "./Reducers/User/ProfileUploadReducer";
 import { ShowAllVehicleReducer } from "./Reducers/Admin/ShowAllVehicleReducer";
+import {GetAllVehicleReducer} from "./Reducers/User/GetAllVehicleReducer"
 // import { EditUserReducer } from "./Reducers/User/EditUserReducer";
 
 const Reducers = combineReducers({
@@ -22,7 +23,8 @@ const Reducers = combineReducers({
     // USER
     UserSignUpReducer: UserSignUpReducer,
     UserLoginReducer: UserLoginReducer,
-    ProfileUploadReducer: ProfileUploadReducer,
+    GetAllVehicleReducer:GetAllVehicleReducer
+    // ProfileUploadReducer: ProfileUploadReducer,
     // EditUserReducer: EditUserReducer
 })
 

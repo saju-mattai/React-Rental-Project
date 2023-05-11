@@ -1,0 +1,16 @@
+.bikeimg{
+    height: 180px;
+    width: auto;
+    border-radius: 5px;
+}
+p{
+    margin: 5px !important;
+    text-align: left;
+    padding: 0;
+}
+.bt1{
+    box-shadow: none !important;
+    /* background-color: white !important; */
+    color: orangered !important;
+    border: 1px solid orangered !important;
+}

@@ -24,10 +24,9 @@ export const UserLoginApi = (email, password) => API.post('/login', { email, pas
 export const uploadprofileApi = (id, formData) => API.post('/addprofile?id=' + ID, formData, configFormData)
 export const EditUserApi = (name, email, phone, place, id) => API.post('/edituser?id=' + ID, { name, email, phone, place }, config)
 export const LoginOtpApi = (phone) => API.post('/otplogin?phone='+phone,config)
-    // return(
-    //     console.log(phone,'apisadsadad')
-       
-    // )
+
+export const GetAllVehicleApi = ()=>API.get('/getallvehilce',config)
+   
    
 
 

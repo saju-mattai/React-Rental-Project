@@ -25,7 +25,7 @@ export default function EditVehicle() {
     padding: "20px",
     width: "100%",
     boxShadow: "3px 3px",
-    height: "480px",
+    height: "600px",
   };
   const location = useLocation();
   const { filteredData } = location.state;
@@ -95,39 +95,55 @@ export default function EditVehicle() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+           
           }}
         >
-          Add Details
+          Edit Details
         </h3>
 
         <>
           <MDBRow className="mt-1  ">
             <MDBCol>
+            <div>
+              <label htmlFor="form3Example2" className="form-label">
+                Vehicle Name
+              </label>
+            </div>
               <MDBInput
                 onChange={(e) => {
                   setName(e.target.value);
                 }}
                 id="form3Example2"
-                label="Vehicle Name"
+                // label="Vehicle Name"
                 defaultValue={filteredData[0].Vname}
               />
             </MDBCol>
             <MDBCol>
+            <div>
+              <label htmlFor="form3Example2" className="form-label">
+                Vehicle Model
+              </label>
+            </div>
               <MDBInput
                 onChange={(e) => {
                   setModel(e.target.value);
                 }}
                 id="form3Example2"
-                label="Vehicle Model"
+                // label="Vehicle Model"
                 defaultValue={filteredData[0].Vmodel}
               />
             </MDBCol>
             <MDBCol>
+            <div>
+              <label htmlFor="form3Example2" className="form-label">
+                Vehicle Brand
+              </label>
+            </div>
               <MDBInput
                 onChange={(e) => {
                   setBrand(e.target.value);
                 }}
-                label="Vehicle Brand"
+                // label="Vehicle Brand"
                 id="form3Example1"
                 defaultValue={filteredData[0].Vbrand}
               />
@@ -135,11 +151,11 @@ export default function EditVehicle() {
           </MDBRow>
           <MDBRow className="mt-1 ">
             <MDBCol>
-              {/* <div>
+              <div>
               <label htmlFor="form3Example2" className="form-label">
                 Vehicle Rate
               </label>
-            </div> */}
+            </div>
               <MDBInput
                 onChange={(e) => {
                   setRate(e.target.value);
@@ -147,57 +163,83 @@ export default function EditVehicle() {
                 id="form3Example2"
                 label="Vehicle Rate"
                 // placeholder="Enter rate here"
-                labelClassName="mb-2"
+                // labelClassName="mb-2"
                 defaultValue={filteredData[0].Vprice}
               />
             </MDBCol>
             <MDBCol>
+            <div>
+              <label htmlFor="form3Example2" className="form-label">
+                Fuel Type
+              </label>
+            </div>
               <MDBInput
                 onChange={(e) => {
                   setFuel(e.target.value);
                 }}
                 id="form3Example2"
-                label="Fuel Type"
+                // label="Fuel Type"
                 defaultValue={filteredData[0].Vfuel}
               />
             </MDBCol>
             <MDBCol>
+            <div>
+              <label htmlFor="form3Example2" className="form-label">
+                Vehicle Colour
+              </label>
+            </div>
               <MDBInput
                 onChange={(e) => {
                   setColor(e.target.value);
                 }}
-                label="Vehicle Colour"
+                // label="Vehicle Colour"
                 id="form3Example1"
                 defaultValue={filteredData[0].Vcolor}
               />
             </MDBCol>
           </MDBRow>
-          <MDBRow className="mt-1 container w-50 float-start">
+          <MDBRow className="mt-1  w-50 float-start">
+
             <MDBCol>
+            <div>
+              <label htmlFor="form3Example2" className="form-label">
+                Vehicle Number
+              </label>
+            </div>
               <MDBInput
                 onChange={(e) => {
                   setVNumber(e.target.value);
                 }}
-                label="Vehicle Number"
+                // label="Vehicle Number"
                 id="form3Example1"
                 defaultValue={filteredData[0].Vnumber}
               />
             </MDBCol>
           </MDBRow>
-          <MDBRow className="mt-2 container w-25 ">
+          <MDBRow className="mt-1 container w-50 ">
             <MDBCol>
+            <div>
+              <label htmlFor="form3Example2" className="form-label">
+                Vehicle Description
+              </label>
+            </div>
               <MDBTextArea
                 onChange={(e) => {
                   setDescription(e.target.value);
                 }}
-                label="Vehicle Description"
+                // label="Vehicle Description"
                 id="textAreaExample"
                 defaultValue={filteredData[0].Vdesc}
                 rows={1}
               />
             </MDBCol>
           </MDBRow>
-          <MDBRow className="mt-1 container w-25 float-start ">
+          <MDBRow className="mt-1 container w-50 float-start ">
+          <div>
+            <label htmlFor="form3Example2" className="form-label">
+              Image 1
+            </label>
+          </div>
             <MDBFile
               onChange={(e) => {
                 setPhotos([...photos, e.target.files[0]]);
@@ -215,7 +257,12 @@ export default function EditVehicle() {
               id="formFileSm"
             />
           </MDBRow>
-          <MDBRow className="mt-5 container w-25  ms-5">
+          <MDBRow className="mt-5 container w-50  ms-5">
+          <div>
+            <label htmlFor="form3Example2" className="form-label">
+              Image 2
+            </label>
+          </div>
             <MDBFile
               onChange={(e) => {
                 setPhotos([...photos, e.target.files[0]]);

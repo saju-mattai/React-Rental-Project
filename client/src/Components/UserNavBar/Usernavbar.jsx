@@ -26,7 +26,6 @@ export default function Usernavbar() {
     const dispacth = useDispatch()
     const UserData = useSelector((state) => state.UserLoginReducer.loginuserdata)
     // const userData = JSON.parse(localStorage.getItem('UserInfo'))
-    console.log(UserData);
 
     const handleLogOut = () => {
         dispacth(UserLogOutAction())
@@ -37,6 +36,9 @@ export default function Usernavbar() {
     }
     const handleProfile = () => {
         navigate('/profile')
+    }
+    const handleBike = ()=>{
+        navigate('/bikes')
     }
 
 
@@ -69,13 +71,13 @@ export default function Usernavbar() {
                                 </MDBNavbarLink>
                             </MDBNavbarItem>
                             <MDBNavbarItem>
-                                <MDBNavbarLink href='#' style={{ marginLeft: '1rem' }}>Cars</MDBNavbarLink>
+                                <MDBNavbarLink onClick={handleBike} style={{ marginLeft: '1rem' }}>Bikes</MDBNavbarLink>
                             </MDBNavbarItem>
                             <MDBNavbarItem>
                                 <MDBNavbarLink href='#' style={{ marginLeft: '1rem' }}>Offers</MDBNavbarLink>
                             </MDBNavbarItem>
                             <MDBNavbarItem>
-                                <MDBNavbarLink href='#' style={{ marginLeft: '1rem' }}>Rent A Car</MDBNavbarLink>
+                                <MDBNavbarLink href='#' style={{ marginLeft: '1rem' }}>Rent A Bike</MDBNavbarLink>
                             </MDBNavbarItem>
                             <MDBNavbarItem>
                                 <MDBNavbarLink href='#' style={{ marginLeft: '1rem' }}>Chat With US</MDBNavbarLink>
