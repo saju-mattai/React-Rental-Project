@@ -14,16 +14,24 @@ import {
   MDBContainer,
   MDBCardFooter,
 } from "mdb-react-ui-kit";
+import {  useNavigate } from "react-router-dom";
 // import './DisplayBikes.css'
 
 function DisplayBikes() {
   const dispacth = useDispatch();
+  const navigate = useNavigate()
 
   const Bikes = useSelector((state) => state.GetAllVehicleReducer.vehicleData);
   console.log(Bikes);
   useEffect(() => {
     dispacth(GetAllVehicleAction());
   }, []);
+
+  const handleBook = (id)=>{
+    const filteredData = Bikes.filter(item => item._id === id);
+    navigate('/booking',{state:{filteredData}})
+  }
+  
 
   return (
     <div>
@@ -48,7 +56,7 @@ function DisplayBikes() {
                             {/* <div style={{ textAlign: "center" }}> */}
                             <p  >{item.Vprice} Rent Per Hour/-</p>
                               <p >{item.Vmodel} Model</p>
-                              <Button variant="outlined" color="success">Book Now</Button>
+                              <Button onClick={()=>{handleBook(item._id)}}  variant="outlined" color="success">Book Now</Button>
                             {/* </div> */}
                           </MDBCardText>
                         </MDBCardBody>

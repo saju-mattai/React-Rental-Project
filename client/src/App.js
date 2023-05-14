@@ -14,6 +14,7 @@ import ShowVehicles from './Pages/Admin/ShowVehicles/ShowVehicles';
 import OtpLogin from './Pages/User/OtpLogin/OtpLogin';
 import EditVehicle from './Pages/Admin/EditVehicle/EditVehicle';
 import DisplayBikes from './Pages/User/UserHome/Displaybikes/DisplayBikes';
+import Booking from './Pages/User/BookingScreen/Booking';
 
 function App() {
   const UserData = useSelector((state) => state.UserLoginReducer.loginuserdata)
@@ -32,6 +33,7 @@ function App() {
           <Route path='/edituser' element={<EditUser />} />
           <Route path='/otplogin' element={<OtpLogin />} />
           <Route path='/bikes' element={<DisplayBikes />} />
+          <Route path='/booking' element={<Booking />} />
           
 
 

@@ -20,7 +20,7 @@ export default function AddVehicle() {
     padding: "20px",
     width: "100%",
     boxShadow: "3px 3px",
-    height: "480px",
+    height: "auto",
   };
 
   const navigate = useNavigate();
@@ -192,7 +192,7 @@ export default function AddVehicle() {
             />
           </MDBCol>
         </MDBRow>
-        <MDBRow className="mt-1  container w-50 ">
+        <MDBRow className="mt-1  container w-50 ms-5 ">
           <MDBCol>
             <div>
               <label htmlFor="form3Example2" className="form-label">

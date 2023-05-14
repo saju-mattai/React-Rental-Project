@@ -23,7 +23,6 @@ function ShowVehicles() {
   };
   const handleEdit = (id) => {
     const filteredData = Vehicledata.filter(item => item._id === id);
-    console.log(filteredData);
     navigate('/editvehicle',{state:{filteredData}})
   };
 

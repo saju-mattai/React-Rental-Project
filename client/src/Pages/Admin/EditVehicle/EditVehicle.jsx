@@ -161,7 +161,7 @@ export default function EditVehicle() {
                   setRate(e.target.value);
                 }}
                 id="form3Example2"
-                label="Vehicle Rate"
+                // label="Vehicle Rate"
                 // placeholder="Enter rate here"
                 // labelClassName="mb-2"
                 defaultValue={filteredData[0].Vprice}
@@ -235,11 +235,7 @@ export default function EditVehicle() {
             </MDBCol>
           </MDBRow>
           <MDBRow className="mt-1 container w-50 float-start ">
-          <div>
-            <label htmlFor="form3Example2" className="form-label">
-              Image 1
-            </label>
-          </div>
+         
             <MDBFile
               onChange={(e) => {
                 setPhotos([...photos, e.target.files[0]]);
@@ -247,7 +243,7 @@ export default function EditVehicle() {
               label={
                 <div>
                   <img
-                    className="h-50 w-50"
+                    className="h-50 w-50 ms-5 mt-3"
                     src={filteredData[0].Vphoto[0].url}
                     alt="Preview"
                   />
@@ -257,12 +253,8 @@ export default function EditVehicle() {
               id="formFileSm"
             />
           </MDBRow>
-          <MDBRow className="mt-5 container w-50  ms-5">
-          <div>
-            <label htmlFor="form3Example2" className="form-label">
-              Image 2
-            </label>
-          </div>
+          <MDBRow className="mt-1 container w-50  ms-5">
+       
             <MDBFile
               onChange={(e) => {
                 setPhotos([...photos, e.target.files[0]]);
@@ -270,7 +262,7 @@ export default function EditVehicle() {
               label={
                 <div>
                   <img
-                    className="h-50 w-50"
+                    className="h-50 w-50 ms-5 mt-3"
                     src={filteredData[0].Vphoto[1].url}
                     alt="Preview"
                   />
