@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import OtpInput from "otp-input-react";
+import { message } from "antd";
 
 import {
   MDBContainer,
@@ -45,7 +46,7 @@ function Userlogin() {
           size: "invisible",
           callback: (response) => {
             // onSignup();
-            handleLoginOtp()
+            handleLoginOtp();
           },
           "expired-callback": () => {},
         },
@@ -71,7 +72,7 @@ function Userlogin() {
               window.confirmationResult = confirmationResult;
               setShowotp(true);
 
-              toast.success("OTP sended successfully!"); 
+              toast.success("OTP sended successfully!");
             })
             .catch((error) => {
               console.log(error);
@@ -84,10 +85,6 @@ function Userlogin() {
           payload: err.response.data,
         });
       });
-
-    // dispatch(LoginOtpAction(mobile));
-    // console.log(mobile);
-    // console.log("clicked");
   };
 
   function onOTPVerify() {
@@ -96,10 +93,14 @@ function Userlogin() {
       .then(async (res) => {
         console.log(res);
         // toast.success(res);
+      message.success("Login Successfully");
+
         navigate("/");
       })
       .catch((err) => {
         console.log(err);
+        message.error("Please Enter Correct OTP");
+
         // toast.success(err);
       });
   }
@@ -117,11 +118,10 @@ function Userlogin() {
         }}
       >
         {" "}
-        Login In{" "}
+        Verify Your Phone Number
       </h1>
 
       <MDBRow>
-        {loginuserErr ? <p className="ms-5">{loginuserErr}</p> : ""}
         <MDBCol className="mt-3">
           <img
             src="https://img.freepik.com/free-vector/car-rental-concept-illustration_114360-9267.jpg?w=900&t=st=1682503839~exp=1682504439~hmac=9fccc719aa40c4b14494c6e237a540b28fff850c4ee2a7187f6e5ece7631ffdd"
@@ -168,10 +168,11 @@ function Userlogin() {
                   htmlFor="otp"
                   className="ms-5"
                   style={{ color: "black" }}
-                >
-                  Verify Your Phone Number
-                </label>
+                ></label>
+                {loginuserErr ? <p style={{color:"red"}} className="ms-5">{loginuserErr}</p> : ""}
+
                 <PhoneInput
+                  className="w-50 mt-4 ms-5"
                   country={"in"}
                   value={phone}
                   onChange={(e) => {

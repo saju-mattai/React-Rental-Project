@@ -34,6 +34,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.2",
     "styled-components": "^5.3.10",
+    "sweetalert2": "^11.7.5",
     "web-vitals": "^2.1.4",
     "yup": "^1.1.1"
   },

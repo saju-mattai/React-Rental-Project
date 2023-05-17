@@ -3,6 +3,7 @@ import { Menu, Button, Text, Avatar } from '@mantine/core';
 import { IconSettings, IconSearch, IconPhoto, IconMessageCircle, IconTrash, IconArrowsLeftRight } from '@tabler/icons-react';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import TwoWheelerIcon from '@mui/icons-material/TwoWheeler';
 import { useNavigate } from 'react-router-dom';
 import {
     MDBNavbar,
@@ -41,14 +42,18 @@ export default function Usernavbar() {
         navigate('/bikes')
     }
 
+    const handleRentBike = ()=>{
+        navigate('/rentbike')
+    }
+    const handleMyRentBike =()=>{
+        navigate('/mybikes')
+    }
+
 
     const [showNavColorThird, setShowNavColorThird] = useState(false);
 
     return (
         <>
-
-
-
 
             <MDBNavbar expand='lg' light style={{ backgroundColor: '#e3f2fd' }}>
                 <MDBContainer fluid >
@@ -77,7 +82,7 @@ export default function Usernavbar() {
                                 <MDBNavbarLink href='#' style={{ marginLeft: '1rem' }}>Offers</MDBNavbarLink>
                             </MDBNavbarItem>
                             <MDBNavbarItem>
-                                <MDBNavbarLink href='#' style={{ marginLeft: '1rem' }}>Rent A Bike</MDBNavbarLink>
+                                <MDBNavbarLink  onClick={handleRentBike} style={{ marginLeft: '1rem' }}>Rent A Bike</MDBNavbarLink>
                             </MDBNavbarItem>
                             <MDBNavbarItem>
                                 <MDBNavbarLink href='#' style={{ marginLeft: '1rem' }}>Chat With US</MDBNavbarLink>
@@ -96,7 +101,7 @@ export default function Usernavbar() {
                                 {/* <Menu.Label>Application</Menu.Label> */}
                                 <Menu.Item onClick={handleProfile} icon={<AccountCircleIcon size={25} />}>Profile</Menu.Item>
                                 <Menu.Item onClick={handleLogOut} icon={<LogoutIcon size={20} />}>Log Out</Menu.Item>
-                                <Menu.Item icon={<IconPhoto size={20} />}>Gallery</Menu.Item>
+                                <Menu.Item onClick={handleMyRentBike} icon={<TwoWheelerIcon size={20} />}>My Bikes</Menu.Item>
                                 <Menu.Item
                                     icon={<IconSearch size={14} />}
                                     rightSection={<Text size="xs" color="dimmed">⌘K</Text>}

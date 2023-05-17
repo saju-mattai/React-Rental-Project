@@ -23,8 +23,6 @@ export const AdminLoginApi = (email, password) => API.post('/adminlogin', { emai
 export const ShowAllUSerApi = () => API.get('/ShowAllUSer', {}, config)
 export const BlockUnblockApi = (id) => API.put(`/blockunblock?id=${id}`, config)
 export const AdminAddVehicleApi = (formData) => API.post('/addvehicle', formData, configFormData)
-    
-
 export const editVehicleApi = (formData,id) => API.post('/editvehicle?id='+id,formData, configFormData)
 
 
@@ -32,4 +30,10 @@ export const editVehicleApi = (formData,id) => API.post('/editvehicle?id='+id,fo
 
 export const ShowAllVehicleApi = () => API.get('/showvehicle', config)
 export const DeleteVehicleApi = (id) => API.delete('/deletevehicle?id='+id, config)
+export const ShowUSerVehicleApi = () => API.get('/showuserbikes', config)
+export const BikeAcceptApi = (id) => API.put(`/bikeaccept?id=${id}`, config)
+export const BikeRejectApi = (id) => API.put(`/bikereject?id=${id}`, config)
+
+
+
 

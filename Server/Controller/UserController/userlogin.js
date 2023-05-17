@@ -1,7 +1,6 @@
 const UserModel = require("../../Models/UserModels/UserModel");
 const bcrypt = require("bcrypt");
 const generateToken = require("../../Utils/generateToken");
-const mongoose = require("mongoose");
 const axios = require("axios");
 
 exports.signup = async (req, res) => {

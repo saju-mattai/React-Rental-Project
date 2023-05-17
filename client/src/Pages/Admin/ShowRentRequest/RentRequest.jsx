@@ -1,53 +1,68 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
-import AdminDrawer from "../../../Components/AdminDashbored/AdminDrawer";
 import { useSelector, useDispatch } from "react-redux";
-import { ShowAllVehicleAction } from "../../../Redux/Actions/Admin_Action/ShowAllVehicleAction";
 import Button from "@mui/material/Button";
-import { deleteVehicleAction } from "../../../Redux/Actions/Admin_Action/DeleteVehicleAction";
 import { useNavigate } from "react-router-dom";
+import { ShowUserBikesAction } from "../../../Redux/Actions/Admin_Action/ShowUserVehicleAction";
+import AdminDrawer from "../../../Components/AdminDashbored/AdminDrawer";
+import { BikeAcceptAction } from "../../../Redux/Actions/Admin_Action/UserBikeAcceptAction";
+import { BikeRejectAction } from "../../../Redux/Actions/Admin_Action/UserBikeRejectAction";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
 
-function ShowVehicles() {
+function RentRequest() {
+  const [show, setShow] = useState(false);
   const Vehicledata = useSelector(
-    (state) => state.ShowAllVehicleReducer.VehicleData
+    (state) => state.ShowUserVehicleReducer.VehicleData
   );
-
-  //   const history = useHistory();
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const handleDelete = (id) => {
+  const handleAccept = (id) => {
     Swal.fire({
       title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      text: "Are You Sure You Want Accept !",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Accept It !",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Dispatch deleteVehicleAction and ShowAllVehicleAction here
+        setShow(true);
+        dispatch(BikeAcceptAction(id)).then(() => {
+          setShow(false);
+        });
+
+        Swal.fire("Accepted!", "Your vehicle has been Accepted.", "success");
+      }
+    });
+  };
+  const handleReject = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Are You Sure You Want Reject !",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Yes, Reject it!",
     }).then((result) => {
       if (result.isConfirmed) {
         // Dispatch deleteVehicleAction and ShowAllVehicleAction here
-        dispatch(deleteVehicleAction(id));
-        dispatch(ShowAllVehicleAction());
+        setShow(true);
+        dispatch(BikeRejectAction(id)).then(() => {
+          setShow(false);
+        })
 
-        Swal.fire("Deleted!", "Your vehicle has been deleted.", "success");
+        Swal.fire("Rejected!", "Your vehicle has been Rejected.", "success");
       }
     });
-    // dispatch(deleteVehicleAction(id));
-    // dispatch(ShowAllVehicleAction());
-  };
-  const handleEdit = (id) => {
-    const filteredData = Vehicledata.filter((item) => item._id === id);
-    navigate("/editvehicle", { state: { filteredData } });
   };
 
   useEffect(() => {
-    dispatch(ShowAllVehicleAction());
-  }, []);
+    dispatch(ShowUserBikesAction());
+  }, [show]);
 
   return (
     <div
@@ -72,8 +87,8 @@ function ShowVehicles() {
               <th scope="col">Colour</th>
               <th scope="col">Number</th>
               <th scope="col">Fuel</th>
-              <th scope="col">Edit</th>
-              <th scope="col"> Delete</th>
+              <th scope="col">Accept</th>
+              <th scope="col"> Reject</th>
             </tr>
           </MDBTableHead>
           <MDBTableBody>
@@ -103,10 +118,10 @@ function ShowVehicles() {
                         <Button
                           variant="outlined"
                           onClick={() => {
-                            handleEdit(data._id);
+                            handleAccept(data._id);
                           }}
                         >
-                          Edit
+                          Accept
                         </Button>
                       </td>
                       <td>
@@ -114,10 +129,10 @@ function ShowVehicles() {
                           variant="outlined"
                           color="error"
                           onClick={() => {
-                            handleDelete(data._id);
+                            handleReject(data._id);
                           }}
                         >
-                          Delete
+                          Reject
                         </Button>
                       </td>
                       {/* <td>{data.Vphoto[0]}</td> */}
@@ -132,4 +147,4 @@ function ShowVehicles() {
   );
 }
 
-export default ShowVehicles;
+export default RentRequest;

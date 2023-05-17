@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
 import { useNavigate } from "react-router-dom";
 import {
   MDBInput,
@@ -7,6 +8,7 @@ import {
   MDBRow,
   MDBFile,
   MDBTextArea,
+  MDBSpinner,
 } from "mdb-react-ui-kit";
 
 import Button from "@mui/material/Button";
@@ -33,6 +35,7 @@ export default function EditVehicle() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   const [name, setName] = useState(filteredData[0].Vname);
   const [model, setModel] = useState(filteredData[0].Vmodel);
@@ -43,11 +46,11 @@ export default function EditVehicle() {
   const [photos, setPhotos] = useState([]);
   const [description, setDescription] = useState(filteredData[0].Vdesc);
   const [vnumber, setVNumber] = useState(filteredData[0].Vnumber);
-  let id = filteredData[0]._id
-  
+  let id = filteredData[0]._id;
 
   const handleEdit = (e) => {
     e.preventDefault();
+    setLoading(true);
     const formData = new FormData();
     photos.forEach((image) => {
       formData.append("images", image);
@@ -60,12 +63,11 @@ export default function EditVehicle() {
     formData.append("Vcolor", color);
     formData.append("Vdesc", description);
     formData.append("Vnumber", vnumber);
-
-    for (const [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`);
-    }
-
-    dispatch(editVehicleAction(formData,id));
+    dispatch(editVehicleAction(formData, id));
+    setTimeout(() => {
+      setLoading(false);
+      navigate("/showallvehicle");
+    }, 2000);
 
     // AdminAddVehicleApi(formData)
     //   .then((data) => {
@@ -95,7 +97,6 @@ export default function EditVehicle() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-           
           }}
         >
           Edit Details
@@ -104,11 +105,11 @@ export default function EditVehicle() {
         <>
           <MDBRow className="mt-1  ">
             <MDBCol>
-            <div>
-              <label htmlFor="form3Example2" className="form-label">
-                Vehicle Name
-              </label>
-            </div>
+              <div>
+                <label htmlFor="form3Example2" className="form-label">
+                  Vehicle Name
+                </label>
+              </div>
               <MDBInput
                 onChange={(e) => {
                   setName(e.target.value);
@@ -119,11 +120,11 @@ export default function EditVehicle() {
               />
             </MDBCol>
             <MDBCol>
-            <div>
-              <label htmlFor="form3Example2" className="form-label">
-                Vehicle Model
-              </label>
-            </div>
+              <div>
+                <label htmlFor="form3Example2" className="form-label">
+                  Vehicle Model
+                </label>
+              </div>
               <MDBInput
                 onChange={(e) => {
                   setModel(e.target.value);
@@ -134,11 +135,11 @@ export default function EditVehicle() {
               />
             </MDBCol>
             <MDBCol>
-            <div>
-              <label htmlFor="form3Example2" className="form-label">
-                Vehicle Brand
-              </label>
-            </div>
+              <div>
+                <label htmlFor="form3Example2" className="form-label">
+                  Vehicle Brand
+                </label>
+              </div>
               <MDBInput
                 onChange={(e) => {
                   setBrand(e.target.value);
@@ -152,10 +153,10 @@ export default function EditVehicle() {
           <MDBRow className="mt-1 ">
             <MDBCol>
               <div>
-              <label htmlFor="form3Example2" className="form-label">
-                Vehicle Rate
-              </label>
-            </div>
+                <label htmlFor="form3Example2" className="form-label">
+                  Vehicle Rate
+                </label>
+              </div>
               <MDBInput
                 onChange={(e) => {
                   setRate(e.target.value);
@@ -168,11 +169,11 @@ export default function EditVehicle() {
               />
             </MDBCol>
             <MDBCol>
-            <div>
-              <label htmlFor="form3Example2" className="form-label">
-                Fuel Type
-              </label>
-            </div>
+              <div>
+                <label htmlFor="form3Example2" className="form-label">
+                  Fuel Type
+                </label>
+              </div>
               <MDBInput
                 onChange={(e) => {
                   setFuel(e.target.value);
@@ -183,11 +184,11 @@ export default function EditVehicle() {
               />
             </MDBCol>
             <MDBCol>
-            <div>
-              <label htmlFor="form3Example2" className="form-label">
-                Vehicle Colour
-              </label>
-            </div>
+              <div>
+                <label htmlFor="form3Example2" className="form-label">
+                  Vehicle Colour
+                </label>
+              </div>
               <MDBInput
                 onChange={(e) => {
                   setColor(e.target.value);
@@ -199,13 +200,12 @@ export default function EditVehicle() {
             </MDBCol>
           </MDBRow>
           <MDBRow className="mt-1  w-50 float-start">
-
             <MDBCol>
-            <div>
-              <label htmlFor="form3Example2" className="form-label">
-                Vehicle Number
-              </label>
-            </div>
+              <div>
+                <label htmlFor="form3Example2" className="form-label">
+                  Vehicle Number
+                </label>
+              </div>
               <MDBInput
                 onChange={(e) => {
                   setVNumber(e.target.value);
@@ -218,11 +218,11 @@ export default function EditVehicle() {
           </MDBRow>
           <MDBRow className="mt-1 container w-50 ">
             <MDBCol>
-            <div>
-              <label htmlFor="form3Example2" className="form-label">
-                Vehicle Description
-              </label>
-            </div>
+              <div>
+                <label htmlFor="form3Example2" className="form-label">
+                  Vehicle Description
+                </label>
+              </div>
               <MDBTextArea
                 onChange={(e) => {
                   setDescription(e.target.value);
@@ -235,7 +235,6 @@ export default function EditVehicle() {
             </MDBCol>
           </MDBRow>
           <MDBRow className="mt-1 container w-50 float-start ">
-         
             <MDBFile
               onChange={(e) => {
                 setPhotos([...photos, e.target.files[0]]);
@@ -254,7 +253,6 @@ export default function EditVehicle() {
             />
           </MDBRow>
           <MDBRow className="mt-1 container w-50  ms-5">
-       
             <MDBFile
               onChange={(e) => {
                 setPhotos([...photos, e.target.files[0]]);
@@ -277,14 +275,20 @@ export default function EditVehicle() {
                     Sign in
                 </MDBBtn> */}
           <MDBRow className="mt-5 ">
-            <Button
-              onClick={handleEdit}
-              className="mb-4 "
-              variant="outlined"
-              size="small"
-            >
-              Edit Details
-            </Button>
+            {loading ? (
+              <MDBSpinner className="ms-5" color="primary">
+                <span className="visually-hidden ms-5 ">Loading...</span>
+              </MDBSpinner>
+            ) : (
+              <Button
+                onClick={handleEdit}
+                className="mb-4 "
+                variant="outlined"
+                size="small"
+              >
+                Edit Details
+              </Button>
+            )}
           </MDBRow>
         </>
       </form>

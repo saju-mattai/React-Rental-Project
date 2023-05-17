@@ -10,6 +10,9 @@ const ShowAllUSer = require('../Controller/AdminController/ShowAllUser')
 const ShowAllVehicle = require('../Controller/AdminController/showAllVehicles')
 const deleteVehicle = require('../Controller/AdminController/DeleteVehicle')
 const editVehicle = require('../Controller/AdminController/editVehicle')
+const ShowAllUserVehicle = require('../Controller/AdminController/ShowAllUserVehicle')
+const userBikeAccept =  require('../Controller/AdminController/userBikeAccept')
+const userBikeReject = require('../Controller/AdminController/userBikeReject')
 
 
 
@@ -23,6 +26,12 @@ router.route('/ShowAllUSer').get(ShowAllUSer.ShowAllUSer)
 router.route('/showvehicle').get(ShowAllVehicle.ShowAllVehicle)
 router.route('/deletevehicle').delete(deleteVehicle.deleteVehicle)
 router.route('/editvehicle').post(upload.array('images'),editVehicle.editVehicle)
+router.route('/showuserbikes').get(ShowAllUserVehicle.ShowAllUserVehicle)
+router.route('/bikeaccept').put(userBikeAccept.userBikeAccept)
+router.route('/bikereject').put(userBikeReject.userBikeReject)
+
+
+
 // router.route('/edit').post(editVehicle.editVehicle)
 
 

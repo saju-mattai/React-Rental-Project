@@ -8,13 +8,12 @@ import {
   MDBFile,
   MDBTextArea,
 } from "mdb-react-ui-kit";
-
 import Button from "@mui/material/Button";
-import AdminDrawer from "../../../Components/AdminDashbored/AdminDrawer";
-import { addVehicleAction } from "../../../Redux/Actions/Admin_Action/AddVehicleAction";
-import { AdminAddVehicleApi } from "../../../API/Admin/ApiCalls";
+import Usernavbar from "../../../Components/UserNavBar/Usernavbar";
+import { AddBikeApi } from "../../../API/User/ApiCalls";
+import { UserAddBikeAction } from "../../../Redux/Actions/User_Action/UserAddBikeAction";
 
-export default function AddVehicle() {
+function Rentbike() {
   const divStyle = {
     border: "1px solid black",
     padding: "20px",
@@ -51,29 +50,18 @@ export default function AddVehicle() {
     formData.append("Vcolor", color);
     formData.append("Vdesc", description);
     formData.append("Vnumber", vnumber);
-   
-    AdminAddVehicleApi(formData)
-      .then((data) => {
-        dispatch(addVehicleAction(data.data));
-        setTimeout(() => {
-          navigate("/showallvehicle");
-        }, 2000);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+    AddBikeApi(formData).then((data)=>{
+        dispatch(UserAddBikeAction(data.data))
+        // setTimeout(() => {
+        //     navigate("/showallvehicle");
+        //   }, 2000);
+    })
   };
 
   return (
-    <div
-      className='mt-5 ms-5 col-10 col-md-4"  '
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <AdminDrawer />
+    <div>
+    <Usernavbar />
       <form className="container  mt-4 ms-5" style={divStyle}>
         <h3
           style={{
@@ -82,7 +70,7 @@ export default function AddVehicle() {
             alignItems: "center",
           }}
         >
-          Add Details
+          Add Your Bike
         </h3>
         <MDBRow className="mt-1  ">
           <MDBCol>
@@ -239,8 +227,8 @@ export default function AddVehicle() {
         </MDBRow>
 
         {/* <MDBBtn type='submit' className='mb-4 ms-5' block>
-                    Sign in
-                </MDBBtn> */}
+             Sign in
+         </MDBBtn> */}
         <MDBRow className="mt-5 ">
           <Button
             onClick={handleSubmit}
@@ -255,3 +243,5 @@ export default function AddVehicle() {
     </div>
   );
 }
+
+export default Rentbike;

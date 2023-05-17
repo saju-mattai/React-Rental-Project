@@ -15,6 +15,9 @@ import OtpLogin from './Pages/User/OtpLogin/OtpLogin';
 import EditVehicle from './Pages/Admin/EditVehicle/EditVehicle';
 import DisplayBikes from './Pages/User/UserHome/Displaybikes/DisplayBikes';
 import Booking from './Pages/User/BookingScreen/Booking';
+import Rentbike from './Pages/User/RentBikeUser/Rentbike';
+import RentRequest from './Pages/Admin/ShowRentRequest/RentRequest';
+import ShowMyBikes from './Pages/User/ShowMyBikes/ShowMyBikes';
 
 function App() {
   const UserData = useSelector((state) => state.UserLoginReducer.loginuserdata)
@@ -34,6 +37,9 @@ function App() {
           <Route path='/otplogin' element={<OtpLogin />} />
           <Route path='/bikes' element={<DisplayBikes />} />
           <Route path='/booking' element={<Booking />} />
+          <Route path='/rentbike' element={<Rentbike />} />
+          <Route path='/mybikes' element={<ShowMyBikes />} />
+
           
 
 
@@ -48,6 +54,8 @@ function App() {
           <Route path='/addvehicle' element={Admindata ? <AddVehicle /> :<Navigate to='/adminlogin' /> } />
           <Route path='/showallvehicle' element={Admindata ? <ShowVehicles/> :<Navigate to='/adminlogin' /> } />
           <Route path='/editvehicle' element={<EditVehicle/> } />
+          <Route path='/rentrequest' element={<RentRequest/> } />
+
 
         </Routes>
       </BrowserRouter>

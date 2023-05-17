@@ -28,7 +28,7 @@ import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import AddIcon from '@mui/icons-material/Add';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import SummarizeIcon from '@mui/icons-material/Summarize';
-
+import BikeScooterTwoToneIcon from '@mui/icons-material/BikeScooterTwoTone';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { LogOutAction } from '../../Redux/Actions/Admin_Action/AdminLogoutAction';
@@ -106,7 +106,6 @@ export default function AdminDrawer() {
   const [open, setOpen] = React.useState(false);
 
   const dispatch = useDispatch()
-
   const navigate = useNavigate()
 
   const handleDrawerOpen = () => {
@@ -139,7 +138,7 @@ export default function AdminDrawer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Two Wheeler
+            Rent A Bike
           </Typography>
         </Toolbar>
       </AppBar>
@@ -157,7 +156,7 @@ export default function AdminDrawer() {
             { name: "Bikes", icon: <TwoWheelerRoundedIcon /> },
             // {name : "Bookings" , icon : <SportsMotorsportsIcon/>},
             { name: "Add Bikes", icon: <AddIcon /> },
-            // {name : "Rent Requests" , icon : <RequestPageIcon/>},
+            {name : "Rent Requests" , icon : <BikeScooterTwoToneIcon/>},
             // {name : "Locations" , icon : <LocationOnIcon/>},
             // {name : "Coupons" , icon : <LocalOfferIcon/>},
             // {name : "Sales Report", icon : <SummarizeIcon/>},
@@ -191,7 +190,7 @@ export default function AdminDrawer() {
                       text2 === 'bikes' && navigate('/showallvehicle')
                     text2 === 'add bikes' && navigate('/addvehicle')
                     //   text2 === 'bookings' && navigate('/admin/bookings')
-                    //   text2 === 'rent requests' && navigate('/admin/rent-requests')
+                      text2 === 'rent requests' && navigate('/rentrequest')
                     //   text2 === 'locations' && navigate('/admin/locations')
                     //   text2 === 'add location' && navigate('/admin/add-location')
                     //   text2 === 'coupons' && navigate('/admin/coupons')

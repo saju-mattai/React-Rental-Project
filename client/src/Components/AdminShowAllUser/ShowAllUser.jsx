@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.css';
 import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import { useSelector, useDispatch } from 'react-redux';
 import { ShowAllUSerAction } from '../../Redux/Actions/Admin_Action/ShowAllUserAction';
@@ -8,7 +10,6 @@ import Button from '@mui/material/Button';
 import AdminDrawer from '../AdminDashbored/AdminDrawer';
 export default function ShowAllUser() {
     const UserData = useSelector((state) => state.ShowAllUSerReducer.UserData)
-    // console.log(UserData, 'userdaaraaaa');
     const blockunblock = useSelector((state) => state.ShowAllUSerReducer)
     console.log(blockunblock, 'blockunblock');
 
@@ -20,7 +21,26 @@ export default function ShowAllUser() {
     }, [])
 
     const handleBlockUnblock = (id) => {
-        dispatch(BlockUnblockAction(id))
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'This action will block/unblock the user.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, proceed!',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              dispatch(BlockUnblockAction(id));
+        
+              Swal.fire({
+                title: 'Success!',
+                text: 'User has been blocked/unblocked.',
+                icon: 'success',
+              });
+            }
+          });
+        // dispatch(BlockUnblockAction(id))
     }
 
     //    console.log('selee',selected);

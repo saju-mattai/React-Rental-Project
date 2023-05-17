@@ -1,9 +1,9 @@
 const vehiclemodel = require("../../Models/AdminModels/VehicleModel");
 
-exports.getAllVehicle = (req, res) => {
+exports.getAllUserVehicle = (req, res) => {
   try {
     vehiclemodel
-      .find({Vrequest:"Accepted"})
+      .find({ OwnerId: req.query.id })
       .then((data) => {
         res.status(200).json(data);
       })
