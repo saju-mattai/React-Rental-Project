@@ -1,6 +1,5 @@
 import React from 'react'
 import AdminDrawer from '../../../Components/AdminDashbored/AdminDrawer'
-import ShowAllUser from '../../../Components/AdminShowAllUser/ShowAllUser'
 
 function Adminhome() {
     return (

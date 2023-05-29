@@ -6,11 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { GetAllUserVehicleAction } from "../../../Redux/Actions/User_Action/GetAllUserVehicleAction";
 
 function ShowMyBikes() {
-
-    const Vehicledata = useSelector(
-        (state) => state.GetAllVehicleReducer.vehicleData
-      );
-      console.log(Vehicledata);
+  const Vehicledata = useSelector(
+    (state) => state.GetAllVehicleReducer.vehicleData
+  );
+  console.log(Vehicledata);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -45,37 +44,32 @@ function ShowMyBikes() {
               </tr>
             </MDBTableHead>
             <MDBTableBody>
-            {Vehicledata
-              ? Vehicledata.map((data, index) => {
-                  return (
-                    <tr>
-                      <th scope="row">{index + 1}</th>
-                      <td>{data.Vname}</td>
-                      <td>{data.Vmodel}</td>
-                      <td>{data.Vbrand}</td>
-                      <td>{data.Vprice}</td>
-                      <td>
-                        {data.Vphoto && data.Vphoto.length > 0 && (
-                          <img
-                            src={data.Vphoto[0].url}
-                            alt="image"
-                            style={{ height: "80px", width: "100px" }}
-                          />
-                        )}
-                      </td>
-
-                      <td>{data.Vcolor}</td>
-                      <td>{data.Vnumber}</td>
-                      <td>{data.Vfuel}</td>
-                      <td>{data.Vrequest}</td>
-
-                      
-                       
-                      {/* <td>{data.Vphoto[0]}</td> */}
-                    </tr>
-                  );
-                })
-              : ""}
+              {Vehicledata
+                ? Vehicledata.map((data, index) => {
+                    return (
+                      <tr>
+                        <th scope="row">{index + 1}</th>
+                        <td>{data.Vname}</td>
+                        <td>{data.Vmodel}</td>
+                        <td>{data.Vbrand}</td>
+                        <td>{data.Vprice}</td>
+                        <td>
+                          {data.Vphoto && data.Vphoto.length > 0 && (
+                            <img
+                              src={data.Vphoto[0].url}
+                              alt="image"
+                              style={{ height: "80px", width: "100px" }}
+                            />
+                          )}
+                        </td>
+                        <td>{data.Vcolor}</td>
+                        <td>{data.Vnumber}</td>
+                        <td>{data.Vfuel}</td>
+                        <td>{data.Vrequest}</td>
+                      </tr>
+                    );
+                  })
+                : ""}
             </MDBTableBody>
           </MDBTable>
         </div>

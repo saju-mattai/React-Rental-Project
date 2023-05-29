@@ -1,23 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { MDBSpinner } from "mdb-react-ui-kit";
-
+import "./BookingScreen.css";
+import { message } from "antd";
+import {
+  MDBSpinner,
+  MDBInput,
+  MDBCard,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBCardText,
+  MDBCardHeader,
+  MDBCardFooter,
+  MDBBtn,
+} from "mdb-react-ui-kit";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import Button from "@mui/material/Button";
 import Usernavbar from "../../../Components/UserNavBar/Usernavbar";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./BookingScreen.css";
 import moment from "moment";
-import { Checkbox, DatePicker, Space } from "antd";
-import { useDispatch } from "react-redux";
+import { Button, Checkbox, DatePicker } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 import { BookingAction } from "../../../Redux/Actions/User_Action/BookingAction";
+import { applyCouponAction } from "../../../Redux/Actions/User_Action/ApplyCouponAction";
+import { BookingApi } from "../../../API/User/ApiCalls";
 const { RangePicker } = DatePicker;
 
 function Booking() {
   const location = useLocation();
   const { filteredData } = location.state;
   const [loading, setLoading] = useState(false);
+
+  const newtotalamount = useSelector((state) => state.applyCouponReducer.Data);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -26,7 +43,10 @@ function Booking() {
   const [enddate, setEnddate] = useState();
   const [totalHour, setTotalHour] = useState(0);
   const [helmet, setHelmet] = useState(false);
-  const [totalAmount, setTotalAmount] = useState(0);
+  let [totalAmount, setTotalAmount] = useState(0);
+  const [showtotal, setShowtotal] = useState(false);
+  const [coupon, setCoupon] = useState("");
+  const [paymentMethod, setpaymentMethod] = useState(false);
 
   // const {
   //   register,
@@ -37,25 +57,48 @@ function Booking() {
   // });
 
   const selectTimeSlot = (value) => {
-    setStartdate(moment(value[0]).format("MMM DD YYYY HH:mm"));
-
-    setEnddate(moment(value[1]).format("MMM DD YYYY HH:mm"));
-
+    setStartdate(moment(value[0].$d).format("MMMM Do YYYY, h:mm:ss a"));
+    setEnddate(moment(value[1].$d).format("MMMM Do YYYY, h:mm:ss a"));
     setTotalHour(value[1].diff(value[0], "hours"));
   };
 
   useEffect(() => {
     setTotalAmount(totalHour * filteredData[0].Vprice);
     if (helmet) {
-      setTotalAmount(totalAmount + 30 * totalHour);
+      setTotalAmount(totalAmount + 100);
     }
   }, [helmet, totalHour]);
 
-  // console.log();
-  const handleBooking = () => {
+  let CouponDetails = {
+    coupon,
+    totalAmount,
+  };
+  const handleCoupon = () => {
+    dispatch(applyCouponAction(CouponDetails));
+  };
+  if (newtotalamount && helmet) {
+    totalAmount = newtotalamount + 100;
+  }
+  if (newtotalamount) {
+    totalAmount = newtotalamount;
+  }
+  
+  
+  const handelSubmit = () => {
+    setLoading(true);
+    if (newtotalamount) {
+      totalAmount = newtotalamount;
+    }
+    // if (newtotalamount && helmet) {
+    //   totalAmount = newtotalamount + 100;
+    // }
     const ReqObj = {
-      user: JSON.parse(localStorage.getItem("UserInfo")).id,
+      userId: JSON.parse(localStorage.getItem("UserInfo")).id,
+      UserName: JSON.parse(localStorage.getItem("UserInfo")).name,
       BikeId: filteredData[0]._id,
+      BikeName: filteredData[0].Vname,
+      BikePhoto: filteredData[0].Vphoto[0].url,
+      Description: filteredData[0].Vdesc,
       totalHour,
       totalAmount,
       HelmetRequired: helmet,
@@ -63,20 +106,29 @@ function Booking() {
         startdate,
         enddate,
       },
+      paymentMethod,
     };
-    setLoading(true);
-    dispatch(BookingAction(ReqObj));
-    setLoading(false);
-    setTimeout(() => {
-      navigate("/bikes");
-    }, 1000);
+
+    BookingApi(ReqObj).then((data) => {
+      if (data.data.url) {
+        window.location.href = data.data.url;
+      }
+      if (data.data.paymentMethod === "Wallet") {
+        message.success("Hamsathali");
+        setTimeout(() => {
+          navigate("/myrent");
+        }, 1000);
+      }
+      dispatch(BookingAction(data.data));
+      setLoading(false);
+    });
   };
 
   return (
     <>
       <Usernavbar />
 
-      <div className="row  ms-5 mt-5">
+      <div className="row  ms-5 mt-4">
         <div
           className="col-6 "
           style={{
@@ -112,14 +164,9 @@ function Booking() {
           <div className="divider d-flex align-items-center my-4 w-75 ms-5 mt-0  ">
             <p className="text-center  mx-3 mb-0">Time Slot</p>
           </div>
-          <div className="mt-2 d-flex justify-content-end  w-75 ms-5">
-            {/* <DatePicker.RangePicker
-              format="MMM-DD-YYYY-HHmm"
-              showTime={{ format: "HH:mm" }}
-              onChange={selectTimeSlot}
-            /> */}
+          <div className=" d-flex justify-content-end  w-75 ">
             <RangePicker
-              className="ms-5"
+              className=""
               showTime={{
                 format: "HH:mm",
               }}
@@ -127,20 +174,39 @@ function Booking() {
               onChange={selectTimeSlot}
             />
           </div>
-          <div className="d-flex justify-content-end mt-2  w-75 ms-5">
-            <Checkbox
+          {/* <div className="d-flex justify-content-end container ms-5 mt-2 me-2 w-50 "> */}
+          <Checkbox
+            onChange={(e) => {
+              if (e.target.checked) {
+                setHelmet(true);
+              } else {
+                setHelmet(false);
+              }
+            }}
+          >
+            Do you want a Helmet for riding
+          </Checkbox>
+          {/* </div> */}
+          <div className="d-flex justify-content-start mt-2 w-50 ">
+            <MDBInput
+              className="mt-auto"
               onChange={(e) => {
-                if (e.target.checked) {
-                  setHelmet(true);
-                } else {
-                  setHelmet(false);
-                }
+                setCoupon(e.target.value);
               }}
-            >
-              Do you want a Helmet for riding
-            </Checkbox>
+              placeholder="Enter Coupon Code"
+              id="form1"
+              type="text"
+            />
           </div>
-          <div className="d-flex justify-content-end  w-75 ms-5 mt-2">
+          <Button
+            onClick={handleCoupon}
+            variant="outlined"
+            className="ms-2 mt-2"
+          >
+            Apply
+          </Button>
+
+          {/* <div className="d-flex justify-content-end  w-75 ms-5 ">
             <p>
               Total Hours : <b>{totalHour}</b>
             </p>
@@ -153,16 +219,65 @@ function Booking() {
           <div className="d-flex justify-content-end mt-0  w-75 ms-5">
             <h3>Total Amout : {totalAmount}</h3>
           </div>
+
           <div className="d-flex justify-content-end mt-0  w-75 ms-5">
-            {loading ? (
-              <MDBSpinner color="primary">
-                <span className="visually-hidden">Loading...</span>
-              </MDBSpinner>
-            ) : (
-              <Button onClick={handleBooking} variant="outlined">
-                Book Now
-              </Button>
-            )}
+           
+            <Button onClick={handelSubmit} variant="outlined">
+              Book Now
+            </Button>
+    
+          </div> */}
+          <div
+            className="container ms-5"
+            style={{ height: "300px", width: "500px" }}
+          >
+            <MDBCard alignment="center " className="ms-5 mb-5">
+              <MDBCardHeader>Featured</MDBCardHeader>
+              <MDBCardBody>
+                <p className="d-flex justify-content-end">
+                  Total Hours : <b>{totalHour}</b>
+                </p>
+                <p className="d-flex justify-content-end">
+                  Rent Per Hour : <b>{filteredData[0].Vprice}</b>{" "}
+                </p>
+                <h3 className="d-flex justify-content-end">
+                  Total Amout : {totalAmount}
+                </h3>
+
+                <FormControl className="mt-5">
+                  <RadioGroup
+                    row
+                    aria-labelledby="demo-row-radio-buttons-group-label"
+                    name="row-radio-buttons-group"
+                  >
+                    <FormControlLabel
+                      value="Wallet"
+                      control={<Radio />}
+                      onChange={(e) => {
+                        setpaymentMethod(true);
+                      }}
+                      label="Wallet"
+                    />
+                    <FormControlLabel
+                      value="Stripe"
+                      onChange={(e) => {
+                        setpaymentMethod(false);
+                      }}
+                      control={<Radio />}
+                      label="Stripe"
+                    />
+                    {/* <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel> */}
+                  </RadioGroup>
+                </FormControl>
+                <Button
+                  className="ms-5 mt-5"
+                  onClick={handelSubmit}
+                  variant="outlined"
+                >
+                  Book Now
+                </Button>
+              </MDBCardBody>
+            </MDBCard>
           </div>
         </div>
       </div>

@@ -13,6 +13,7 @@ const editVehicle = require('../Controller/AdminController/editVehicle')
 const ShowAllUserVehicle = require('../Controller/AdminController/ShowAllUserVehicle')
 const userBikeAccept =  require('../Controller/AdminController/userBikeAccept')
 const userBikeReject = require('../Controller/AdminController/userBikeReject')
+const addCoupon = require('../Controller/AdminController/addCoupon')
 
 
 
@@ -29,6 +30,8 @@ router.route('/editvehicle').post(upload.array('images'),editVehicle.editVehicle
 router.route('/showuserbikes').get(ShowAllUserVehicle.ShowAllUserVehicle)
 router.route('/bikeaccept').put(userBikeAccept.userBikeAccept)
 router.route('/bikereject').put(userBikeReject.userBikeReject)
+router.route('/addcoupon').post(addCoupon.addCoupon)
+
 
 
 

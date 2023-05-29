@@ -4,6 +4,7 @@ import { IconSettings, IconSearch, IconPhoto, IconMessageCircle, IconTrash, Icon
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import TwoWheelerIcon from '@mui/icons-material/TwoWheeler';
+import BikeScooterIcon from '@mui/icons-material/BikeScooter';
 import { useNavigate } from 'react-router-dom';
 import {
     MDBNavbar,
@@ -47,6 +48,9 @@ export default function Usernavbar() {
     }
     const handleMyRentBike =()=>{
         navigate('/mybikes')
+    }
+    const handleMyRide =()=>{
+        navigate('/myrent')
     }
 
 
@@ -102,6 +106,8 @@ export default function Usernavbar() {
                                 <Menu.Item onClick={handleProfile} icon={<AccountCircleIcon size={25} />}>Profile</Menu.Item>
                                 <Menu.Item onClick={handleLogOut} icon={<LogoutIcon size={20} />}>Log Out</Menu.Item>
                                 <Menu.Item onClick={handleMyRentBike} icon={<TwoWheelerIcon size={20} />}>My Bikes</Menu.Item>
+                                <Menu.Item onClick={handleMyRide} icon={<BikeScooterIcon size={20} />}>My Rides</Menu.Item>
+
                                 <Menu.Item
                                     icon={<IconSearch size={14} />}
                                     rightSection={<Text size="xs" color="dimmed">⌘K</Text>}

@@ -18,9 +18,9 @@ function ProfileSection() {
 
   // const image = useSelector((state) => state.ProfileUploadReducer.ImageData)
   const userData = JSON.parse(localStorage.getItem("UserInfo"));
-  useEffect(() => {
-    JSON.parse(localStorage.getItem("UserInfo"));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   JSON.parse(localStorage.getItem("UserInfo"));
+  // }, []);
 
 //   console.log(loading);
 
@@ -37,9 +37,9 @@ function ProfileSection() {
     
   };
 
-  useEffect(() => {
-    console.log(loading); // This will log the updated value of 'loading' when it changes.
-  }, [loading]);
+  // useEffect(() => {
+  //   console.log(loading); // This will log the updated value of 'loading' when it changes.
+  // }, [loading]);
 
   return (
     <div

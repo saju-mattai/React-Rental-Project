@@ -3,6 +3,7 @@ import { combineReducers } from "redux";
 import { AdminLoginReducer } from "./Reducers/Admin/AdminLoginReducer";
 import { ShowAllUSerReducer } from "./Reducers/Admin/ShowAllUserReducer";
 import { addvehicleReducer } from "./Reducers/Admin/AddVehicleReducer";
+import {AddCouponReducer} from "./Reducers/Admin/AddCouponReducer"
 
 
 import { UserSignUpReducer } from "./Reducers/User/SignUpReducer";
@@ -13,6 +14,12 @@ import {GetAllVehicleReducer} from "./Reducers/User/GetAllVehicleReducer"
 import { BookingReducer } from "./Reducers/User/BookingReducer";
 import { UserAddBikeReducer } from "./Reducers/User/UserAddBikeReducer";
 import { ShowUserVehicleReducer } from "./Reducers/Admin/ShowAllUserVehicleReducer";
+import { getWalletReducer } from "./Reducers/User/GetWalletReducer";
+import { getRentedBikeReducer } from "./Reducers/User/GetRentedBikeReducer";
+import { applyCouponReducer } from "./Reducers/User/ApplyCouponReducer";
+
+
+
 
 const Reducers = combineReducers({
     //ADMIN
@@ -21,6 +28,7 @@ const Reducers = combineReducers({
     addvehicleReducer: addvehicleReducer,
     ShowAllVehicleReducer: ShowAllVehicleReducer,
     ShowUserVehicleReducer:ShowUserVehicleReducer,
+    AddCouponReducer:AddCouponReducer,
 
 
     // USER
@@ -29,6 +37,9 @@ const Reducers = combineReducers({
     GetAllVehicleReducer:GetAllVehicleReducer,
     BookingReducer:BookingReducer,
     UserAddBikeReducer:UserAddBikeReducer,
+    getWalletReducer:getWalletReducer,
+    getRentedBikeReducer:getRentedBikeReducer,
+    applyCouponReducer:applyCouponReducer,
     // ProfileUploadReducer: ProfileUploadReducer,
     // EditUserReducer: EditUserReducer
 })

@@ -10,7 +10,7 @@ function Profile() {
             <Usernavbar />
             <ProfileSection />
             <ProfileDetailSection />
-            {/* <WalletSection /> */}
+            <WalletSection />
         </div>
     )
 }

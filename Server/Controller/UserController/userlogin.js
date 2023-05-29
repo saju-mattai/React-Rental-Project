@@ -1,58 +1,63 @@
 const UserModel = require("../../Models/UserModels/UserModel");
+const Wallet = require("../../Models/WalletSchema");
 const bcrypt = require("bcrypt");
 const generateToken = require("../../Utils/generateToken");
 const axios = require("axios");
 
 exports.signup = async (req, res) => {
-//   if (req.body.googleAccessToken) {
-//     const { googleAccessToken } = req.body;
+  //   if (req.body.googleAccessToken) {
+  //     const { googleAccessToken } = req.body;
 
-//     axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
-//       headers: {
-//         Authorization: `Bearer ${googleAccessToken}`,
-//       },
-//     });
-//   } else {
-    //normal form sign up
-    const { name, email, place, dateCreated, status, phone } = req.body;
-    let password = await bcrypt.hash(req.body.password, 10);
-    try {
-      let details = {
-        name,
-        email,
-        place,
-        password,
-        dateCreated,
-        status,
-        phone,
-      };
+  //     axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
+  //       headers: {
+  //         Authorization: `Bearer ${googleAccessToken}`,
+  //       },
+  //     });
+  //   } else {
+  //normal form sign up
+  const { name, email, place, dateCreated, status, phone } = req.body;
+  let password = await bcrypt.hash(req.body.password, 10);
+  try {
+    let details = {
+      name,
+      email,
+      place,
+      password,
+      dateCreated,
+      status,
+      phone,
+    };
 
-      let emailExists = await UserModel.findOne({ email: details.email });
-      let phoneExist = await UserModel.findOne({ phone: details.phone });
+    let emailExists = await UserModel.findOne({ email: details.email });
+    let phoneExist = await UserModel.findOne({ phone: details.phone });
 
-      if (emailExists && phoneExist) {
-        res.status(400).json("Email  AND Phone Already Exist");
-      } else if (emailExists && !phoneExist) {
-        res.status(400).json("Email Already Exist");
-      } else if (!emailExists && phoneExist) {
-        res.status(400).json("Phone Number Already Exist");
-      } else {
-        UserModel.create(details).then((data) => {
-          let result = {
-            name: data.name,
-            email: data.email,
-            place: data.place,
-            phone: data.phone,
-            // image : data.image
-          };
-          res.status(200).json(result);
-        });
-      }
-    } catch (error) {
-      console.log("jhgfds", error);
-      res.status(400).json("Can't create user something went wrong");
+    if (emailExists && phoneExist) {
+      res.status(400).json("Email  AND Phone Already Exist");
+    } else if (emailExists && !phoneExist) {
+      res.status(400).json("Email Already Exist");
+    } else if (!emailExists && phoneExist) {
+      res.status(400).json("Phone Number Already Exist");
+    } else {
+      UserModel.create(details).then((data) => {
+        let result = {
+          name: data.name,
+          email: data.email,
+          place: data.place,
+          phone: data.phone,
+          // image : data.image
+        };
+        res.status(200).json(result);
+        console.log(data);
+        let NewWallet = {
+          userId: data._id,
+        };
+        Wallet.create(NewWallet);
+      });
     }
+  } catch (error) {
+    res.status(400).json("Can't create user something went wrong");
   }
+};
 // };
 
 exports.login = (req, res) => {

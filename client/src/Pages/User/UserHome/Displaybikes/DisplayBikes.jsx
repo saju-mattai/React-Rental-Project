@@ -22,7 +22,6 @@ function DisplayBikes() {
   const navigate = useNavigate()
 
   const Bikes = useSelector((state) => state.GetAllVehicleReducer.vehicleData);
-  console.log(Bikes);
   useEffect(() => {
     dispacth(GetAllVehicleAction());
   }, []);
@@ -30,6 +29,10 @@ function DisplayBikes() {
   const handleBook = (id)=>{
     const filteredData = Bikes.filter(item => item._id === id);
     navigate('/booking',{state:{filteredData}})
+  }
+  const handleSignleView =(id)=>{
+    const filteredData = Bikes.filter(item => item._id === id);
+    navigate('/singleview',{state:{filteredData}})
   }
   
 
@@ -46,6 +49,7 @@ function DisplayBikes() {
                     <MDBCol>
                       <MDBCard style={ {boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>
                         <MDBCardImage
+                        onClick={()=>{handleSignleView(item._id)}}
                           src={item?.Vphoto[0]?.url}
                           alt="..."
                           position="top"

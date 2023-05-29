@@ -33,6 +33,7 @@ export const DeleteVehicleApi = (id) => API.delete('/deletevehicle?id='+id, conf
 export const ShowUSerVehicleApi = () => API.get('/showuserbikes', config)
 export const BikeAcceptApi = (id) => API.put(`/bikeaccept?id=${id}`, config)
 export const BikeRejectApi = (id) => API.put(`/bikereject?id=${id}`, config)
+export const AddCouponApi = (Coupon) => API.post('/addcoupon', { Coupon}, config)
 
 
 

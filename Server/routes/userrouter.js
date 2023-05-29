@@ -4,16 +4,21 @@ const protect = require('../Middleware/jwt')
 const upload = require('../Utils/multer')
 
 
-const signup = require('../Controller/UserController/userlogin')
-const login = require('../Controller/UserController/userlogin')
-const updataprofile = require('../Controller/UserController/adduserProfile')
-const edituser = require('../Controller/UserController/edituser')
-const otpLogin = require('../Controller/UserController/OtpLogin')
-const getAllVehicle = require('../Controller/UserController/getAllVehicle')
-const booking = require('../Controller/UserController/booking')
-const addBikeUser = require('../Controller/UserController/addBikeUser')
-const getAllUserVehicle = require('../Controller/UserController/getAllUserVehicle')
-// const home = require('../Controller/UserController/userlogin')
+const signup = require('../controller/UserController/userlogin')
+const login = require('../controller/UserController/userlogin')
+const updataprofile = require('../controller/UserController/adduserProfile')
+const edituser = require('../controller/UserController/edituser')
+const otpLogin = require('../controller/UserController/OtpLogin')
+const getAllVehicle = require('../controller/UserController/getAllVehicle')
+const booking = require('../controller/UserController/booking')
+const addBikeUser = require('../controller/UserController/addBikeUser')
+const getAllUserVehicle = require('../controller/UserController/getAllUserVehicle')
+// const home = require('../controller/UserController/userlogin')
+const getWalletDetails = require('../controller/UserController/Wallet')
+const saveBooking = require('../controller/UserController/savebooking')
+const getMyRentedBikeDetails = require('../controller/UserController/GetRentedBike')
+const CancelMyRide = require('../controller/UserController/CancelMyRide')
+const applyCoupon = require('../controller/UserController/applyCoupon')
 
 /* GET users listing. */
 router.route('/signup').post(signup.signup)
@@ -28,6 +33,15 @@ router.route('/getalluservehilce').get(getAllUserVehicle.getAllUserVehicle)
 
 router.route('/booking').post(booking.booking)
 router.route('/adduserbike').post(upload.array('images'),addBikeUser.addBikeUser)
+router.route('/getwallet').get(getWalletDetails.getWalletDetails)
+router.route('/getrentedbike').get(getMyRentedBikeDetails.getMyRentedBikeDetails)
+router.route('/savebooking').post(saveBooking.saveBooking)
+router.route('/cancelride').put(CancelMyRide.CancelMyRide)
+router.route('/applycoupon').post(applyCoupon.applyCoupon)
+
+
+
+
 
 // router.route('/home').get(protect,home.home)
 

@@ -29,7 +29,15 @@ export const LoginOtpApi = (phone) =>
   API.post("/otplogin?phone=" + phone, config);
 export const GetAllVehicleApi = () => API.get("/getallvehilce", config);
 export const BookingApi = (ReqObj) => API.post("/booking", { ReqObj }, config);
+export const BookinSavegApi = (Obj) =>
+  API.post("/savebooking", { Obj }, config);
+
 export const AddBikeApi = (formData) =>
-  API.post("/adduserbike?id=" + ID,  formData , configFormData);
-export const GetAllUserVehicleApi = () => API.get("/getalluservehilce?id="+ID, config);
-  
+  API.post("/adduserbike?id=" + ID, formData, configFormData);
+export const GetAllUserVehicleApi = () =>
+  API.get("/getalluservehilce?id=" + ID, config);
+export const GetWalletDetailsApi = () => API.get("/getwallet?id=" + ID, config);
+export const GetRentedBikeApi = () => API.get("/getrentedbike", config);
+export const CancelMyRideApi = (id) => API.put("/cancelride?id=" + id, config);
+export const ApplyCouponApi = (data) => API.post("/applycoupon", { data }, config);
+

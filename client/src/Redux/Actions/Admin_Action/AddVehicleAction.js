@@ -1,4 +1,3 @@
-import { AdminAddVehicleApi } from "../../../API/Admin/ApiCalls";
 import { Admin_Action_Types } from "../../Constants/Admin_Constants/AdminConstants";
 
 export const addVehicleAction = (formData) => async (dispatch) => {

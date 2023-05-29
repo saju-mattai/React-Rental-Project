@@ -3,8 +3,6 @@ const path = require('path')
 const fs = require('fs')
 const cloudinary = require('../../Utils/cloudinary')
 exports.npmaddvehicle = async (req, res) => {
-    console.log("sasasas",req.body);
-    console.log("file",req.files);
     
     try {
         const uploader = async (path) => await cloudinary.uploads(path, 'Images');

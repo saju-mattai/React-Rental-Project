@@ -18,6 +18,10 @@ import Booking from './Pages/User/BookingScreen/Booking';
 import Rentbike from './Pages/User/RentBikeUser/Rentbike';
 import RentRequest from './Pages/Admin/ShowRentRequest/RentRequest';
 import ShowMyBikes from './Pages/User/ShowMyBikes/ShowMyBikes';
+import CheckOutSuccess from './Pages/User/CheckOut/CheckOutSuccess';
+import SingleViewBike from './Pages/User/SingleViewBike/SingleViewBike';
+import Myrent from './Pages/User/MyRent/Myrent';
+import AddCoupon from './Pages/Admin/AddCoupon/AddCoupon';
 
 function App() {
   const UserData = useSelector((state) => state.UserLoginReducer.loginuserdata)
@@ -39,6 +43,13 @@ function App() {
           <Route path='/booking' element={<Booking />} />
           <Route path='/rentbike' element={<Rentbike />} />
           <Route path='/mybikes' element={<ShowMyBikes />} />
+          <Route path='/checkout-success' element={<CheckOutSuccess />} />
+          <Route path='/singleview' element={<SingleViewBike />} />
+          <Route path="/myrent" element={<Myrent />} />
+
+
+
+          
 
           
 
@@ -55,6 +66,8 @@ function App() {
           <Route path='/showallvehicle' element={Admindata ? <ShowVehicles/> :<Navigate to='/adminlogin' /> } />
           <Route path='/editvehicle' element={<EditVehicle/> } />
           <Route path='/rentrequest' element={<RentRequest/> } />
+          <Route path='/addcoupon' element={<AddCoupon/> } />
+
 
 
         </Routes>

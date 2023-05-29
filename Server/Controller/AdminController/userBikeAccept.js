@@ -8,9 +8,7 @@ exports.userBikeAccept = (req, res) => {
 
     try {
         vehiclemodel.findOne({ _id: req.query.id }).then((response) => {
-            console.log(
-                response
-            );
+           
             vehiclemodel.updateOne({ _id: response._id },
                 {
                     $set: {

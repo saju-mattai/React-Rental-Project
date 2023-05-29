@@ -7,6 +7,7 @@ import {
   MDBRow,
   MDBFile,
   MDBTextArea,
+  MDBSpinner,
 } from "mdb-react-ui-kit";
 
 import Button from "@mui/material/Button";
@@ -15,6 +16,8 @@ import { addVehicleAction } from "../../../Redux/Actions/Admin_Action/AddVehicle
 import { AdminAddVehicleApi } from "../../../API/Admin/ApiCalls";
 
 export default function AddVehicle() {
+  const [loading, setLoading] = useState(false);
+
   const divStyle = {
     border: "1px solid black",
     padding: "20px",
@@ -38,11 +41,11 @@ export default function AddVehicle() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     const formData = new FormData();
     photos.forEach((image) => {
       formData.append("images", image);
     });
-
     formData.append("Vname", name);
     formData.append("Vmodel", model);
     formData.append("Vbrand", brand);
@@ -51,13 +54,14 @@ export default function AddVehicle() {
     formData.append("Vcolor", color);
     formData.append("Vdesc", description);
     formData.append("Vnumber", vnumber);
-   
+
     AdminAddVehicleApi(formData)
       .then((data) => {
         dispatch(addVehicleAction(data.data));
         setTimeout(() => {
           navigate("/showallvehicle");
-        }, 2000);
+          setLoading(false);
+        }, 1000);
       })
       .catch((err) => {
         console.log(err);
@@ -238,18 +242,23 @@ export default function AddVehicle() {
           />
         </MDBRow>
 
-        {/* <MDBBtn type='submit' className='mb-4 ms-5' block>
-                    Sign in
-                </MDBBtn> */}
-        <MDBRow className="mt-5 ">
-          <Button
-            onClick={handleSubmit}
-            className="mt-3"
-            variant="outlined"
-            size="small"
-          >
-            Upload
-          </Button>
+        <MDBRow
+          className="mt-5"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {loading ? (
+            <MDBSpinner className="ms-5" color="primary">
+              <span className="visually-hidden">Loading...</span>
+            </MDBSpinner>
+          ) : (
+            <Button onClick={handleSubmit} variant="outlined" size="small">
+              Upload
+            </Button>
+          )}
         </MDBRow>
       </form>
     </div>
