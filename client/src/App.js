@@ -22,6 +22,7 @@ import CheckOutSuccess from './Pages/User/CheckOut/CheckOutSuccess';
 import SingleViewBike from './Pages/User/SingleViewBike/SingleViewBike';
 import Myrent from './Pages/User/MyRent/Myrent';
 import AddCoupon from './Pages/Admin/AddCoupon/AddCoupon';
+import GetBookings from './Pages/Admin/Bookings/GetBookings';
 
 function App() {
   const UserData = useSelector((state) => state.UserLoginReducer.loginuserdata)
@@ -47,16 +48,6 @@ function App() {
           <Route path='/singleview' element={<SingleViewBike />} />
           <Route path="/myrent" element={<Myrent />} />
 
-
-
-          
-
-          
-
-
-
-
-
           {/* Admin */}
           {/* <Route path='/adminhome' element={<Adminhome></Adminhome>} /> */}
           <Route path="/adminlogin" element={Admindata ? <Navigate to='/adminhome' /> : <Login />} />
@@ -67,6 +58,8 @@ function App() {
           <Route path='/editvehicle' element={<EditVehicle/> } />
           <Route path='/rentrequest' element={<RentRequest/> } />
           <Route path='/addcoupon' element={<AddCoupon/> } />
+          <Route path='/getbookings' element={<GetBookings/> } />
+
 
 
 

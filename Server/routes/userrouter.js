@@ -31,7 +31,10 @@ router.route('/getalluservehilce').get(getAllUserVehicle.getAllUserVehicle)
 
 
 
-router.route('/booking').post(booking.booking)
+router.route('/booking').post(protect,booking.booking)
+
+
+
 router.route('/adduserbike').post(upload.array('images'),addBikeUser.addBikeUser)
 router.route('/getwallet').get(getWalletDetails.getWalletDetails)
 router.route('/getrentedbike').get(getMyRentedBikeDetails.getMyRentedBikeDetails)

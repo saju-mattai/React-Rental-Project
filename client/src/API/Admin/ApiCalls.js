@@ -4,12 +4,19 @@ const API = axios.create({ baseURL: "http://localhost:3000/api/admin" })
 
 const Admin = JSON.parse(localStorage.getItem("AdminInfo"));
 
+
 const ID = Admin?.id;
 const config = {
     headers: {
         "Content-Type": "application/json"
     }
 }
+const configToken = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer" + " " + Admin?.token,
+    },
+  };
 const configFormData = {
     headers: {
         "Content-Type": "multipart/form-data",
@@ -34,6 +41,8 @@ export const ShowUSerVehicleApi = () => API.get('/showuserbikes', config)
 export const BikeAcceptApi = (id) => API.put(`/bikeaccept?id=${id}`, config)
 export const BikeRejectApi = (id) => API.put(`/bikereject?id=${id}`, config)
 export const AddCouponApi = (Coupon) => API.post('/addcoupon', { Coupon}, config)
+export const GetBookingDetailsApi = () => API.get('/getbookingdetails', config)
+
 
 
 

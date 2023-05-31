@@ -1,8 +1,9 @@
 const Wallet = require("../../Models/WalletSchema");
 
 exports.getWalletDetails = (req, res) => {
+  console.log(req.query.id );
   Wallet.findOne({ userId: req.query.id }).then((data) => {
-    console.log(data);
+    console.log(data,'llll');
 
     res.status(200).json(data);
   })

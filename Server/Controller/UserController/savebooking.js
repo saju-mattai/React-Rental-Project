@@ -15,6 +15,7 @@ exports.saveBooking = (req, res) => {
     enddate,
     BikePhoto,
     Description,
+    paymentMethod
   } = req.body.Obj;
   console.log('req.body.Obj',req.body.Obj);
   const details = {
@@ -29,9 +30,9 @@ exports.saveBooking = (req, res) => {
     BikeName,
     BikePhoto,
     Description,
+    paymentMethod:'Stripe'
+
   };
-
-
   let bookedTimeSlots = {
     startdate,
     enddate,
@@ -43,6 +44,14 @@ exports.saveBooking = (req, res) => {
         .findOne({ _id: data.BikeId })
         .then(async (result) => {
           result.BookedTimeSlots.push(bookedTimeSlots);
+          vehiclemodel.updateOne({_id:result._id},
+            {
+              $set:{
+                Vstatus:"Rented"
+              }
+            }).then((res)=>{
+              
+            })
           await result.save();
           res.send("your booking is successfull");
         })

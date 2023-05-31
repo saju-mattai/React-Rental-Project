@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./BookingScreen.css";
+import { User_Action_Types } from "../../../Redux/Constants/User_Constants/UserConstants";
+
 import { message } from "antd";
 import {
   MDBSpinner,
@@ -76,25 +78,27 @@ function Booking() {
   const handleCoupon = () => {
     dispatch(applyCouponAction(CouponDetails));
   };
-  if (newtotalamount && helmet) {
-    totalAmount = newtotalamount + 100;
-  }
   if (newtotalamount) {
     totalAmount = newtotalamount;
   }
-  
-  
+  if (newtotalamount && helmet) {
+    totalAmount = newtotalamount + 100;
+  }
+  // if(!newtotalamount && helmet === true){
+  //   totalAmount = totalAmount + 100;
+  // }
+
   const handelSubmit = () => {
     setLoading(true);
     if (newtotalamount) {
       totalAmount = newtotalamount;
     }
-    // if (newtotalamount && helmet) {
-    //   totalAmount = newtotalamount + 100;
-    // }
+    if (newtotalamount && helmet) {
+      totalAmount = newtotalamount + 100;
+    }
     const ReqObj = {
-      userId: JSON.parse(localStorage.getItem("UserInfo")).id,
-      UserName: JSON.parse(localStorage.getItem("UserInfo")).name,
+      userId: JSON.parse(localStorage.getItem("UserInfo"))?.id,
+      UserName: JSON.parse(localStorage.getItem("UserInfo"))?.name,
       BikeId: filteredData[0]._id,
       BikeName: filteredData[0].Vname,
       BikePhoto: filteredData[0].Vphoto[0].url,
@@ -109,19 +113,31 @@ function Booking() {
       paymentMethod,
     };
 
-    BookingApi(ReqObj).then((data) => {
-      if (data.data.url) {
-        window.location.href = data.data.url;
-      }
-      if (data.data.paymentMethod === "Wallet") {
-        message.success("Hamsathali");
-        setTimeout(() => {
-          navigate("/myrent");
-        }, 1000);
-      }
-      dispatch(BookingAction(data.data));
-      setLoading(false);
-    });
+    BookingApi(ReqObj)
+      .then((data) => {
+        if (data.data.url) {
+          window.location.href = data.data.url;
+        }
+        if (data.data.paymentMethod === "Wallet") {
+          message.success("Hamsathali");
+          setTimeout(() => {
+            navigate("/myrent");
+          }, 1000);
+        }
+        dispatch(BookingAction(data.data));
+        setLoading(false);
+      })
+      .catch((err) => {
+        dispatch({
+          type: User_Action_Types.BOOKING_FAIL,
+          payload: err.resoponse,
+        });
+        message.error(
+          err.response && err.response.data
+            ? err.response.data
+            : "Error occurred"
+        );
+      });
   };
 
   return (

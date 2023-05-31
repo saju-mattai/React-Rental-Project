@@ -14,7 +14,6 @@ function ShowVehicles() {
     (state) => state.ShowAllVehicleReducer.VehicleData
   );
 
-  //   const history = useHistory();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -72,6 +71,7 @@ function ShowVehicles() {
               <th scope="col">Colour</th>
               <th scope="col">Number</th>
               <th scope="col">Fuel</th>
+              <th scope="col">Status</th>
               <th scope="col">Edit</th>
               <th scope="col"> Delete</th>
             </tr>
@@ -98,7 +98,10 @@ function ShowVehicles() {
 
                       <td>{data.Vcolor}</td>
                       <td>{data.Vnumber}</td>
+
                       <td>{data.Vfuel}</td>
+                      <td>{data.Vstatus}</td>
+
                       <td>
                         <Button
                           variant="outlined"

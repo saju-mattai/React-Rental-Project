@@ -21,6 +21,8 @@ function CheckOutSuccess() {
   const BikeName = searchParams.get("BikeName").trim();
   const BikePhoto = searchParams.get("BikePhoto").trim();
   const Description = searchParams.get("Description").trim();
+  const paymentMethod = searchParams.get("paymentMethod").trim();
+
   const UserName = searchParams.get("UserName");
 
 
@@ -36,8 +38,8 @@ function CheckOutSuccess() {
     BikeName,
     BikePhoto,
     Description,
+    paymentMethod
   };
-   console.log(userId);
 
   useEffect(() => {
     // BookinSavegApi(details).then((data) => {

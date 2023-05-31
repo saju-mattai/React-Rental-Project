@@ -168,7 +168,7 @@ export default function AdminDrawer() {
               name: "Bikes",
               icon: <TwoWheelerRoundedIcon style={{ color: "#6366F1" }} />,
             },
-            // {name : "Bookings" , icon : <SportsMotorsportsIcon/>},
+            {name : "Bookings" , icon : <SportsMotorsportsIcon  style={{ color: "#6366F1" }}  />},
             {
               name: "Add Bikes",
               icon: <AddIcon style={{ color: "#6366F1" }} />,
@@ -211,7 +211,7 @@ export default function AdminDrawer() {
                     text2 === "users" && navigate("/showalluser");
                     text2 === "bikes" && navigate("/showallvehicle");
                     text2 === "add bikes" && navigate("/addvehicle");
-                    //   text2 === 'bookings' && navigate('/admin/bookings')
+                      text2 === 'bookings' && navigate('/getbookings')
                     text2 === "rent requests" && navigate("/rentrequest");
                     //   text2 === 'locations' && navigate('/admin/locations')
                     //   text2 === 'add location' && navigate('/admin/add-location')

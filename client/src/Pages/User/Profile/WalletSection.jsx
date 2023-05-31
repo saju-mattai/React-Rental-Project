@@ -7,10 +7,11 @@ import { getWalletAction } from "../../../Redux/Actions/User_Action/GetWalletAct
 function WalletSection() {
   const Wallet = useSelector((state) => state.getWalletReducer.WalletData);
   console.log(Wallet);
-  const dispatch = useDispatch();
+const userId = JSON.parse(localStorage.getItem("UserInfo")).id
 
+  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getWalletAction());
+    dispatch(getWalletAction(userId));
   }, []);
 
   return (
