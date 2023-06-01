@@ -4,26 +4,45 @@ import "sweetalert2/dist/sweetalert2.css";
 import ReactPaginate from "react-paginate";
 import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
 import { useSelector, useDispatch } from "react-redux";
-import { ShowAllUSerAction } from "../../Redux/Actions/Admin_Action/ShowAllUserAction";
+import {
+  ShowAllUSerAction,
+  searchUserAction,
+} from "../../Redux/Actions/Admin_Action/ShowAllUserAction";
 import { BlockUnblockAction } from "../../Redux/Actions/Admin_Action/BlockUnblockAction";
 import Button from "@mui/material/Button";
 import AdminDrawer from "../AdminDashbored/AdminDrawer";
-import { ShowAllUSerApi } from "../../API/Admin/ApiCalls";
+import { SearchUserApi, ShowAllUSerApi } from "../../API/Admin/ApiCalls";
+import TextField from "@mui/material/TextField";
 export default function ShowAllUser() {
-//   const data = useSelector((state) => state.ShowAllUSerReducer.data);
+    const SearchedData = useSelector((state) => state.ShowAllUSerReducer);
+    console.log(SearchedData);
 
   const [limit, setLimit] = useState(4);
   const [pageCount, setPageCount] = useState(1);
   const currentPage = useRef();
   const [data, setData] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const [searchedData, setSearchedData] = useState([]);
+
+  
+
+  
 
   const dispatch = useDispatch();
+
+ 
 
   useEffect(() => {
     dispatch(ShowAllUSerAction());
     currentPage.current = 1;
     getPaginatedUser();
-  }, []);
+    if (searchTerm) {
+      handleSubmit();
+    }
+    
+  }, [searchTerm]);
+
   const handlePageClick = (e) => {
     currentPage.current = e.selected + 1;
     getPaginatedUser();
@@ -34,6 +53,8 @@ export default function ShowAllUser() {
       setData(data.data.result);
     });
   }
+  
+
 
   const handleBlockUnblock = (id) => {
     Swal.fire({
@@ -55,6 +76,18 @@ export default function ShowAllUser() {
       }
     });
   };
+  const handleSubmit = (e) => {
+    // dispatch(searchUserAction(searchTerm));
+    SearchUserApi(searchTerm).then((data)=>{
+      setSearchedData(data.data)
+    })
+  };
+  const handleChange = (e) => {
+    const { value } = e.target;
+    setSearchTerm(value);
+  };
+  const tableData = searchTerm ? searchedData : data;
+
 
   return (
     <div
@@ -66,10 +99,22 @@ export default function ShowAllUser() {
       }}
     >
       <AdminDrawer />
+
       <div style={{ marginTop: "6em", width: "75%" }} className="maintable">
+        
+        <TextField
+          className="w-50 mb-3"
+          id="outlined-basic"
+          variant="outlined"
+          value={searchTerm}
+          fullWidth
+          label="Search"
+          onChange={handleChange}
+        />
+
         <MDBTable bordered>
           <MDBTableHead>
-            <tr>
+            <tr >
               <th scope="col">No</th>
               <th scope="col">Name</th>
               <th scope="col">Email</th>
@@ -79,10 +124,10 @@ export default function ShowAllUser() {
             </tr>
           </MDBTableHead>
           <MDBTableBody>
-            {data
-              ? data.map((data, index) => {
+            {tableData
+              ? tableData.map((data, index) => {
                   return (
-                    <tr>
+                    <tr key={index}>
                       <th scope="row">{index + 1}</th>
                       <td>{data.name}</td>
                       <td>{data.email}</td>

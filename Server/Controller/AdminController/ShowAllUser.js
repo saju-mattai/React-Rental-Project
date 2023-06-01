@@ -34,3 +34,19 @@ exports.ShowAllUSer = (req, res) => {
       });
   } catch (error) {}
 };
+
+exports.searchUser = (req, res) => {
+  const searchdata = req.query.searchdata
+  try {
+    UserModel.find({
+      $or: [
+        { name: { $regex: ".*" + searchdata + ".*", $options: "i" } }, 
+        { email: { $regex: ".*" + searchdata + ".*", $options: "i" } },
+        { place: { $regex: ".*" + searchdata + ".*", $options: "i" } },
+
+    ]
+    }).then((data) => {
+      res.status(200).json(data);
+    });
+  } catch (error) {}
+};

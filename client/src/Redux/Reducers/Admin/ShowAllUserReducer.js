@@ -17,6 +17,21 @@ export const ShowAllUSerReducer = (state = {}, { type, payload }) => {
                 UserDataErr: payload
             }
 
+             case Admin_Action_Types.SEARCH_USER_REQUEST:
+            return {
+                loading: true
+            }
+        case Admin_Action_Types.SEARCH_USER_SUCCESS:
+            return {
+                loading: false,
+                UserData: payload
+            }
+        case Admin_Action_Types.SEARCH_USER_FAIL:
+            return {
+                loading: false,
+                UserDataErr: payload
+            }
+
         case Admin_Action_Types.ADMIN_LOGIN_REQUEST:
             return {
                 loading: true

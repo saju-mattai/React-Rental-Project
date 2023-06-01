@@ -24,6 +24,8 @@ router
   .route("/addvehicle")
   .post(upload.array("images"), addvehicle.npmaddvehicle);
 router.route("/ShowAllUSer").get(ShowAllUSer.ShowAllUSer);
+router.route("/searchuser").get(ShowAllUSer.searchUser);
+
 router.route("/showvehicle").get(ShowAllVehicle.ShowAllVehicle);
 router.route("/deletevehicle").delete(deleteVehicle.deleteVehicle);
 router

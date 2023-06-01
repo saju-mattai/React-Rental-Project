@@ -28,6 +28,7 @@ const configFormData = {
 
 export const AdminLoginApi = (email, password) => API.post('/adminlogin', { email, password }, config)
 export const ShowAllUSerApi = (currentPage,limit) => API.get(`/ShowAllUSer?page=${currentPage}&limit=${limit}`, config)
+export const SearchUserApi = (searchdata)=>API.get(`/searchuser?searchdata=${searchdata}`,config)
 export const BlockUnblockApi = (id) => API.put(`/blockunblock?id=${id}`, config)
 export const AdminAddVehicleApi = (formData) => API.post('/addvehicle', formData, configFormData)
 export const editVehicleApi = (formData,id) => API.post('/editvehicle?id='+id,formData, configFormData)
