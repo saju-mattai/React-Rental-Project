@@ -2,14 +2,13 @@ import { Admin_Action_Types } from "../../Constants/Admin_Constants/AdminConstan
 
 import { ShowAllUSerApi } from "../../../API/Admin/ApiCalls";
 
-export const ShowAllUSerAction = () => async (dispatch) => {
+export const ShowAllUSerAction = (currentPage,limit) => async (dispatch) => {
     dispatch({
         type: Admin_Action_Types.SHOW_ALL_USER_REQUEST
     })
     try {
-        ShowAllUSerApi()
+        ShowAllUSerApi(currentPage,limit)
             .then((data) => {
-                console.log('DSDASD',data.data);
                 dispatch({
                     type: Admin_Action_Types.SHOW_ALL_USER_SUCCESS,
                     payload: data.data

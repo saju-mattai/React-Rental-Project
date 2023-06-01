@@ -27,7 +27,7 @@ const configFormData = {
 
 
 export const AdminLoginApi = (email, password) => API.post('/adminlogin', { email, password }, config)
-export const ShowAllUSerApi = () => API.get('/ShowAllUSer', {}, config)
+export const ShowAllUSerApi = (currentPage,limit) => API.get(`/ShowAllUSer?page=${currentPage}&limit=${limit}`, config)
 export const BlockUnblockApi = (id) => API.put(`/blockunblock?id=${id}`, config)
 export const AdminAddVehicleApi = (formData) => API.post('/addvehicle', formData, configFormData)
 export const editVehicleApi = (formData,id) => API.post('/editvehicle?id='+id,formData, configFormData)
@@ -35,13 +35,13 @@ export const editVehicleApi = (formData,id) => API.post('/editvehicle?id='+id,fo
 
 
 
-export const ShowAllVehicleApi = () => API.get('/showvehicle', config)
+export const ShowAllVehicleApi = (currentPage,limit) => API.get(`/showvehicle?page=${currentPage}&limit=${limit}`, config)
 export const DeleteVehicleApi = (id) => API.delete('/deletevehicle?id='+id, config)
 export const ShowUSerVehicleApi = () => API.get('/showuserbikes', config)
 export const BikeAcceptApi = (id) => API.put(`/bikeaccept?id=${id}`, config)
 export const BikeRejectApi = (id) => API.put(`/bikereject?id=${id}`, config)
 export const AddCouponApi = (Coupon) => API.post('/addcoupon', { Coupon}, config)
-export const GetBookingDetailsApi = () => API.get('/getbookingdetails', config)
+export const GetBookingDetailsApi = (currentPage,limit) => API.get(`/getbookingdetails?page=${currentPage}&limit=${limit}`, config)
 
 
 

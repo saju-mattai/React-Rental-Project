@@ -1,19 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import ReactPaginate from "react-paginate";
 import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
 import AdminDrawer from "../../../Components/AdminDashbored/AdminDrawer";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ShowAllVehicleAction } from "../../../Redux/Actions/Admin_Action/ShowAllVehicleAction";
 import Button from "@mui/material/Button";
 import { deleteVehicleAction } from "../../../Redux/Actions/Admin_Action/DeleteVehicleAction";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
+import { ShowAllVehicleApi } from "../../../API/Admin/ApiCalls";
 
 function ShowVehicles() {
-  const Vehicledata = useSelector(
-    (state) => state.ShowAllVehicleReducer.VehicleData
-  );
+  const [limit, setLimit] = useState(3);
+  const [pageCount, setPageCount] = useState(1);
+  const currentPage = useRef();
+  const [data, setData] = useState("");
 
+  // const data = useSelector(
+  //   (state) => state.ShowAllVehicleReducer.VehicleData
+  // );
+  // console.log("data", data);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,17 +43,27 @@ function ShowVehicles() {
         Swal.fire("Deleted!", "Your vehicle has been deleted.", "success");
       }
     });
-    // dispatch(deleteVehicleAction(id));
-    // dispatch(ShowAllVehicleAction());
   };
   const handleEdit = (id) => {
-    const filteredData = Vehicledata.filter((item) => item._id === id);
+    const filteredData = data.filter((item) => item._id === id);
     navigate("/editvehicle", { state: { filteredData } });
   };
-
   useEffect(() => {
     dispatch(ShowAllVehicleAction());
+    currentPage.current = 1;
+    getPaginatedVehicle();
   }, []);
+
+  const handlePageClick = (e) => {
+    currentPage.current = e.selected + 1;
+    getPaginatedVehicle();
+  };
+  function getPaginatedVehicle() {
+    ShowAllVehicleApi(currentPage.current, limit).then((data) => {
+      setPageCount(data.data.pageCount);
+      setData(data.data.result);
+    });
+  }
 
   return (
     <div
@@ -77,8 +94,8 @@ function ShowVehicles() {
             </tr>
           </MDBTableHead>
           <MDBTableBody>
-            {Vehicledata
-              ? Vehicledata.map((data, index) => {
+            {data
+              ? data.map((data, index) => {
                   return (
                     <tr>
                       <th scope="row">{index + 1}</th>
@@ -123,13 +140,29 @@ function ShowVehicles() {
                           Delete
                         </Button>
                       </td>
-                      {/* <td>{data.Vphoto[0]}</td> */}
                     </tr>
                   );
                 })
               : ""}
           </MDBTableBody>
         </MDBTable>
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="next >"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          previousLabel="< previous"
+          renderOnZeroPageCount={null}
+          containerClassName="pagination justify-content-center"
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName="page-link"
+          activeClassName="active"
+        />
       </div>
     </div>
   );

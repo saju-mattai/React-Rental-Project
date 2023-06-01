@@ -1,20 +1,41 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
 import AdminDrawer from "../../../Components/AdminDashbored/AdminDrawer";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getBookingAction } from "../../../Redux/Actions/Admin_Action/getBookingDetailsAction";
+import { GetBookingDetailsApi } from "../../../API/Admin/ApiCalls";
+import ReactPaginate from "react-paginate";
 
 function GetBookings() {
+  const [limit, setLimit] = useState(3);
+  const [pageCount, setPageCount] = useState(1);
+  const currentPage = useRef();
+  const [data, setData] = useState("");
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const Data = useSelector((state) => state.getBookingDetailsReducer.Data);
-  console.log(Data);
+  // const data = useSelector((state) => state.getBookingDetailsReducer.data);
+  // console.log(data);
 
   useEffect(() => {
     dispatch(getBookingAction());
+    currentPage.current = 1;
+    getPaginatedVehicle();
   }, []);
+  const handlePageClick = (e) => {
+    currentPage.current = e.selected + 1;
+    getPaginatedVehicle();
+  };
+
+  
+  function getPaginatedVehicle() {
+    GetBookingDetailsApi(currentPage.current, limit).then((data) => {
+      setPageCount(data.data.pageCount);
+      setData(data.data.result);
+    });
+  }
 
   return (
     <div
@@ -39,36 +60,51 @@ function GetBookings() {
               <th scope="col">TotalAmout</th>
               <th scope="col">Payment</th>
               <th scope="col">Status</th>
-
             </tr>
           </MDBTableHead>
           <MDBTableBody>
-          {Data
-              ? Data.map((data, index) => {
+            {data
+              ? data.map((data, index) => {
                   return (
                     <tr>
                       <th scope="row">{index + 1}</th>
                       <td>{data.UserName}</td>
                       <td>{data.BikeName}</td>
                       <td>
-                          <img
-                            src={data.BikePhoto}
-                            alt="image"
-                            style={{ height: "80px", width: "100px" }}
-                          />
+                        <img
+                          src={data.BikePhoto}
+                          alt="image"
+                          style={{ height: "80px", width: "100px" }}
+                        />
                       </td>
                       <td>{data.startdate}</td>
                       <td>{data.enddate}</td>
                       <td>{data.totalAmount}</td>
                       <td>{data.paymentMethod}</td>
                       <td>{data.status}</td>
-                      
                     </tr>
                   );
                 })
               : ""}
           </MDBTableBody>
         </MDBTable>
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="next >"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          previousLabel="< previous"
+          renderOnZeroPageCount={null}
+          containerClassName="pagination justify-content-center"
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName="page-link"
+          activeClassName="active"
+        />
       </div>
     </div>
   );
