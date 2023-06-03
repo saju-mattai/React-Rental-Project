@@ -17,48 +17,12 @@ function RentRequest() {
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleAccept = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "Are You Sure You Want Accept !",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Accept It !",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // Dispatch deleteVehicleAction and ShowAllVehicleAction here
-        setShow(true);
-        dispatch(BikeAcceptAction(id)).then(() => {
-          setShow(false);
-        });
-
-        Swal.fire("Accepted!", "Your vehicle has been Accepted.", "success");
-      }
-    });
-  };
-  const handleReject = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "Are You Sure You Want Reject !",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Reject it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // Dispatch deleteVehicleAction and ShowAllVehicleAction here
-        setShow(true);
-        dispatch(BikeRejectAction(id)).then(() => {
-          setShow(false);
-        })
-
-        Swal.fire("Rejected!", "Your vehicle has been Rejected.", "success");
-      }
-    });
-  };
+  
+  const handleView=(id)=>{
+     const filteredData = Vehicledata.filter((item) => item._id === id);
+    navigate("/viewmore-rentrequest", { state: { filteredData } });
+  }
+  
 
   useEffect(() => {
     dispatch(ShowUserBikesAction());
@@ -75,6 +39,9 @@ function RentRequest() {
     >
       <AdminDrawer />
       <div style={{ marginTop: "6em", width: "75%" }} className="maintable">
+      <div>
+          <h1 className="text-center" > <b>Rent Request </b> </h1>
+        </div>
         <MDBTable bordered>
           <MDBTableHead>
             <tr className="container ">
@@ -87,8 +54,7 @@ function RentRequest() {
               <th scope="col">Colour</th>
               <th scope="col">Number</th>
               <th scope="col">Fuel</th>
-              <th scope="col">Accept</th>
-              <th scope="col"> Reject</th>
+              <th scope="col">View More</th>
             </tr>
           </MDBTableHead>
           <MDBTableBody>
@@ -114,7 +80,18 @@ function RentRequest() {
                       <td>{data.Vcolor}</td>
                       <td>{data.Vnumber}</td>
                       <td>{data.Vfuel}</td>
-                      <td>
+                    <td>
+                    <Button
+                          variant="outlined"
+                          onClick={() => {
+                            handleView(data._id);
+                          }}
+                        >
+                          View  
+                        </Button>
+                    </td>
+
+                      {/* <td>
                         <Button
                           variant="outlined"
                           onClick={() => {
@@ -123,18 +100,18 @@ function RentRequest() {
                         >
                           Accept
                         </Button>
-                      </td>
-                      <td>
-                        <Button
-                          variant="outlined"
-                          color="error"
-                          onClick={() => {
-                            handleReject(data._id);
-                          }}
-                        >
-                          Reject
-                        </Button>
-                      </td>
+                          </td> */}
+                        {/* <td>
+                          <Button
+                            variant="outlined"
+                            color="Primary"
+                            onClick={() => {
+                              handleReject(data._id);
+                            }}
+                          >
+                            View More
+                          </Button>
+                        </td> */}
                       {/* <td>{data.Vphoto[0]}</td> */}
                     </tr>
                   );

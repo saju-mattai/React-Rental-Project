@@ -10,18 +10,7 @@ import { UserSignUp } from "../../../Redux/Actions/User_Action/SignUpAction";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
-import {
-  MDBBtn,
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  // MDBCard,
-  // MDBCardBody,
-  // MDBCardImage,
-  MDBInput,
-  // MDBIcon,
-  // MDBCheckbox
-} from "mdb-react-ui-kit";
+import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 
 const schema = yup.object().shape({
   name: yup
@@ -68,7 +57,7 @@ function Signup() {
   const UserSignUpData = useSelector((state) => state.UserSignUpReducer);
 
   const submitHandler = async (data) => {
-    console.log(data, "lll");
+    console.log('data');
     // setLoading(true);
     const Name = data.name;
     const Email = data.email;
@@ -87,7 +76,6 @@ function Signup() {
   };
 
   return (
-    // <div>
     <MDBContainer fluid className="p-3 my-5">
       <MDBRow>
         <h1

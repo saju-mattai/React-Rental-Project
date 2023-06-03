@@ -82,9 +82,7 @@ export default function Usernavbar() {
                             <MDBNavbarItem>
                                 <MDBNavbarLink onClick={handleBike} style={{ marginLeft: '1rem' }}>Bikes</MDBNavbarLink>
                             </MDBNavbarItem>
-                            <MDBNavbarItem>
-                                <MDBNavbarLink href='#' style={{ marginLeft: '1rem' }}>Offers</MDBNavbarLink>
-                            </MDBNavbarItem>
+                            
                             <MDBNavbarItem>
                                 <MDBNavbarLink  onClick={handleRentBike} style={{ marginLeft: '1rem' }}>Rent A Bike</MDBNavbarLink>
                             </MDBNavbarItem>

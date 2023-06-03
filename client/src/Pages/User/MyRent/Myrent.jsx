@@ -30,12 +30,17 @@ function Myrent() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(GetRentedBikeAction());
+    Swal.fire('Come With Id Proof For Purchase')
   }, []);
 
   return (
     <div>
       <Usernavbar />
+      <div>
+          <h3 className="text-center" > <b> My Orders</b> </h3>
+        </div>
       <MDBTable className="caption-top container ">
+        
         <caption>List Of Orders</caption>
         <MDBTableHead>
           <tr>
@@ -67,7 +72,7 @@ function Myrent() {
                     <td>{data.startdate}</td>
                     <td>{data.enddate}</td>
                     <td>{data.totalHour} Hour</td>
-                    <td>{data.totalAmount} </td>
+                    <td>Rs.{data.totalAmount} </td>
                     <td>{data.status} </td>
                     <td>
                       {" "}

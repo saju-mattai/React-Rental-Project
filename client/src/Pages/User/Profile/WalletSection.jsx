@@ -26,7 +26,7 @@ const userId = JSON.parse(localStorage.getItem("UserInfo")).id
       }}
     >
       <div className="me-auto mt-4">
-        <h6>Wallet Amount : {Wallet?.walletAmount}</h6>
+        <h6>Wallet Amount : Rs.{Wallet?.walletAmount}</h6>
       </div>
       <Button
         style={{ marginBottom: "4px", width: "40%", marginLeft: "9em" }}

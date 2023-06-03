@@ -62,12 +62,14 @@ function Booking() {
     setStartdate(moment(value[0].$d).format("MMMM Do YYYY, h:mm:ss a"));
     setEnddate(moment(value[1].$d).format("MMMM Do YYYY, h:mm:ss a"));
     setTotalHour(value[1].diff(value[0], "hours"));
+    setShowtotal(true);
   };
 
   useEffect(() => {
     setTotalAmount(totalHour * filteredData[0].Vprice);
     if (helmet) {
       setTotalAmount(totalAmount + 100);
+      setHelmet(true);
     }
   }, [helmet, totalHour]);
 
@@ -119,7 +121,7 @@ function Booking() {
           window.location.href = data.data.url;
         }
         if (data.data.paymentMethod === "Wallet") {
-          message.success("Hamsathali");
+          message.success("Booked Successfully");
           setTimeout(() => {
             navigate("/myrent");
           }, 1000);
@@ -143,7 +145,9 @@ function Booking() {
   return (
     <>
       <Usernavbar />
-
+      <div>
+          <h3 className="text-center" > <b> Check Out</b> </h3>
+        </div>
       <div className="row  ms-5 mt-4">
         <div
           className="col-6 "
@@ -222,78 +226,68 @@ function Booking() {
             Apply
           </Button>
 
-          {/* <div className="d-flex justify-content-end  w-75 ms-5 ">
-            <p>
-              Total Hours : <b>{totalHour}</b>
-            </p>
-          </div>
-          <div className="d-flex justify-content-end mt-0  w-75 ms-5">
-            <p>
-              Rent Per Hour : <b>{filteredData[0].Vprice}</b>{" "}
-            </p>
-          </div>
-          <div className="d-flex justify-content-end mt-0  w-75 ms-5">
-            <h3>Total Amout : {totalAmount}</h3>
-          </div>
-
-          <div className="d-flex justify-content-end mt-0  w-75 ms-5">
-           
-            <Button onClick={handelSubmit} variant="outlined">
-              Book Now
-            </Button>
-    
-          </div> */}
           <div
             className="container ms-5"
             style={{ height: "300px", width: "500px" }}
           >
-            <MDBCard alignment="center " className="ms-5 mb-5">
-              <MDBCardHeader>Featured</MDBCardHeader>
-              <MDBCardBody>
-                <p className="d-flex justify-content-end">
-                  Total Hours : <b>{totalHour}</b>
-                </p>
-                <p className="d-flex justify-content-end">
-                  Rent Per Hour : <b>{filteredData[0].Vprice}</b>{" "}
-                </p>
-                <h3 className="d-flex justify-content-end">
-                  Total Amout : {totalAmount}
-                </h3>
+            {showtotal ? (
+              <MDBCard alignment="center " className="ms-5 mb-5">
+                <MDBCardHeader>Check Out</MDBCardHeader>
+                <MDBCardBody>
+                  <p className="d-flex justify-content-end">
+                    Total Hours : <b>{totalHour}hr</b>
+                  </p>
+                  {helmet ? (
+                    <p className="d-flex justify-content-end">
+                      Extra Helmet : <b>Rs.100</b>{" "}
+                    </p>
+                  ) : (
+                    ""
+                  )}
+                  <p className="d-flex justify-content-end">
+                    Rent Per Hour : <b>Rs.{filteredData[0].Vprice}</b>{" "}
+                  </p>
+                  <h3 className="d-flex justify-content-end">
+                    Total Amout :Rs. {totalAmount}
+                  </h3>
 
-                <FormControl className="mt-5">
-                  <RadioGroup
-                    row
-                    aria-labelledby="demo-row-radio-buttons-group-label"
-                    name="row-radio-buttons-group"
+                  <FormControl className="mt-5">
+                    <RadioGroup
+                      row
+                      aria-labelledby="demo-row-radio-buttons-group-label"
+                      name="row-radio-buttons-group"
+                    >
+                      <FormControlLabel
+                        value="Wallet"
+                        control={<Radio />}
+                        onChange={(e) => {
+                          setpaymentMethod(true);
+                        }}
+                        label="Wallet"
+                      />
+                      <FormControlLabel
+                        value="Stripe"
+                        onChange={(e) => {
+                          setpaymentMethod(false);
+                        }}
+                        control={<Radio />}
+                        label="Stripe"
+                      />
+                      {/* <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel> */}
+                    </RadioGroup>
+                  </FormControl>
+                  <Button
+                    className="ms-5 mt-5"
+                    onClick={handelSubmit}
+                    variant="outlined"
                   >
-                    <FormControlLabel
-                      value="Wallet"
-                      control={<Radio />}
-                      onChange={(e) => {
-                        setpaymentMethod(true);
-                      }}
-                      label="Wallet"
-                    />
-                    <FormControlLabel
-                      value="Stripe"
-                      onChange={(e) => {
-                        setpaymentMethod(false);
-                      }}
-                      control={<Radio />}
-                      label="Stripe"
-                    />
-                    {/* <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel> */}
-                  </RadioGroup>
-                </FormControl>
-                <Button
-                  className="ms-5 mt-5"
-                  onClick={handelSubmit}
-                  variant="outlined"
-                >
-                  Book Now
-                </Button>
-              </MDBCardBody>
-            </MDBCard>
+                    Book Now
+                  </Button>
+                </MDBCardBody>
+              </MDBCard>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>

@@ -5,16 +5,15 @@ exports.applyCoupon = (req, res) => {
   console.log(coupon, totalAmount);
   CouponModel.findOne({ coupocode: coupon })
     .then((data) => {
-      //   if (data) {
+        // if (data) {
       let NewTotalAmount = totalAmount - data.Amount;
       res.status(200).json(NewTotalAmount);
-      //   } else {
-      //     console.log("cant fid coupon");
-      //     res.status(500).json("cant find coupon");
-      //   }
+        // } else {
+        //   res.status(200).json("Invalid Coupon");
+        // }
     })
     .catch((error) => {
       //   res.status(500).json(error);
-      res.status(500).json("cant find coupon");
+      res.status(400).json(error);
     });
 };

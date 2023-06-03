@@ -48,6 +48,9 @@ function GetBookings() {
     >
       <AdminDrawer />
       <div style={{ marginTop: "6em", width: "75%" }} className="maintable">
+        <div>
+          <h1 className="text-center" > <b> Booking Details</b> </h1>
+        </div>
         <MDBTable bordered>
           <MDBTableHead>
             <tr className="container ">
@@ -79,7 +82,7 @@ function GetBookings() {
                       </td>
                       <td>{data.startdate}</td>
                       <td>{data.enddate}</td>
-                      <td>{data.totalAmount}</td>
+                      <td>Rs.{data.totalAmount}</td>
                       <td>{data.paymentMethod}</td>
                       <td>{data.status}</td>
                     </tr>

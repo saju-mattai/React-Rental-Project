@@ -14,8 +14,8 @@ import AdminDrawer from "../AdminDashbored/AdminDrawer";
 import { SearchUserApi, ShowAllUSerApi } from "../../API/Admin/ApiCalls";
 import TextField from "@mui/material/TextField";
 export default function ShowAllUser() {
-    const SearchedData = useSelector((state) => state.ShowAllUSerReducer);
-    console.log(SearchedData);
+  const SearchedData = useSelector((state) => state.ShowAllUSerReducer);
+  console.log(SearchedData);
 
   const [limit, setLimit] = useState(4);
   const [pageCount, setPageCount] = useState(1);
@@ -25,13 +25,7 @@ export default function ShowAllUser() {
 
   const [searchedData, setSearchedData] = useState([]);
 
-  
-
-  
-
   const dispatch = useDispatch();
-
- 
 
   useEffect(() => {
     dispatch(ShowAllUSerAction());
@@ -40,7 +34,6 @@ export default function ShowAllUser() {
     if (searchTerm) {
       handleSubmit();
     }
-    
   }, [searchTerm]);
 
   const handlePageClick = (e) => {
@@ -53,8 +46,6 @@ export default function ShowAllUser() {
       setData(data.data.result);
     });
   }
-  
-
 
   const handleBlockUnblock = (id) => {
     Swal.fire({
@@ -78,16 +69,15 @@ export default function ShowAllUser() {
   };
   const handleSubmit = (e) => {
     // dispatch(searchUserAction(searchTerm));
-    SearchUserApi(searchTerm).then((data)=>{
-      setSearchedData(data.data)
-    })
+    SearchUserApi(searchTerm).then((data) => {
+      setSearchedData(data.data);
+    });
   };
   const handleChange = (e) => {
     const { value } = e.target;
     setSearchTerm(value);
   };
   const tableData = searchTerm ? searchedData : data;
-
 
   return (
     <div
@@ -99,8 +89,23 @@ export default function ShowAllUser() {
       }}
     >
       <AdminDrawer />
+      {/* <div
+        className=" text-center border me-4 mb-5"
+        style={{
+          height: "25%",
+          width: "25%",
+          
+        }}
+      >
+        <div  >
 
-      <div style={{ marginTop: "6em", width: "75%" }} className="maintable">
+        <h5 className="mb-5">Filter</h5>
+          
+        </div>
+      </div> */}
+      <div style={{ marginTop: "6em", width: "75%" }} className="maintable ">
+ 
+          <h1 className="text-center mb-5" > <b> Users Details</b> </h1>
         
         <TextField
           className="w-50 mb-3"
@@ -114,7 +119,7 @@ export default function ShowAllUser() {
 
         <MDBTable bordered>
           <MDBTableHead>
-            <tr >
+            <tr>
               <th scope="col">No</th>
               <th scope="col">Name</th>
               <th scope="col">Email</th>

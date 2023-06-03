@@ -231,6 +231,38 @@ function Rentbike() {
           />
         </MDBRow>
 
+        <MDBRow className="mt-1 container w-50 float-start ">
+          <div>
+            <label htmlFor="form3Example2" className="form-label">
+              Submit Your Front Side Of RC
+            </label>
+          </div>
+          <MDBFile
+            onChange={(e) => {
+              setPhotos([...photos, e.target.files[0]]);
+            }}
+            label=""
+            size="sm"
+            id="formFileSm"
+          />
+        </MDBRow>
+        <MDBRow className="mt-1 container w-50  ms-5">
+          <div>
+            <label htmlFor="form3Example2" className="form-label">
+            Submit Your Back Side Of RC
+            </label>
+          </div>
+          <MDBFile
+            onChange={(e) => {
+              setPhotos([...photos, e.target.files[0]]);
+            }}
+            label=""
+            size="sm"
+            id="formFileSm"
+          />
+        </MDBRow>
+        
+
         {/* <MDBBtn type='submit' className='mb-4 ms-5' block>
              Sign in
          </MDBBtn> */}

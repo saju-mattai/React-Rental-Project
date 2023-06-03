@@ -76,6 +76,9 @@ function ShowVehicles() {
     >
       <AdminDrawer />
       <div style={{ marginTop: "6em", width: "75%" }} className="maintable">
+      <div>
+          <h1 className="text-center" > <b> Vehicle Details</b> </h1>
+        </div>
         <MDBTable bordered>
           <MDBTableHead>
             <tr className="container ">
@@ -102,7 +105,7 @@ function ShowVehicles() {
                       <td>{data.Vname}</td>
                       <td>{data.Vmodel}</td>
                       <td>{data.Vbrand}</td>
-                      <td>{data.Vprice}</td>
+                      <td>Rs.{data.Vprice}</td>
                       <td>
                         {data.Vphoto && data.Vphoto.length > 0 && (
                           <img

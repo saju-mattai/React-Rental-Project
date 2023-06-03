@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Usernavbar from "../../../../Components/UserNavBar/Usernavbar";
 import { useSelector, useDispatch } from "react-redux";
 import { GetAllVehicleAction } from "../../../../Redux/Actions/User_Action/GetAllVehicle";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import {
   MDBCard,
   MDBCardImage,
@@ -14,59 +14,77 @@ import {
   MDBContainer,
   MDBCardFooter,
 } from "mdb-react-ui-kit";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import './DisplayBikes.css'
 
 function DisplayBikes() {
   const dispacth = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const Bikes = useSelector((state) => state.GetAllVehicleReducer.vehicleData);
   useEffect(() => {
     dispacth(GetAllVehicleAction());
   }, []);
 
-  const handleBook = (id)=>{
-    const filteredData = Bikes.filter(item => item._id === id);
-    navigate('/booking',{state:{filteredData}})
-  }
-  const handleSignleView =(id)=>{
-    const filteredData = Bikes.filter(item => item._id === id);
-    navigate('/singleview',{state:{filteredData}})
-  }
-  
+  const handleBook = (id) => {
+    const filteredData = Bikes.filter((item) => item._id === id);
+    navigate("/booking", { state: { filteredData } });
+  };
+  const handleSignleView = (id) => {
+    const filteredData = Bikes.filter((item) => item._id === id);
+    navigate("/singleview", { state: { filteredData } });
+  };
 
   return (
     <div>
       <Usernavbar />
 
       <MDBContainer className="mt-5" style={{ width: "700px" }}>
+        
+          <h4 className="text-center">
+            {" "}
+            <b>Bikes</b>{" "}
+          </h4>
+
         <MDBRow className="row-cols-1 row-cols-md-3 g-4">
           {Bikes
             ? Bikes.map((item, i) => {
                 return (
                   <div className="mt-5">
                     <MDBCol>
-                      <MDBCard style={ {boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>
+                      <MDBCard
+                        style={{ boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}
+                      >
                         <MDBCardImage
-                        onClick={()=>{handleSignleView(item._id)}}
+                          onClick={() => {
+                            handleSignleView(item._id);
+                          }}
                           src={item?.Vphoto[0]?.url}
                           alt="..."
                           position="top"
                         />
                         <MDBCardBody>
-                          <MDBCardTitle style={{ textAlign: "center" }}>{item.Vname}</MDBCardTitle>
-                          <MDBCardText style={{ textAlign: "center" }} >
+                          <MDBCardTitle style={{ textAlign: "center" }}>
+                            {item.Vname}
+                          </MDBCardTitle>
+                          <MDBCardText style={{ textAlign: "center" }}>
                             {/* <div style={{ textAlign: "center" }}> */}
-                            <p  >{item.Vprice} Rent Per Hour/-</p>
-                              <p >{item.Vmodel} Model</p>
-                              <Button onClick={()=>{handleBook(item._id)}}  variant="outlined" color="success">Book Now</Button>
+                            <p>Rs.{item.Vprice} Rent Per Hour/-</p>
+                            <p>{item.Vmodel} Model</p>
+                            <Button
+                              onClick={() => {
+                                handleBook(item._id);
+                              }}
+                              variant="outlined"
+                              color="success"
+                            >
+                              Book Now
+                            </Button>
                             {/* </div> */}
                           </MDBCardText>
                         </MDBCardBody>
                       </MDBCard>
                     </MDBCol>
-                    
                   </div>
                 );
               })

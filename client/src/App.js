@@ -23,6 +23,7 @@ import SingleViewBike from './Pages/User/SingleViewBike/SingleViewBike';
 import Myrent from './Pages/User/MyRent/Myrent';
 import AddCoupon from './Pages/Admin/AddCoupon/AddCoupon';
 import GetBookings from './Pages/Admin/Bookings/GetBookings';
+import VeiwMoreRentRequest from './Pages/Admin/ViewRentRequestAccept/VeiwMoreRentRequest';
 
 function App() {
   const UserData = useSelector((state) => state.UserLoginReducer.loginuserdata)
@@ -59,6 +60,8 @@ function App() {
           <Route path='/rentrequest' element={<RentRequest/> } />
           <Route path='/addcoupon' element={<AddCoupon/> } />
           <Route path='/getbookings' element={<GetBookings/> } />
+          <Route path='/viewmore-rentrequest' element={<VeiwMoreRentRequest/> } />
+
 
 
 
