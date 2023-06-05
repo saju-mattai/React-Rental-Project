@@ -15,7 +15,6 @@ import { SearchUserApi, ShowAllUSerApi } from "../../API/Admin/ApiCalls";
 import TextField from "@mui/material/TextField";
 export default function ShowAllUser() {
   const SearchedData = useSelector((state) => state.ShowAllUSerReducer);
-  console.log(SearchedData);
 
   const [limit, setLimit] = useState(4);
   const [pageCount, setPageCount] = useState(1);

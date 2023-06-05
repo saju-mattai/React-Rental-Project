@@ -1,6 +1,6 @@
 const bookingmodel = require("../../Models/BookingSchema");
 const WalletModel = require("../../Models/WalletSchema");
-
+const vehiclemodel = require("../../Models/AdminModels/VehicleModel");
 exports.CancelMyRide = (req, res) => {
   console.log(req.query.bookingid);
   console.log(req.query.userid);
@@ -16,7 +16,7 @@ exports.CancelMyRide = (req, res) => {
             },
           }
         )
-        .then((result) => { 
+        .then((result) => {
           WalletModel.updateOne(
             { userId: req.query.userid },
             {
@@ -25,13 +25,23 @@ exports.CancelMyRide = (req, res) => {
               },
             }
           ).then((res) => {
-            console.log(res);
+            // console.log(res);
           });
 
           bookingmodel.find().then((data) => {
             res.status(200).json(data);
           });
         });
+      vehiclemodel.updateOne(
+        { _id: response[0].BikeId },
+        {
+          $set: {
+            Vstatus: "Available",
+          },
+        }
+      ).then((res)=>{
+        console.log(res);
+      })
     });
   } catch (error) {}
 

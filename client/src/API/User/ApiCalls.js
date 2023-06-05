@@ -22,7 +22,6 @@ const configFormData = {
     Authorization: "Bearer" + " " + user?.token,
   },
 };
-console.log(user, "ddddddddddddddddddddddddddddddd");
 
 export const UserSignUpApi = (name, email, place, password, phone) =>
   API.post("/signup", { name, email, place, password, phone }, config);
@@ -36,11 +35,11 @@ export const LoginOtpApi = (phone) =>
   API.post("/otplogin?phone=" + phone, config);
 export const GetAllVehicleApi = () => API.get("/getallvehilce", config);
 
+export const searchVehicleApi = (searchTerm) =>
+  API.get("/searchvehicle?searchTerm=" + searchTerm, config);
 
 export const BookingApi = (ReqObj) =>
   API.post("/booking", { ReqObj }, configTOken);
-
-
 
 export const BookinSavegApi = (Obj) =>
   API.post("/savebooking", { Obj }, config);
@@ -56,3 +55,9 @@ export const CancelMyRideApi = (id) =>
   API.put(`/cancelride?bookingid=${id}&userid=${ID}`, config);
 export const ApplyCouponApi = (data) =>
   API.post("/applycoupon", { data }, config);
+
+export const filterByBrandApi = (data) =>
+  API.post("/filterbybrand", { data }, config);
+
+  export const filterByModelApi = (data) =>
+  API.post("/filterbymodel", { data }, config);

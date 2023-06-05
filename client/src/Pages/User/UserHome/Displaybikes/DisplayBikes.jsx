@@ -1,8 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Usernavbar from "../../../../Components/UserNavBar/Usernavbar";
 import { useSelector, useDispatch } from "react-redux";
 import { GetAllVehicleAction } from "../../../../Redux/Actions/User_Action/GetAllVehicle";
 import Button from "@mui/material/Button";
+import NoDataImg from '../../../../assets/2953962.jpg'
+
+import TextField from "@mui/material/TextField";
+
 import {
   MDBCard,
   MDBCardImage,
@@ -12,14 +16,21 @@ import {
   MDBRow,
   MDBCol,
   MDBContainer,
-  MDBCardFooter,
 } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
+import { searchVehicleApi } from "../../../../API/User/ApiCalls";
+import { filterByBrandAction, filterByModelAction } from "../../../../Redux/Actions/User_Action/FilterAction";
+import { height } from "@mui/system";
 // import './DisplayBikes.css'
 
 function DisplayBikes() {
   const dispacth = useDispatch();
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchedData, setSearchedData] = useState([]);
+  const [filterbrand, setFilterBrand] = useState("");
+  const [filtermodel, setFilterModel] = useState("");
+
 
   const Bikes = useSelector((state) => state.GetAllVehicleReducer.vehicleData);
   useEffect(() => {
@@ -30,96 +41,164 @@ function DisplayBikes() {
     const filteredData = Bikes.filter((item) => item._id === id);
     navigate("/booking", { state: { filteredData } });
   };
+
   const handleSignleView = (id) => {
     const filteredData = Bikes.filter((item) => item._id === id);
     navigate("/singleview", { state: { filteredData } });
   };
+  const handleChange = (e) => {
+    const { value } = e.target;
+    setSearchTerm(value);
+  };
 
+  useEffect(() => {
+    if (searchTerm) {
+      handleSubmit();
+    }
+  }, [searchTerm]);
+
+  const handleSubmit = () => {
+    searchVehicleApi(searchTerm).then((data) => {
+      setSearchedData(data.data);
+    });
+  };
+
+  const handleFilter = () => {
+    if (filterbrand) {
+      dispacth(filterByBrandAction(filterbrand));
+    } else {
+      dispacth(filterByModelAction(filtermodel))
+    }
+  };
+
+  const Data = searchTerm ? searchedData : Bikes;
   return (
     <div>
       <Usernavbar />
 
-      <MDBContainer className="mt-5" style={{ width: "700px" }}>
-        
-          <h4 className="text-center">
-            {" "}
-            <b>Bikes</b>{" "}
-          </h4>
+      <div className="row justify-content-start">
+        <div className="col d-flex p-5 mt-5">
+          <MDBContainer className="container">
+            <div
+              className=" text-center "
+              style={{
+                minHeight: "45%",
+                width: "100%",
+                marginBottom: "30%",
+              }}
+            >
+              <div>
+                <h5 className="">Filter</h5>
+              </div>
+              <div>
+                <h6 className="container">Search By Brand</h6>
+              </div>
+              <div>
+                <TextField
+                  className="container "
+                  id="standard-basic"
+                  label="Enter Brand"
+                  variant="standard"
+                  onChange={(e) => {
+                    setFilterBrand(e.target.value);
+                  }}
+                />
+              </div>
 
-        <MDBRow className="row-cols-1 row-cols-md-3 g-4">
-          {Bikes
-            ? Bikes.map((item, i) => {
-                return (
-                  <div className="mt-5">
-                    <MDBCol>
-                      <MDBCard
-                        style={{ boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}
-                      >
-                        <MDBCardImage
-                          onClick={() => {
-                            handleSignleView(item._id);
-                          }}
-                          src={item?.Vphoto[0]?.url}
-                          alt="..."
-                          position="top"
-                        />
-                        <MDBCardBody>
-                          <MDBCardTitle style={{ textAlign: "center" }}>
-                            {item.Vname}
-                          </MDBCardTitle>
-                          <MDBCardText style={{ textAlign: "center" }}>
-                            {/* <div style={{ textAlign: "center" }}> */}
-                            <p>Rs.{item.Vprice} Rent Per Hour/-</p>
-                            <p>{item.Vmodel} Model</p>
-                            <Button
+              <div className="mt-3">
+                <h6 className="container">Search By Model</h6>
+              </div>
+              <div>
+                <TextField
+                  id="standard-basic"
+                  label="Enter Model"
+                  variant="standard"
+                  onChange={(e) => {
+                    setFilterModel(e.target.value);
+                  }}
+                />
+              </div>
+              <div>
+                <Button
+                  onClick={handleFilter}
+                  className="mt-3"
+                  variant="contained"
+                >
+                  Apply Filter
+                </Button>
+              </div>
+            </div>
+          </MDBContainer>
+        </div>
+        <div className="col">
+          <MDBContainer className="mt-5" style={{ width: "700px" }}>
+            <h4 className="text-center">
+              {" "}
+              <b>Bikes</b>{" "}
+            </h4>
+
+            <MDBCol md="6">
+              <input
+                className="form-control "
+                value={searchTerm}
+                placeholder="Search"
+                aria-label="Search"
+                onChange={handleChange}
+              />
+            </MDBCol>
+
+            <MDBRow className="row-cols-1 row-cols-md-3 g-4">
+              {Data && Data.length
+                ?( Data.map((item, i) => {
+                    return (
+                      <div className="mt-5">
+                        <MDBCol>
+                          <MDBCard
+                            style={{
+                              boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+                            }}
+                          >
+                            <MDBCardImage
                               onClick={() => {
-                                handleBook(item._id);
+                                handleSignleView(item._id);
                               }}
-                              variant="outlined"
-                              color="success"
-                            >
-                              Book Now
-                            </Button>
-                            {/* </div> */}
-                          </MDBCardText>
-                        </MDBCardBody>
-                      </MDBCard>
-                    </MDBCol>
-                  </div>
-                );
-              })
-            : ""}
-        </MDBRow>
-      </MDBContainer>
-
-      {/* <Row justify="center" gutter={16} className="mt-5">
-        {Bikes
-          ? Bikes.map((item, i) => {
-              return (
-                <Col lg={5} sm={24} xs={24}>
-                  <div className="bike p-2 bs1 mt-3">
-                    <img
-                      src={item?.Vphoto[0]?.url}
-                      alt=""
-                      srcset=""
-                      className="bikeimg"
-                    />
-
-                    <div className="bike-content d-flex align-items-center  ">
-                      <div>
-                        <p>{item.Vname}</p>
-                        <p>{item.Vprice} Rent Per Hour/-</p>
+                              src={item?.Vphoto[0]?.url}
+                              alt="..."
+                              position="top"
+                            />
+                            <MDBCardBody>
+                              <MDBCardTitle style={{ textAlign: "center" }}>
+                                {item.Vname}
+                              </MDBCardTitle>
+                              <MDBCardText style={{ textAlign: "center" }}>
+                                {/* <div style={{ textAlign: "center" }}> */}
+                                <p>Rs.{item.Vprice} Rent Per Hour/-</p>
+                                <p>{item.Vmodel} Model</p>
+                                <Button
+                                  onClick={() => {
+                                    handleBook(item._id);
+                                  }}
+                                  variant="outlined"
+                                  color="success"
+                                >
+                                  Book Now
+                                </Button>
+                                {/* </div> */}
+                              </MDBCardText>
+                            </MDBCardBody>
+                          </MDBCard>
+                        </MDBCol>
                       </div>
-                      <div>
-                        <button className="btn1" >Book Now</button>
-                      </div>
-                    </div>
-                  </div>
-                </Col>
-              );
-            })
-          : ""}
-      </Row> */}
+                    );
+                  }))
+                : <div style={{ width:'100%' , height:"100%"}}>
+                  <img  src={NoDataImg} alt="" style={{ width:'70%' , height:"70%",marginLeft:'20%'}} />
+                </div> }
+            </MDBRow>
+          </MDBContainer>
+        </div>
+        <div className="col"></div>
+      </div>
     </div>
   );
 }

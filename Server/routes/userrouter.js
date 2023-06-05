@@ -27,6 +27,10 @@ router.route('/addprofile').post(upload.single('image'), updataprofile.uploadpro
 router.route('/edituser').post(edituser.edituser)
 router.route('/otplogin').post(otpLogin.otpLogin)
 router.route('/getallvehilce').get(getAllVehicle.getAllVehicle)
+router.route('/searchvehicle').get(getAllVehicle.searchVehicle)
+router.route('/filterbybrand').post(getAllVehicle.filterByBrand)
+router.route('/filterbymodel').post(getAllVehicle.filterByModel)
+
 router.route('/getalluservehilce').get(getAllUserVehicle.getAllUserVehicle)
 
 
