@@ -1,13 +1,34 @@
 import React, { useState } from "react";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import AdminDrawer from "../../../Components/AdminDashbored/AdminDrawer";
 import { MDBInput, MDBCol, MDBRow, MDBSpinner } from "mdb-react-ui-kit";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { DatePicker } from "antd";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AddCouponAction } from "../../../Redux/Actions/Admin_Action/AddCouponAction";
 const { RangePicker } = DatePicker;
+
+const schema = yup.object().shape({
+  couponcode: yup
+    .string("couponcode should be a string")
+    .min(3, "couponcode should have a min length of 3 letters")
+    .required("couponcode is required"),
+
+  minprice: yup
+    .string("minprice should be a number")
+    .min(1, "minprice should have a minimum length of 1")
+    .required("minprice  is required"),
+  amount: yup
+    .string("amount should be a number")
+    .min(1, "amount should have a minimum length of 1")
+    .required("amount  is required"),
+});
 
 function AddCoupon() {
   const divStyle = {
@@ -17,31 +38,38 @@ function AddCoupon() {
     boxShadow: "3px 3px",
     height: "auto",
   };
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [startdate, setStartdate] = useState();
   const [enddate, setEnddate] = useState();
-  const [coupocode, setCoupocode] = useState();
-  const [minprice, setMinprice] = useState();
-  const [Amount, setAmount] = useState();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   const selectTimeSlot = (value) => {
     setStartdate(moment(value[0].$d).format("MMMM Do YYYY, h:mm:ss a"));
     setEnddate(moment(value[1].$d).format("MMMM Do YYYY, h:mm:ss a"));
   };
-  const Coupon={
-    coupocode,
-    minprice,
-    Amount,
-    startdate,
-    enddate
-  }
-  const handleSubmit =()=>{
-    dispatch(AddCouponAction(Coupon))
+
+  const submitHandler = async (data) => {
+    const Coupon = {
+      coupocode: data.couponcode,
+      minprice: data.minprice,
+      Amount: data.amount,
+      startdate,
+      enddate,
+    };
+    console.log("data", data);
+    dispatch(AddCouponAction(Coupon));
     // setTimeout(() => {
-        navigate('/addcoupon')
+    navigate("/addcoupon");
     // }, 1000);
-  }
+  };
 
   return (
     <div
@@ -53,7 +81,7 @@ function AddCoupon() {
       }}
     >
       <AdminDrawer />
-      <form className="container  mt-4 ms-5" style={divStyle}>
+      <MDBCol className="container  mt-4 ms-5" style={divStyle}>
         <h3
           style={{
             display: "flex",
@@ -63,99 +91,143 @@ function AddCoupon() {
         >
           Add Coupons
         </h3>
-        <MDBRow className="mt-1  ">
-          <MDBCol>
-            <div>
-              <label htmlFor="form3Example2" className="form-label">
-                CouponCode
-              </label>
-            </div>
-            <MDBInput
-              id="form3Example2"
-              onChange={(e) => {
-                setCoupocode(e.target.value);
-              }}
-            />
-          </MDBCol>
-          <MDBCol>
-            <div>
-              <label htmlFor="form3Example2" className="form-label">
-                MinPrice
-              </label>
-            </div>
-            <MDBInput
-              id="form3Example2"
-              onChange={(e) => {
-                setMinprice(e.target.value);
-              }}
-            />
-          </MDBCol>
-          <MDBCol>
-            <div>
-              <label htmlFor="form3Example2" className="form-label">
-                Amount
-              </label>
-            </div>
-            <MDBInput
-             onChange={(e) => {
-                setAmount(e.target.value);
-              }}
-             id="form3Example1" />
-          </MDBCol>
-        </MDBRow>
+        <Box
+          component="form"
+          onSubmit={handleSubmit(submitHandler)}
+          sx={{ mt: 1 }}
+        >
+          <MDBRow className="mt-1  ">
+            {/* <MDBCol>
+              <div>
+                <label htmlFor="form3Example2" className="form-label">
+                  CouponCode
+                </label>
+              </div>
+              <MDBInput
+                id="couponcode"
+                name="couponcode"
+                type="text"
+                error={!!errors.couponcode}
+                helperText={errors.couponcode ? errors.couponcode.message : ""}
+                {...register("couponcode")}
+              />
+            </MDBCol> */}
+            <MDBCol>
+              <TextField
+                id="couponcode"
+                name="couponcode"
+                type="text"
+                label="CouponCode"
+                error={!!errors.couponcode}
+                helperText={errors.couponcode ? errors.couponcode.message : ""}
+                {...register("couponcode")}
+                variant="outlined"
+              />
+            </MDBCol>
+            <MDBCol>
+              <TextField
+                id="minprice"
+                name="minprice"
+                type="number"
+                label="MinPrice"
+                error={!!errors.minprice}
+                helperText={errors.minprice ? errors.minprice.message : ""}
+                {...register("minprice")}
+                variant="outlined"
+              />
+            </MDBCol>
 
-        <MDBRow className="mt-1  ">
-          <MDBCol>
-            <div>
-              <label htmlFor="form3Example2" className="form-label">
-                {/* StartingDate and EndingDate */}
-              </label>
-            </div>
-            <RangePicker
-              className="ms-5"
-              showTime={{
-                format: "HH:mm",
-              }}
-              format="YYYY-MM-DD HH:mm"
-              onChange={selectTimeSlot}
-            />
-          </MDBCol>
+            <MDBCol>
+              <TextField
+                id="amount"
+                name="amount"
+                type="number"
+                label="Amount"
+                error={!!errors.amount}
+                helperText={errors.amount ? errors.amount.message : ""}
+                {...register("amount")}
+                variant="outlined"
+              />
+            </MDBCol>
 
-          <MDBCol>
-            {/* <div>
+            {/* <MDBCol>
+              <div>
+                <label htmlFor="form3Example2" className="form-label">
+                  MinPrice
+                </label>
+              </div>
+              <MDBInput
+                id="minprice"
+                name="minprice"
+                type="number"
+                error={!!errors.minprice}
+                helperText={errors.minprice ? errors.minprice.message : ""}
+                {...register("minprice")}
+              />
+            </MDBCol>
+            <MDBCol>
+              <div>
+                <label htmlFor="form3Example2" className="form-label">
+                  Amount
+                </label>
+              </div>
+              <MDBInput
+                name="amount"
+                type="number"
+                error={!!errors.amount}
+                helperText={errors.amount ? errors.amount.message : ""}
+                {...register("amount")}
+                id="amount"
+              />
+            </MDBCol> */}
+          </MDBRow>
+
+          <MDBRow className="mt-1  ">
+            <MDBCol>
+              <div>
+                <label htmlFor="form3Example2" className="form-label">
+                  {/* StartingDate and EndingDate */}
+                </label>
+              </div>
+              <RangePicker
+                {...register("date", {
+                  required: true,
+                  minLength: 2,
+                })}
+                className="ms-5"
+                showTime={{
+                  format: "HH:mm",
+                }}
+                format="YYYY-MM-DD HH:mm"
+                onChange={selectTimeSlot}
+              />
+              {errors.date && (
+                <p style={{ color: "red" }}>Please enter a date</p>
+              )}
+            </MDBCol>
+
+            <MDBCol>
+              {/* <div>
               <label htmlFor="form3Example2" className="form-label">
                 Amount
               </label>
             </div>
             <MDBInput id="form3Example1" /> */}
-            <Button
-              className="mt-4"
-              style={{
-                display: "flex",
-              }}
-              variant="outlined"
-              size="small"
-              onClick={handleSubmit}
-            >
-              Upload
-            </Button>
-          </MDBCol>
-        </MDBRow>
-
-        {/* <MDBRow
-          className="mt-5"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-           
-            <Button  variant="outlined" size="small">
-              Upload
-            </Button>
-        </MDBRow> */}
-      </form>
+              <Button
+                type="submit"
+                className="mt-4"
+                style={{
+                  display: "flex",
+                }}
+                variant="outlined"
+                size="small"
+              >
+                Upload
+              </Button>
+            </MDBCol>
+          </MDBRow>
+        </Box>
+      </MDBCol>
     </div>
   );
 }

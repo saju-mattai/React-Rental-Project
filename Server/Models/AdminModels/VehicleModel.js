@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
 const vehicleSchema = new mongoose.Schema({
-  OwnerId: { type: String ,ref : "User" },
+  OwnerId: { type: String, ref: "User" },
   Vname: { type: String },
   Vmodel: { type: String },
   Vbrand: { type: String },
-  Vprice: { type: String },
+  Vprice: { type: Number },
   Vcolor: { type: String },
   Vfuel: { type: String },
   Vdesc: { type: String },

@@ -64,6 +64,10 @@ function Booking() {
     setTotalHour(value[1].diff(value[0], "hours"));
     setShowtotal(true);
   };
+  function disabledDate(current) {
+    // Disable dates before today's date
+    return current && current < moment().startOf('day');
+  }
 
   useEffect(() => {
     setTotalAmount(totalHour * filteredData[0].Vprice);
@@ -192,6 +196,7 @@ function Booking() {
               }}
               format="YYYY-MM-DD HH:mm"
               onChange={selectTimeSlot}
+              disabledDate={disabledDate} // Set the disabledDate function
             />
           </div>
           {/* <div className="d-flex justify-content-end container ms-5 mt-2 me-2 w-50 "> */}
