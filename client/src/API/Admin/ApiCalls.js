@@ -43,6 +43,10 @@ export const BikeAcceptApi = (id) => API.put(`/bikeaccept?id=${id}`, config)
 export const BikeRejectApi = (id) => API.put(`/bikereject?id=${id}`, config)
 export const AddCouponApi = (Coupon) => API.post('/addcoupon', { Coupon}, config)
 export const GetBookingDetailsApi = (currentPage,limit) => API.get(`/getbookingdetails?page=${currentPage}&limit=${limit}`, config)
+export const AddLocationApi = (data) => API.post('/addlocation', { data}, config)
+export const GetLocationApi = () => API.get('/getlocation', config)
+
+
 
 
 

@@ -67,7 +67,7 @@ function ShowVehicles() {
 
   return (
     <div
-      className='mt-5  col-md-6"  container '
+      className=' ms-0  col-md-6"  container '
       style={{
         display: "flex",
         justifyContent: "center",
@@ -89,6 +89,7 @@ function ShowVehicles() {
               <th scope="col">Rent/Hour</th>
               <th scope="col">Image</th>
               <th scope="col">Colour</th>
+              <th scope="col">Location</th>
               <th scope="col">Number</th>
               <th scope="col">Fuel</th>
               <th scope="col">Status</th>
@@ -117,6 +118,7 @@ function ShowVehicles() {
                       </td>
 
                       <td>{data.Vcolor}</td>
+                      <td>{data.Vlocation}</td>
                       <td>{data.Vnumber}</td>
 
                       <td>{data.Vfuel}</td>

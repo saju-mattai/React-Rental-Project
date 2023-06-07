@@ -19,6 +19,9 @@ function ShowMyBikes() {
   return (
     <div>
       <Usernavbar />
+      <div>
+          <h3 className="text-center" > <b> My Bikes</b> </h3>
+        </div>
       <div
         className='  col-md-6"  container '
         style={{
@@ -27,7 +30,7 @@ function ShowMyBikes() {
           alignItems: "center",
         }}
       >
-        <div style={{ marginTop: "6em", width: "75%" }} className="maintable">
+        <div style={{ marginTop: "2em", width: "75%" }} className="maintable">
           <MDBTable bordered>
             <MDBTableHead>
               <tr className="container ">

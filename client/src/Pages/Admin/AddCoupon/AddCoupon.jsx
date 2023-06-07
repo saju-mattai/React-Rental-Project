@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import AdminDrawer from "../../../Components/AdminDashbored/AdminDrawer";
-import { MDBInput, MDBCol, MDBRow, MDBSpinner } from "mdb-react-ui-kit";
+import {  MDBCol, MDBRow,  } from "mdb-react-ui-kit";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -97,21 +97,7 @@ function AddCoupon() {
           sx={{ mt: 1 }}
         >
           <MDBRow className="mt-1  ">
-            {/* <MDBCol>
-              <div>
-                <label htmlFor="form3Example2" className="form-label">
-                  CouponCode
-                </label>
-              </div>
-              <MDBInput
-                id="couponcode"
-                name="couponcode"
-                type="text"
-                error={!!errors.couponcode}
-                helperText={errors.couponcode ? errors.couponcode.message : ""}
-                {...register("couponcode")}
-              />
-            </MDBCol> */}
+           
             <MDBCol>
               <TextField
                 id="couponcode"
@@ -150,36 +136,6 @@ function AddCoupon() {
               />
             </MDBCol>
 
-            {/* <MDBCol>
-              <div>
-                <label htmlFor="form3Example2" className="form-label">
-                  MinPrice
-                </label>
-              </div>
-              <MDBInput
-                id="minprice"
-                name="minprice"
-                type="number"
-                error={!!errors.minprice}
-                helperText={errors.minprice ? errors.minprice.message : ""}
-                {...register("minprice")}
-              />
-            </MDBCol>
-            <MDBCol>
-              <div>
-                <label htmlFor="form3Example2" className="form-label">
-                  Amount
-                </label>
-              </div>
-              <MDBInput
-                name="amount"
-                type="number"
-                error={!!errors.amount}
-                helperText={errors.amount ? errors.amount.message : ""}
-                {...register("amount")}
-                id="amount"
-              />
-            </MDBCol> */}
           </MDBRow>
 
           <MDBRow className="mt-1  ">

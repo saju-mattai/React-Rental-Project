@@ -173,7 +173,9 @@ function DisplayBikes() {
                               <MDBCardText style={{ textAlign: "center" }}>
                                 {/* <div style={{ textAlign: "center" }}> */}
                                 <p>Rs.{item.Vprice} Rent Per Hour/-</p>
-                                <p>{item.Vmodel} Model</p>
+                                <p>Model : {item.Vmodel} </p>
+                                <p>Location : {item.Vlocation} </p>
+
                                 <Button
                                   onClick={() => {
                                     handleBook(item._id);

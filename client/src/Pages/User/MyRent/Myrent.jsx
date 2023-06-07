@@ -50,6 +50,8 @@ function Myrent() {
             <th scope="col">Starting Time</th>
             <th scope="col">Ending Time</th>
             <th scope="col">Total Hours</th>
+            <th scope="col">Payment</th>
+            <th scope="col">Location</th>
             <th scope="col">Total Amount</th>
             <th scope="col">Status</th>
             <th scope="col">Action</th>
@@ -72,6 +74,8 @@ function Myrent() {
                     <td>{data.startdate}</td>
                     <td>{data.enddate}</td>
                     <td>{data.totalHour} Hour</td>
+                    <td>{data.paymentMethod} </td>
+                    <td>{data.Location} </td>
                     <td>Rs.{data.totalAmount} </td>
                     <td>{data.status} </td>
                     <td>

@@ -16,7 +16,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import ReceiptIcon from '@mui/icons-material/Receipt';
+import ReceiptIcon from "@mui/icons-material/Receipt";
 
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import UsersIcon from "@mui/icons-material/Group";
@@ -168,7 +168,10 @@ export default function AdminDrawer() {
               name: "Bikes",
               icon: <TwoWheelerRoundedIcon style={{ color: "#6366F1" }} />,
             },
-            {name : "Bookings" , icon : <SportsMotorsportsIcon  style={{ color: "#6366F1" }}  />},
+            {
+              name: "Bookings",
+              icon: <SportsMotorsportsIcon style={{ color: "#6366F1" }} />,
+            },
             {
               name: "Add Bikes",
               icon: <AddIcon style={{ color: "#6366F1" }} />,
@@ -177,8 +180,14 @@ export default function AdminDrawer() {
               name: "Rent Requests",
               icon: <BikeScooterTwoToneIcon style={{ color: "#6366F1" }} />,
             },
-            // {name : "Locations" , icon : <LocationOnIcon/>},
-            {name : "Coupons" , icon : <ReceiptIcon   style={{ color: "#6366F1" }} />},
+            {
+              name: "Locations",
+              icon: <LocationOnIcon style={{ color: "#6366F1" }} />,
+            },
+            {
+              name: "Coupons",
+              icon: <ReceiptIcon style={{ color: "#6366F1" }} />,
+            },
             // {name : "Sales Report", icon : <SummarizeIcon/>},
             {
               name: "Logout",
@@ -211,11 +220,11 @@ export default function AdminDrawer() {
                     text2 === "users" && navigate("/showalluser");
                     text2 === "bikes" && navigate("/showallvehicle");
                     text2 === "add bikes" && navigate("/addvehicle");
-                      text2 === 'bookings' && navigate('/getbookings')
+                    text2 === "bookings" && navigate("/getbookings");
                     text2 === "rent requests" && navigate("/rentrequest");
                     //   text2 === 'locations' && navigate('/admin/locations')
-                    //   text2 === 'add location' && navigate('/admin/add-location')
-                      text2 === 'coupons' && navigate('/addcoupon')
+                    text2 === "add location" && navigate("/addlocation");
+                    text2 === "coupons" && navigate("/addcoupon");
                     //   text2 === 'sales report' && navigate('/admin/sales-report')
                     text2 === "logout" && handleLogout();
                   }}

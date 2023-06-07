@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import NoDataImg from "../../../assets/2953962.jpg";
 import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
 import AdminDrawer from "../../../Components/AdminDashbored/AdminDrawer";
 import { useSelector, useDispatch } from "react-redux";
@@ -29,7 +30,6 @@ function GetBookings() {
     getPaginatedVehicle();
   };
 
-  
   function getPaginatedVehicle() {
     GetBookingDetailsApi(currentPage.current, limit).then((data) => {
       setPageCount(data.data.pageCount);
@@ -49,7 +49,10 @@ function GetBookings() {
       <AdminDrawer />
       <div style={{ marginTop: "6em", width: "75%" }} className="maintable">
         <div>
-          <h1 className="text-center" > <b> Booking Details</b> </h1>
+          <h1 className="text-center">
+            {" "}
+            <b> Booking Details</b>{" "}
+          </h1>
         </div>
         <MDBTable bordered>
           <MDBTableHead>
@@ -58,6 +61,7 @@ function GetBookings() {
               <th scope="col">UserName</th>
               <th scope="col">Bike</th>
               <th scope="col">Image</th>
+              <th scope="col">Location</th>
               <th scope="col">StartingTime</th>
               <th scope="col">EndingTime</th>
               <th scope="col">TotalAmout</th>
@@ -66,29 +70,38 @@ function GetBookings() {
             </tr>
           </MDBTableHead>
           <MDBTableBody>
-            {data
-              ? data.map((data, index) => {
-                  return (
-                    <tr>
-                      <th scope="row">{index + 1}</th>
-                      <td>{data.UserName}</td>
-                      <td>{data.BikeName}</td>
-                      <td>
-                        <img
-                          src={data.BikePhoto}
-                          alt="image"
-                          style={{ height: "80px", width: "100px" }}
-                        />
-                      </td>
-                      <td>{data.startdate}</td>
-                      <td>{data.enddate}</td>
-                      <td>Rs.{data.totalAmount}</td>
-                      <td>{data.paymentMethod}</td>
-                      <td>{data.status}</td>
-                    </tr>
-                  );
-                })
-              : ""}
+            {data ? (
+              data.map((data, index) => {
+                return (
+                  <tr>
+                    <th scope="row">{index + 1}</th>
+                    <td>{data.UserName}</td>
+                    <td>{data.BikeName}</td>
+                    <td>
+                      <img
+                        src={data.BikePhoto}
+                        alt="image"
+                        style={{ height: "80px", width: "100px" }}
+                      />
+                    </td>
+                    <td>{data.Location}</td>
+                    <td>{data.startdate}</td>
+                    <td>{data.enddate}</td>
+                    <td>Rs.{data.totalAmount}</td>
+                    <td>{data.paymentMethod}</td>
+                    <td>{data.status}</td>
+                  </tr>
+                );
+              })
+            ) : (
+              <div style={{ width: "100%", height: "100%" }}>
+                <img
+                  src={NoDataImg}
+                  alt=""
+                  style={{ width: "70%", height: "70%", marginLeft: "20%" }}
+                />
+              </div>
+            )}
           </MDBTableBody>
         </MDBTable>
         <ReactPaginate

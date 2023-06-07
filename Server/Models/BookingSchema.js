@@ -17,6 +17,7 @@ const bookingSchema = new mongoose.Schema(
     BikeName: { type: String },
     BikePhoto: { type: String },
     Description: { type: String },
+    Location:{type:String},
     totalHour: { type: Number },
     totalAmount: { type: Number },
     transactionId: { type: String },

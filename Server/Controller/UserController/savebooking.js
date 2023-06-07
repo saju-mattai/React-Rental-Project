@@ -15,6 +15,7 @@ exports.saveBooking = (req, res) => {
     enddate,
     BikePhoto,
     Description,
+    Location,
     paymentMethod
   } = req.body.Obj;
   console.log('req.body.Obj',req.body.Obj);
@@ -30,6 +31,7 @@ exports.saveBooking = (req, res) => {
     BikeName,
     BikePhoto,
     Description,
+    Location,
     paymentMethod:'Stripe'
 
   };

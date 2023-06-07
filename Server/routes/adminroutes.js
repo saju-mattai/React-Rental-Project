@@ -15,6 +15,7 @@ const userBikeAccept = require("../controller/AdminController/userBikeAccept");
 const userBikeReject = require("../controller/AdminController/userBikeReject");
 const addCoupon = require("../controller/AdminController/addCoupon");
 const getBookingDetails = require("../controller/AdminController/getBookingDetails");
+const addLocation = require('../controller/AdminController/AddLocation')
 
 /* GET users listing. */
 router.route("/adminsignup").post(adminsignup.Adminsignup);
@@ -36,6 +37,10 @@ router.route("/bikeaccept").put(userBikeAccept.userBikeAccept);
 router.route("/bikereject").put(userBikeReject.userBikeReject);
 router.route("/addcoupon").post(addCoupon.addCoupon);
 router.route("/getbookingdetails").get(getBookingDetails.getBookingDetails);
+
+
+router.route('/addlocation').post(addLocation.addLocation)
+router.route('/getlocation').get(addLocation.getLocation)
 
 
 module.exports = router;

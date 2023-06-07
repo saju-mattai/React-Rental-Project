@@ -5,6 +5,7 @@ import { ShowAllUSerReducer } from "./Reducers/Admin/ShowAllUserReducer";
 import { addvehicleReducer } from "./Reducers/Admin/AddVehicleReducer";
 import {AddCouponReducer} from "./Reducers/Admin/AddCouponReducer"
 import { getBookingDetailsReducer } from "./Reducers/Admin/GetBookingDetailsReducer";
+import {AddLocationReducer} from "./Reducers/Admin/AddLocationReducer"
 
 
 import { UserSignUpReducer } from "./Reducers/User/SignUpReducer";
@@ -31,6 +32,7 @@ const Reducers = combineReducers({
     ShowUserVehicleReducer:ShowUserVehicleReducer,
     AddCouponReducer:AddCouponReducer,
     getBookingDetailsReducer:getBookingDetailsReducer,
+    AddLocationReducer:AddLocationReducer,
 
 
     // USER

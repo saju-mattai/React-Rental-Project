@@ -17,6 +17,7 @@ exports.booking = async (req, res) => {
     BikeName,
     BikePhoto,
     Description,
+    Location,
     UserName,
     paymentMethod,
   } = req.body.ReqObj;
@@ -85,6 +86,7 @@ exports.booking = async (req, res) => {
             BikeName,
             BikePhoto,
             Description,
+            Location,
             UserName,
             paymentMethod,
           };
@@ -148,7 +150,7 @@ exports.booking = async (req, res) => {
         ],
         mode: "payment",
         success_url: `${process.env.CLIENT_URL}/checkout-success?userId=${userId}
-      &BikeName=${BikeName}
+      &BikeName=${BikeName}&Location=${Location}
       &Description=${Description}&BikeId=${BikeId}&totalAmount=${totalAmount}&paymentMethod=${paymentMethod}
       &totalHour=${totalHour}&HelmetRequired=${HelmetRequired}&enddate=${enddate}&startdate=${startdate}&BikePhoto=${BikePhoto}&UserName=${UserName}`,
         cancel_url: `${process.env.CLIENT_URL}/booking`,

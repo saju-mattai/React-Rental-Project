@@ -22,9 +22,9 @@ function CheckOutSuccess() {
   const BikePhoto = searchParams.get("BikePhoto").trim();
   const Description = searchParams.get("Description").trim();
   const paymentMethod = searchParams.get("paymentMethod").trim();
+  const Location = searchParams.get("Location").trim();
 
   const UserName = searchParams.get("UserName");
-
 
   const details = {
     userId,
@@ -38,23 +38,24 @@ function CheckOutSuccess() {
     BikeName,
     BikePhoto,
     Description,
-    paymentMethod
+    Location,
+    paymentMethod,
   };
 
   useEffect(() => {
     // BookinSavegApi(details).then((data) => {
-      dispatch(bookingSaveAction(details));
-      Swal.fire({
-        text: "Your Bike Has Been Order Successfull",
-        icon: "success",
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "My Orders",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate("/myrent");
-        }
-      });
+    dispatch(bookingSaveAction(details));
+    Swal.fire({
+      text: "Your Bike Has Been Order Successfull",
+      icon: "success",
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "My Orders",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/myrent");
+      }
+    });
     // });
   }, []);
 

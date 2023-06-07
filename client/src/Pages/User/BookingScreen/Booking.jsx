@@ -109,6 +109,7 @@ function Booking() {
       BikeName: filteredData[0].Vname,
       BikePhoto: filteredData[0].Vphoto[0].url,
       Description: filteredData[0].Vdesc,
+      Location:filteredData[0].Vlocation,
       totalHour,
       totalAmount,
       HelmetRequired: helmet,

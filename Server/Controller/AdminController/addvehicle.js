@@ -17,7 +17,7 @@ exports.npmaddvehicle = async (req, res) => {
                 fs.unlinkSync(path)
             }
 
-            const { Vname, Vmodel, Vbrand, Vprice, Vcolor, Vfuel, Vdesc, Vphoto ,Vnumber} = req.body
+            const { Vname, Vmodel, Vbrand, Vprice, Vcolor, Vfuel, Vdesc, Vphoto ,Vnumber,Vlocation} = req.body
             const vehicleDetails = {
                 Vname,
                 Vmodel,
@@ -27,7 +27,8 @@ exports.npmaddvehicle = async (req, res) => {
                 Vnumber,
                 Vfuel,
                 Vdesc,
-                Vphoto: urls
+                Vphoto: urls,
+                Vlocation
             }
             vehiclemodel.create(vehicleDetails).then((response) => {
                 res.status(200).json(response)

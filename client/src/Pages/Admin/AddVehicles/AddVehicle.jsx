@@ -1,14 +1,10 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Form } from "semantic-ui-react";
-import {
-  MDBInput,
-  MDBCol,
-  MDBRow,
-  MDBSpinner,
-} from "mdb-react-ui-kit";
+import { MDBInput, MDBCol, MDBRow, MDBSpinner } from "mdb-react-ui-kit";
+import { getLocation } from "../../../Redux/Actions/Admin_Action/addLocationAction";
 
 import Button from "@mui/material/Button";
 import AdminDrawer from "../../../Components/AdminDashbored/AdminDrawer";
@@ -26,6 +22,13 @@ export default function AddVehicle() {
     height: "auto",
   };
 
+  const location = useSelector((state) => state.AddLocationReducer.Data);
+  console.log(location);
+
+  useEffect(() => {
+    dispatch(getLocation());
+  }, []);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -34,6 +37,7 @@ export default function AddVehicle() {
   const [brand, setBrand] = useState("");
   const [fuel, setFuel] = useState("");
   const [rate, setRate] = useState("");
+  const [loc, setLocation] = useState("");
   const [color, setColor] = useState("");
   const [photos, setPhotos] = useState([]);
   const [description, setDescription] = useState("");
@@ -46,7 +50,6 @@ export default function AddVehicle() {
   } = useForm();
 
   const onSubmit = (e) => {
-    
     setLoading(true);
     const formData = new FormData();
     photos.forEach((image) => {
@@ -57,6 +60,7 @@ export default function AddVehicle() {
     formData.append("Vbrand", brand);
     formData.append("Vfuel", fuel);
     formData.append("Vprice", rate);
+    formData.append("Vlocation", loc);
     formData.append("Vcolor", color);
     formData.append("Vdesc", description);
     formData.append("Vnumber", vnumber);
@@ -293,6 +297,30 @@ export default function AddVehicle() {
             </Form.Field>
             {errors.desc && (
               <p style={{ color: "red" }}>Please add a description</p>
+            )}
+          </MDBCol>
+          <MDBCol>
+            <Form.Field>
+              <label htmlFor="">Choose Location</label>
+              <select
+                name="location"
+                id=""
+                {...register("location", {
+                  required: "select one option",
+                })}
+                onChange={(e) => setLocation(e.target.value)}
+              >
+                <option>Choose</option>
+
+                {location
+                  ? location.map((x) => {
+                      return <option value={x.Location}>{x.Location}</option>;
+                    })
+                  : ""}
+              </select>
+            </Form.Field>
+            {errors.location && (
+              <p style={{ color: "red" }}>{errors.location.message}</p>
             )}
           </MDBCol>
         </MDBRow>
