@@ -47,6 +47,21 @@ export const ShowUserVehicleReducer = (state = {}, { type, payload }) => {
           VehicleDataErr: payload,
         };
 
+        case Admin_Action_Types.SEARCH_USER_VEHICLE_REQUEST:
+          return {
+            loading: true,
+          };
+        case Admin_Action_Types.SEARCH_USER_VEHICLE_SUCCESS:
+          return {
+            loading: false,
+            VehicleData: payload,
+          };
+        case Admin_Action_Types.SEARCH_USER_VEHICLE_FAIL:
+          return {
+            loading: false,
+            VehicleDataErr: payload,
+          };
+
     default:
       return state;
   }

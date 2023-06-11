@@ -1,20 +1,14 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Form } from "semantic-ui-react";
-import {
-  MDBInput,
-  MDBCol,
-  MDBRow,
-  MDBFile,
-  MDBTextArea,
-  MDBSpinner,
-} from "mdb-react-ui-kit";
+import { MDBInput, MDBCol, MDBRow, MDBSpinner } from "mdb-react-ui-kit";
 import Button from "@mui/material/Button";
 import Usernavbar from "../../../Components/UserNavBar/Usernavbar";
 import { AddBikeApi } from "../../../API/User/ApiCalls";
 import { UserAddBikeAction } from "../../../Redux/Actions/User_Action/UserAddBikeAction";
+import { getLocation } from "../../../Redux/Actions/Admin_Action/addLocationAction";
 
 function Rentbike() {
   const [loading, setLoading] = useState(false);
@@ -30,11 +24,19 @@ function Rentbike() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const location = useSelector((state) => state.AddLocationReducer.Data);
+  console.log(location);
+
+  useEffect(() => {
+    dispatch(getLocation());
+  }, []);
+
   const [name, setName] = useState("");
   const [model, setModel] = useState("");
   const [brand, setBrand] = useState("");
   const [fuel, setFuel] = useState("");
   const [rate, setRate] = useState("");
+  const [loc, setLocation] = useState("");
   const [color, setColor] = useState("");
   const [photos, setPhotos] = useState([]);
   const [description, setDescription] = useState("");
@@ -58,6 +60,7 @@ function Rentbike() {
     formData.append("Vbrand", brand);
     formData.append("Vfuel", fuel);
     formData.append("Vprice", rate);
+    formData.append("Vlocation", loc);
     formData.append("Vcolor", color);
     formData.append("Vdesc", description);
     formData.append("Vnumber", vnumber);
@@ -234,7 +237,8 @@ function Rentbike() {
             )}
           </MDBCol>
         </MDBRow>
-        <MDBRow className="mt-1   w-50 float-start">
+
+        <MDBRow className="mt-1 ">
           <MDBCol>
             <Form.Field>
               <div>
@@ -258,8 +262,6 @@ function Rentbike() {
               <p style={{ color: "red" }}>Please enter the Number</p>
             )}
           </MDBCol>
-        </MDBRow>
-        <MDBRow className="mt-1  container w-50 ms-5 ">
           <MDBCol>
             <Form.Field>
               <div>
@@ -284,7 +286,35 @@ function Rentbike() {
               <p style={{ color: "red" }}>Please add a description</p>
             )}
           </MDBCol>
+          <MDBCol className="mt-2">
+            <Form.Field>
+              <label htmlFor="location">Choose Location</label>
+              <select
+                name="location"
+                id="location"
+                {...register("location", {
+                  required: "Please select an option",
+                })}
+                onChange={(e) => setLocation(e.target.value)}
+                className="form-select"
+              >
+                <option value="">Choose</option>
+
+                {location
+                  ? location.map((x) => (
+                      <option key={x.Location} value={x.Location}>
+                        {x.Location}
+                      </option>
+                    ))
+                  : null}
+              </select>
+            </Form.Field>
+            {errors.location && (
+              <p style={{ color: "red" }}>{errors.location.message}</p>
+            )}
+          </MDBCol>
         </MDBRow>
+
         <MDBRow className="mt-1 container w-50 float-start ">
           <Form.Field>
             <div>

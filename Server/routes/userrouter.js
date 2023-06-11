@@ -19,6 +19,8 @@ const saveBooking = require('../controller/UserController/savebooking')
 const getMyRentedBikeDetails = require('../controller/UserController/GetRentedBike')
 const CancelMyRide = require('../controller/UserController/CancelMyRide')
 const applyCoupon = require('../controller/UserController/applyCoupon')
+const getCancelledVehicle = require('../controller/UserController/getCancelledBike')
+
 
 /* GET users listing. */
 router.route('/signup').post(signup.signup)
@@ -42,8 +44,11 @@ router.route('/booking').post(protect,booking.booking)
 router.route('/adduserbike').post(upload.array('images'),addBikeUser.addBikeUser)
 router.route('/getwallet').get(getWalletDetails.getWalletDetails)
 router.route('/getrentedbike').get(getMyRentedBikeDetails.getMyRentedBikeDetails)
+router.route('/getonride').get(getMyRentedBikeDetails.getOnride)
 router.route('/savebooking').post(saveBooking.saveBooking)
 router.route('/cancelride').put(CancelMyRide.CancelMyRide)
+router.route('/getcancelledbike').get(getCancelledVehicle.getCancelledVehicle)
+
 router.route('/applycoupon').post(applyCoupon.applyCoupon)
 
 

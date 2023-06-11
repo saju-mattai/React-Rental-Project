@@ -1,45 +1,136 @@
 import React, { useEffect } from "react";
+import Paper from "@mui/material/Paper";
 import Usernavbar from "../../../Components/UserNavBar/Usernavbar";
 import Button from "@mui/material/Button";
 
 import Swal from "sweetalert2";
-import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
+// import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
 import { useDispatch, useSelector } from "react-redux";
 import { GetRentedBikeAction } from "../../../Redux/Actions/User_Action/GetRentedBikeAction";
-import { CancelMyRideAction } from "../../../Redux/Actions/User_Action/CancelMyRideAction";
-function Myrent() {
-  const BikeData = useSelector((state) => state.getRentedBikeReducer.Data);
-  console.log(BikeData);
-  const handleCancel = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You Want To Cancel!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Cancel it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        dispatch(CancelMyRideAction(id));
-        Swal.fire("Canceled!", "Your Order has been Canceled.", "success");
-      }
-    });
+// import { CancelMyRideAction } from "../../../Redux/Actions/User_Action/CancelMyRideAction";
+import { Box, Stack, Tab, Tabs, Typography, styled } from "@mui/material";
+import PropTypes from "prop-types";
+import AllRide from "../../../Components/RentedRides/AllRide";
+import CancelledRides from "../../../Components/RentedRides/CancelledRides";
+import { getCancelledBikeAction } from "../../../Redux/Actions/User_Action/GetCancelledBike";
+import {  getOnrideBikeAction } from "../../../Redux/Actions/User_Action/GetOnrideAction";
+import OnRide from "../../../Components/RentedRides/OnRide";
+
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
+}
+function Myrent() {
+  const RentedRide = useSelector((state) => state.getRentedBikeReducer.Data);
+  const CancelledRide = useSelector((state) => state.GetCancelledBikeReducer.Data);
+  // const Onride = useSelector((state) => state.GetOnrideBikeReducer.Data);
+
+
+ 
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(GetRentedBikeAction());
-    Swal.fire('Come With Id Proof For Purchase')
+    dispatch(getCancelledBikeAction())
+    dispatch(getOnrideBikeAction())
+    // Swal.fire('Come With Id Proof For Purchase')
   }, []);
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  }));
 
   return (
     <div>
       <Usernavbar />
-      <div>
-          <h3 className="text-center" > <b> My Orders</b> </h3>
-        </div>
-      <MDBTable className="caption-top container ">
+
+      <Box sx={{ width: "100%" }}>
+        <Stack spacing={2} className="mt-3">
+          <Item>
+            <h3>Your Rides</h3>
+          </Item>
+        </Stack>
+      </Box>
+
+      <Box sx={{ width: "100%" }} className="mt-3 container">
+        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="basic tabs example"
+            centered
+          >
+            <Tab label="My Rides " />
+            {/* <Tab label="On Ride"></Tab> */}
+            {/* <Tab label="Completed Rides" /> */}
+            {/* <Tab label="Pending Rides" /> */}
+            <Tab label="Cancelled Rides" />
+          </Tabs>
+        </Box>
+        <TabPanel value={value} index={0}>
+          <AllRide data={RentedRide} />
+        </TabPanel>
+{/* 
+        <TabPanel value={value} index={1}>
+          <OnRide data={Onride} />
+        </TabPanel> */}
+
+        {/* <TabPanel value={value} index={2}>
+          <CompletedRides data={RentedRide} />
+          CompletedRides
+        </TabPanel> */}
+
+      
+
+        <TabPanel value={value} index={1}>
+          <CancelledRides data={CancelledRide} />
+        </TabPanel>
+      </Box>
+    </div>
+  );
+}
+
+export default Myrent;
+
+{
+  /* <MDBTable className="caption-top container ">
         
         <caption>List Of Orders</caption>
         <MDBTableHead>
@@ -99,9 +190,5 @@ function Myrent() {
               })
             : ""}
         </MDBTableBody>
-      </MDBTable>
-    </div>
-  );
+      </MDBTable> */
 }
-
-export default Myrent;

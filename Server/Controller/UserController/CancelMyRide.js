@@ -2,11 +2,12 @@ const bookingmodel = require("../../Models/BookingSchema");
 const WalletModel = require("../../Models/WalletSchema");
 const vehiclemodel = require("../../Models/AdminModels/VehicleModel");
 exports.CancelMyRide = (req, res) => {
-  console.log(req.query.bookingid);
-  console.log(req.query.userid);
+ 
 
   try {
     bookingmodel.find({ _id: req.query.bookingid }).then((response) => {
+      let StartTime = response[0].startdate;
+      let EndTime = response[0].enddate;
       bookingmodel
         .updateOne(
           { _id: req.query.bookingid },
@@ -17,6 +18,7 @@ exports.CancelMyRide = (req, res) => {
           }
         )
         .then((result) => {
+          console.log(result)
           WalletModel.updateOne(
             { userId: req.query.userid },
             {
@@ -25,44 +27,38 @@ exports.CancelMyRide = (req, res) => {
               },
             }
           ).then((res) => {
-            // console.log(res);
+            // res.status(200).json(data);
           });
 
           bookingmodel.find().then((data) => {
             res.status(200).json(data);
           });
         });
-      vehiclemodel.updateOne(
-        { _id: response[0].BikeId },
-        {
-          $set: {
-            Vstatus: "Available",
-          },
-        }
-      ).then((res)=>{
-        console.log(res);
-      })
+      vehiclemodel
+        .updateOne(
+          { _id: response[0].BikeId },
+          {
+            $set: {
+              Vstatus: "Available",
+            },
+          }
+        )
+        .then((res) => {
+          vehiclemodel
+            .updateOne(
+              { _id: response[0].BikeId },
+              {
+                $pull: {
+                  BookedTimeSlots: {
+                    startdate: StartTime,
+                    enddate: EndTime,
+                  },
+                },
+              }
+            )
+            .then((result) => {
+            });
+        });
     });
   } catch (error) {}
-
-  //   bookingmodel
-  //     .updateOne(
-  //       { userId: req.query.id },
-  //       {
-  //         $set: {
-  //           status: "Cancelled",
-  //         },
-  //       }
-  //     )
-  //     .then((result) => {
-  //         // WalletModel.updateOne({userId:req.query.id},
-  //         //     {
-  //         //         $set:{
-  //         //             walletAmount:
-  //         //         }
-  //         //     })
-  //       bookingmodel.find().then((data) => {
-  //         res.status(200).json(data);
-  //       });
-  //     });
 };

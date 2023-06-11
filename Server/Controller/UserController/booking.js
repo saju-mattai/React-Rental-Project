@@ -35,8 +35,6 @@ exports.booking = async (req, res) => {
   let currentTime = moment().format("MMMM Do YYYY, h:mm:ss a");
   let currTime = moment(currentTime, "MMMM Do YYYY, h:mm:ss a");
   const currTimeStamp = currTime.unix();
-  console.log("stamp", currTimeStamp);
-  console.log("startstampe", startTimeStamp);
 
   if (startTimeStamp < currTimeStamp) {
     res

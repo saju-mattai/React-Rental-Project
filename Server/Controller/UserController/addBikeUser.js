@@ -32,6 +32,7 @@ exports.addBikeUser = async (req, res) => {
         Vdesc,
         Vphoto,
         Vnumber,
+        Vlocation
       } = req.body;
       const vehicleDetails = {
         Vname,
@@ -40,6 +41,7 @@ exports.addBikeUser = async (req, res) => {
         Vprice,
         Vcolor,
         Vnumber,
+        Vlocation,
         Vfuel,
         Vdesc,
         Vphoto: urls,

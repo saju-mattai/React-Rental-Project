@@ -37,14 +37,20 @@ export const editVehicleApi = (formData,id) => API.post('/editvehicle?id='+id,fo
 
 
 export const ShowAllVehicleApi = (currentPage,limit) => API.get(`/showvehicle?page=${currentPage}&limit=${limit}`, config)
+export const SearchVehicelApi = (searchdata)=>API.get(`/searchvehicle?searchdata=${searchdata}`,config)
+
 export const DeleteVehicleApi = (id) => API.delete('/deletevehicle?id='+id, config)
 export const ShowUSerVehicleApi = () => API.get('/showuserbikes', config)
+export const SearchUserVehicleApi = (searchdata)=>API.get(`/searchuservehicle?searchdata=${searchdata}`,config)
 export const BikeAcceptApi = (id) => API.put(`/bikeaccept?id=${id}`, config)
 export const BikeRejectApi = (id) => API.put(`/bikereject?id=${id}`, config)
 export const AddCouponApi = (Coupon) => API.post('/addcoupon', { Coupon}, config)
 export const GetBookingDetailsApi = (currentPage,limit) => API.get(`/getbookingdetails?page=${currentPage}&limit=${limit}`, config)
 export const AddLocationApi = (data) => API.post('/addlocation', { data}, config)
 export const GetLocationApi = () => API.get('/getlocation', config)
+
+export const getDashBoardDetailsApi = () =>
+  API.get("/getdashboard", configToken);
 
 
 

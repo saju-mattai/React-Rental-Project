@@ -15,7 +15,8 @@ const userBikeAccept = require("../controller/AdminController/userBikeAccept");
 const userBikeReject = require("../controller/AdminController/userBikeReject");
 const addCoupon = require("../controller/AdminController/addCoupon");
 const getBookingDetails = require("../controller/AdminController/getBookingDetails");
-const addLocation = require('../controller/AdminController/AddLocation')
+const addLocation = require("../controller/AdminController/AddLocation");
+const getAllDetails = require("../controller/AdminController/Dashboard")
 
 /* GET users listing. */
 router.route("/adminsignup").post(adminsignup.Adminsignup);
@@ -28,19 +29,23 @@ router.route("/ShowAllUSer").get(ShowAllUSer.ShowAllUSer);
 router.route("/searchuser").get(ShowAllUSer.searchUser);
 
 router.route("/showvehicle").get(ShowAllVehicle.ShowAllVehicle);
+router.route("/searchvehicle").get(ShowAllVehicle.searchVehicle);
+
 router.route("/deletevehicle").delete(deleteVehicle.deleteVehicle);
 router
   .route("/editvehicle")
   .post(upload.array("images"), editVehicle.editVehicle);
+router.route("/searchuservehicle").get(ShowAllUserVehicle.SearchUserVehicle) 
 router.route("/showuserbikes").get(ShowAllUserVehicle.ShowAllUserVehicle);
+
 router.route("/bikeaccept").put(userBikeAccept.userBikeAccept);
 router.route("/bikereject").put(userBikeReject.userBikeReject);
 router.route("/addcoupon").post(addCoupon.addCoupon);
 router.route("/getbookingdetails").get(getBookingDetails.getBookingDetails);
 
-
-router.route('/addlocation').post(addLocation.addLocation)
-router.route('/getlocation').get(addLocation.getLocation)
+router.route("/addlocation").post(addLocation.addLocation);
+router.route("/getlocation").get(addLocation.getLocation);
+router.route("/getdashboard").get(getAllDetails.getAllDetails);
 
 
 module.exports = router;

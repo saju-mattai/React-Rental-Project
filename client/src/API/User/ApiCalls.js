@@ -53,6 +53,10 @@ export const GetWalletDetailsApi = (userId) =>
 export const GetRentedBikeApi = () => API.get("/getrentedbike", config);
 export const CancelMyRideApi = (id) =>
   API.put(`/cancelride?bookingid=${id}&userid=${ID}`, config);
+  export const GetCanceledBikeApi = () =>
+  API.get('/getcancelledbike', config);
+  export const GetOnrideBikeApi = () =>
+  API.get('/getonride', config);
 export const ApplyCouponApi = (data) =>
   API.post("/applycoupon", { data }, config);
 

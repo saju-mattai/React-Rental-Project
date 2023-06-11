@@ -31,6 +31,8 @@ export const getRentedBikeReducer = (state = {}, { type, payload }) => {
         loading: false,
         Err: payload,
       };
+
+   
     default:
       return state;
   }

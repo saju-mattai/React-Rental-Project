@@ -35,3 +35,20 @@ exports.ShowAllVehicle = (req, res) => {
       });
   } catch (error) {}
 };
+
+exports.searchVehicle = (req, res) => {
+  const searchdata = req.query.searchdata;
+  try {
+    vehiclemodel.find({
+      $or: [
+        { Vname: { $regex: ".*" + searchdata + ".*", $options: "i" } },
+        { Vbrand: { $regex: ".*" + searchdata + ".*", $options: "i" } },
+        { Vlocation: { $regex: ".*" + searchdata + ".*", $options: "i" } },
+        { Vcolor: { $regex: ".*" + searchdata + ".*", $options: "i" } },
+      ],
+    }).then((data) => {
+      console.log(data);
+      res.status(200).json(data);
+    });
+  } catch (error) {}
+};

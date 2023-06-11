@@ -3,19 +3,30 @@ import ReactPaginate from "react-paginate";
 import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
 import AdminDrawer from "../../../Components/AdminDashbored/AdminDrawer";
 import { useDispatch } from "react-redux";
-import { ShowAllVehicleAction } from "../../../Redux/Actions/Admin_Action/ShowAllVehicleAction";
+import {
+  SearchVehicleAction,
+  ShowAllVehicleAction,
+} from "../../../Redux/Actions/Admin_Action/ShowAllVehicleAction";
 import Button from "@mui/material/Button";
 import { deleteVehicleAction } from "../../../Redux/Actions/Admin_Action/DeleteVehicleAction";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { MDBCol } from "mdb-react-ui-kit";
+
 import "sweetalert2/dist/sweetalert2.css";
-import { ShowAllVehicleApi } from "../../../API/Admin/ApiCalls";
+import {
+  SearchVehicelApi,
+  ShowAllVehicleApi,
+} from "../../../API/Admin/ApiCalls";
 
 function ShowVehicles() {
   const [limit, setLimit] = useState(3);
   const [pageCount, setPageCount] = useState(1);
   const currentPage = useRef();
   const [data, setData] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const [searchedData, setSearchedData] = useState([]);
 
   // const data = useSelector(
   //   (state) => state.ShowAllVehicleReducer.VehicleData
@@ -52,7 +63,8 @@ function ShowVehicles() {
     dispatch(ShowAllVehicleAction());
     currentPage.current = 1;
     getPaginatedVehicle();
-  }, []);
+    handleSubmit();
+  }, [searchTerm]);
 
   const handlePageClick = (e) => {
     currentPage.current = e.selected + 1;
@@ -64,6 +76,18 @@ function ShowVehicles() {
       setData(data.data.result);
     });
   }
+  const handleSubmit = (e) => {
+    dispatch(SearchVehicleAction(searchTerm));
+    SearchVehicelApi(searchTerm).then((data) => {
+      setSearchedData(data.data);
+    });
+  };
+  
+  const handleChange = (e) => {
+    const { value } = e.target;
+    setSearchTerm(value);
+  };
+  const tableData = searchTerm ? searchedData : data;
 
   return (
     <div
@@ -75,9 +99,24 @@ function ShowVehicles() {
       }}
     >
       <AdminDrawer />
-      <div style={{ marginTop: "6em", width: "75%" }} className="maintable">
-      <div>
-          <h1 className="text-center" > <b> Vehicle Details</b> </h1>
+
+      <div style={{ marginTop: "5em", width: "75%" }} className="maintable">
+        <div>
+          <h1 className="text-center">
+            {" "}
+            <b> Vehicle Details</b>{" "}
+          </h1>
+        </div>
+        <div>
+          <MDBCol md="6">
+            <input
+              className="form-control "
+              value={searchTerm}
+              placeholder="Search"
+              aria-label="Search"
+              onChange={handleChange}
+            />
+          </MDBCol>
         </div>
         <MDBTable bordered>
           <MDBTableHead>
@@ -98,8 +137,8 @@ function ShowVehicles() {
             </tr>
           </MDBTableHead>
           <MDBTableBody>
-            {data
-              ? data.map((data, index) => {
+            {tableData
+              ? tableData.map((data, index) => {
                   return (
                     <tr>
                       <th scope="row">{index + 1}</th>

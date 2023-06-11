@@ -19,6 +19,9 @@ import { ShowUserVehicleReducer } from "./Reducers/Admin/ShowAllUserVehicleReduc
 import { getWalletReducer } from "./Reducers/User/GetWalletReducer";
 import { getRentedBikeReducer } from "./Reducers/User/GetRentedBikeReducer";
 import { applyCouponReducer } from "./Reducers/User/ApplyCouponReducer";
+import { getDashBoardDetailsReducer } from "./Reducers/Admin/DashBoardReducer";
+import { GetCancelledBikeReducer } from "./Reducers/User/GetCancelledBikeReducer";
+import { GetOnrideBikeReducer } from "./Reducers/User/GetOnrideReducer";
 
 
 
@@ -33,6 +36,7 @@ const Reducers = combineReducers({
     AddCouponReducer:AddCouponReducer,
     getBookingDetailsReducer:getBookingDetailsReducer,
     AddLocationReducer:AddLocationReducer,
+    getDashBoardDetailsReducer:getDashBoardDetailsReducer,
 
 
     // USER
@@ -44,6 +48,8 @@ const Reducers = combineReducers({
     getWalletReducer:getWalletReducer,
     getRentedBikeReducer:getRentedBikeReducer,
     applyCouponReducer:applyCouponReducer,
+    GetCancelledBikeReducer:GetCancelledBikeReducer,
+    GetOnrideBikeReducer:GetOnrideBikeReducer,
     // ProfileUploadReducer: ProfileUploadReducer,
     // EditUserReducer: EditUserReducer
 })

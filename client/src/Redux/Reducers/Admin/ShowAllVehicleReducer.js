@@ -30,6 +30,21 @@ export const ShowAllVehicleReducer = (state = {}, { type, payload }) => {
         loading: false,
         VehicleDataErr: payload,
       };
+
+      case Admin_Action_Types.SEARCH_VEHICLE_REQUEST:
+        return {
+          loading: true,
+        };
+      case Admin_Action_Types.SEARCH_VEHICLE_SUCCESS:
+        return {
+          loading: false,
+          VehicleData: payload,
+        };
+      case Admin_Action_Types.SEARCH_VEHICLE_FAIL:
+        return {
+          loading: false,
+          VehicleDataErr: payload,
+        };
     default:
       return state;
   }

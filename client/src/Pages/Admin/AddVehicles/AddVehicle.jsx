@@ -88,6 +88,7 @@ export default function AddVehicle() {
       }}
     >
       <AdminDrawer />
+
       <Form
         className="container  mt-4 ms-5"
         style={divStyle}
@@ -102,6 +103,7 @@ export default function AddVehicle() {
         >
           Add Details
         </h3>
+
         <MDBRow className="mt-1  ">
           <MDBCol>
             <Form.Field>
@@ -249,7 +251,83 @@ export default function AddVehicle() {
             )}
           </MDBCol>
         </MDBRow>
-        <MDBRow className="mt-1   w-50 float-start">
+
+        <MDBRow>
+           <MDBCol>
+            <Form.Field>
+              <div>
+                <label htmlFor="form3Example2" className="form-label">
+                  Vehicle Number
+                </label>
+              </div>
+              <MDBInput
+                {...register("VehicleNumber", {
+                  required: true,
+                  minLength: 3,
+                })}
+                onChange={(e) => {
+                  setVNumber(e.target.value);
+                }}
+                // label="Vehicle Number"
+                id="form3Example1"
+              />
+            </Form.Field>
+            {errors.VehicleNumber && (
+              <p style={{ color: "red" }}>Please enter the Number</p>
+            )}
+          </MDBCol>
+          <MDBCol>
+            <Form.Field>
+              <div>
+                <label htmlFor="form3Example2" className="form-label">
+                  Vehicle Description
+                </label>
+              </div>
+              <MDBInput
+                {...register("desc", {
+                  required: true,
+                  minLength: 3,
+                })}
+                onChange={(e) => setDescription(e.target.value)}
+                id="textAreaExample"
+                rows={1}
+              />
+            </Form.Field>
+            {errors.desc && (
+              <p style={{ color: "red" }}>Please add a description</p>
+            )}
+          </MDBCol>
+
+          <MDBCol className="mt-2">
+            <Form.Field>
+              <label htmlFor="location">Choose Location</label>
+              <select
+                name="location"
+                id="location"
+                {...register("location", {
+                  required: "Please select an option",
+                })}
+                onChange={(e) => setLocation(e.target.value)}
+                className="form-select"
+              >
+                <option value="">Choose</option>
+
+                {location
+                  ? location.map((x) => (
+                      <option key={x.Location} value={x.Location}>
+                        {x.Location}
+                      </option>
+                    ))
+                  : null}
+              </select>
+            </Form.Field>
+            {errors.location && (
+              <p style={{ color: "red" }}>{errors.location.message}</p>
+            )}
+          </MDBCol>
+        </MDBRow>
+
+        {/* <MDBRow className="mt-1 ">
           <MDBCol>
             <Form.Field>
               <div>
@@ -273,8 +351,6 @@ export default function AddVehicle() {
               <p style={{ color: "red" }}>Please enter the Number</p>
             )}
           </MDBCol>
-        </MDBRow>
-        <MDBRow className="mt-1  container w-50 ms-5 ">
           <MDBCol>
             <Form.Field>
               <div>
@@ -299,7 +375,8 @@ export default function AddVehicle() {
               <p style={{ color: "red" }}>Please add a description</p>
             )}
           </MDBCol>
-          <MDBCol>
+
+          <MDBCol className="mt-4" >
             <Form.Field>
               <label htmlFor="">Choose Location</label>
               <select
@@ -323,7 +400,8 @@ export default function AddVehicle() {
               <p style={{ color: "red" }}>{errors.location.message}</p>
             )}
           </MDBCol>
-        </MDBRow>
+        </MDBRow> */}
+
         <MDBRow className="mt-1 container w-50 float-start ">
           <Form.Field>
             <div>
