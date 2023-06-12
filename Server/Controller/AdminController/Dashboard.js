@@ -14,7 +14,9 @@ exports.getAllDetails = async (req, res) => {
       //   totalCancelled,
       totalPendingRequests,
       totalRejectedRequests,
-    //   totalAcceptedRequests,
+      totalAcceptedRequests,
+      getWalletPayment,
+      getStripePayment
     ] = await Promise.all([
       UserModel.countDocuments(),
       vehiclemodel.countDocuments({ Vrequest: "Accepted" }),
@@ -25,7 +27,10 @@ exports.getAllDetails = async (req, res) => {
       //   bookingSchema.countDocuments({ status: "Cancelled" }),
       vehiclemodel.countDocuments({ Vrequest: "Pending" }),
       vehiclemodel.countDocuments({ Vrequest: "Rejected" }),
-    //   vehiclemodel.countDocuments({ Status: "Acccepted" }),
+      vehiclemodel.countDocuments({ Vrequest: "Accepted" }),
+      bookingModel.countDocuments({paymentMethod:"Wallet"}),
+      bookingModel.countDocuments({paymentMethod:"Stripe"}),
+
     ]);
 
 
@@ -39,7 +44,9 @@ exports.getAllDetails = async (req, res) => {
         // totalCancelled,
         totalPendingRequests,
         totalRejectedRequests,
-        // totalAcceptedRequests,
+        totalAcceptedRequests,
+        getWalletPayment,
+        getStripePayment,
         // totalAmountCompletedBookings: bookingTotalAmount[0]?.totalAmount || 0,
       };
   

@@ -17,6 +17,7 @@ const addCoupon = require("../controller/AdminController/addCoupon");
 const getBookingDetails = require("../controller/AdminController/getBookingDetails");
 const addLocation = require("../controller/AdminController/AddLocation");
 const getAllDetails = require("../controller/AdminController/Dashboard")
+const getSalesReport = require("../controller/AdminController/SalesReport")
 
 /* GET users listing. */
 router.route("/adminsignup").post(adminsignup.Adminsignup);
@@ -46,6 +47,8 @@ router.route("/getbookingdetails").get(getBookingDetails.getBookingDetails);
 router.route("/addlocation").post(addLocation.addLocation);
 router.route("/getlocation").get(addLocation.getLocation);
 router.route("/getdashboard").get(getAllDetails.getAllDetails);
+router.route("/getsalesreport").get(getSalesReport.getSalesReport);
+
 
 
 module.exports = router;

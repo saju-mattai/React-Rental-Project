@@ -48,6 +48,8 @@ export const AddCouponApi = (Coupon) => API.post('/addcoupon', { Coupon}, config
 export const GetBookingDetailsApi = (currentPage,limit) => API.get(`/getbookingdetails?page=${currentPage}&limit=${limit}`, config)
 export const AddLocationApi = (data) => API.post('/addlocation', { data}, config)
 export const GetLocationApi = () => API.get('/getlocation', config)
+export const GetSalesReportApi = () => API.get('/getsalesreport', config)
+
 
 export const getDashBoardDetailsApi = () =>
   API.get("/getdashboard", configToken);

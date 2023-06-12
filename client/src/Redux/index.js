@@ -22,6 +22,7 @@ import { applyCouponReducer } from "./Reducers/User/ApplyCouponReducer";
 import { getDashBoardDetailsReducer } from "./Reducers/Admin/DashBoardReducer";
 import { GetCancelledBikeReducer } from "./Reducers/User/GetCancelledBikeReducer";
 import { GetOnrideBikeReducer } from "./Reducers/User/GetOnrideReducer";
+import { getSalesReportReducer } from "./Reducers/Admin/SalesReportReducer";
 
 
 
@@ -37,6 +38,7 @@ const Reducers = combineReducers({
     getBookingDetailsReducer:getBookingDetailsReducer,
     AddLocationReducer:AddLocationReducer,
     getDashBoardDetailsReducer:getDashBoardDetailsReducer,
+    getSalesReportReducer:getSalesReportReducer,
 
 
     // USER

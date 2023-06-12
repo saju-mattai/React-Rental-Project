@@ -188,7 +188,7 @@ export default function AdminDrawer() {
               name: "Coupons",
               icon: <ReceiptIcon style={{ color: "#6366F1" }} />,
             },
-            // {name : "Sales Report", icon : <SummarizeIcon/>},
+            {name : "Sales Report", icon : <SummarizeIcon  style={{ color: "#6366F1" }}  />},
             {
               name: "Logout",
               icon: <LogoutIcon style={{ color: "#6366F1" }} />,
@@ -222,10 +222,10 @@ export default function AdminDrawer() {
                     text2 === "add bikes" && navigate("/addvehicle");
                     text2 === "bookings" && navigate("/getbookings");
                     text2 === "rent requests" && navigate("/rentrequest");
-                    //   text2 === 'locations' && navigate('/admin/locations')
-                    text2 === "add location" && navigate("/addlocation");
+                      text2 === 'locations' && navigate('/addlocation')
+                    // text2 === "add location" && navigate("/addlocation");
                     text2 === "coupons" && navigate("/addcoupon");
-                    //   text2 === 'sales report' && navigate('/admin/sales-report')
+                      text2 === 'sales report' && navigate('/salesreport')
                     text2 === "logout" && handleLogout();
                   }}
                 />

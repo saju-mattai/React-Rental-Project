@@ -26,6 +26,7 @@ import GetBookings from './Pages/Admin/Bookings/GetBookings';
 import VeiwMoreRentRequest from './Pages/Admin/ViewRentRequestAccept/VeiwMoreRentRequest';
 import AddLocation from './Pages/Admin/Location/AddLocation';
 import Dashboard from './Pages/Admin/Dashboard/Dashboard';
+import SalesReport from './Pages/Admin/SalesReport/SalesReport';
 
 function App() {
   const UserData = useSelector((state) => state.UserLoginReducer.loginuserdata)
@@ -65,6 +66,8 @@ function App() {
           <Route path='/viewmore-rentrequest' element={<VeiwMoreRentRequest/> } />
           <Route path='/addlocation' element={<AddLocation/> } />
           <Route path='/dashboard' element={<Dashboard/> } />
+          <Route path='/salesreport' element={<SalesReport/> } />
+
 
 
 

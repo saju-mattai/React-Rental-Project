@@ -5,22 +5,27 @@ import {
   MDBCardBody,
   MDBCardTitle,
   MDBCardText,
+  MDBRow,
+  MDBCol,
 } from "mdb-react-ui-kit";
 import { useDispatch, useSelector } from "react-redux";
 import { getDashBoardDetailsAction } from "../../../Redux/Actions/Admin_Action/GetDashboardDetails";
+import RentRequestGraph from "../../../Components/RentRequestGraph";
+import RentPaymentGraph from "../../../Components/RentPaymentGraph";
 
 function Dashboard() {
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getDashBoardDetailsAction());
+  }, []);
 
-    const dispatch = useDispatch()
+  const details = useSelector(
+    (state) => state.getDashBoardDetailsReducer.dashBoardData
+  );
+  console.log("DASH", details);
+  console.log(details?.getStripePayment)
 
-  useEffect(() =>{
-    dispatch(getDashBoardDetailsAction())
-  },[])
-
-
-  const details = useSelector((state) => state.getDashBoardDetailsReducer.dashBoardData)
-  console.log('DASH',details);
   return (
     <div>
       <h1 className="text-center mt-5  pt-4">DashBoard</h1>
@@ -41,12 +46,8 @@ function Dashboard() {
         >
           <MDBCardBody>
             <MDBCardTitle>Total Users</MDBCardTitle>
-            <MDBCardText>
-             {details?.totalUsers}
-            </MDBCardText>
-            <MDBCardText>
-            Total Registered Users
-            </MDBCardText>
+            <MDBCardText>{details?.totalUsers}</MDBCardText>
+            <MDBCardText>Total Registered Users</MDBCardText>
           </MDBCardBody>
         </MDBCard>
         <MDBCard
@@ -57,12 +58,8 @@ function Dashboard() {
         >
           <MDBCardBody>
             <MDBCardTitle>Total Bikes</MDBCardTitle>
-            <MDBCardText>
-            {details?.totalBikes}
-            </MDBCardText>
-            <MDBCardText>
-            Total Accepted Bikes
-            </MDBCardText>
+            <MDBCardText>{details?.totalBikes}</MDBCardText>
+            <MDBCardText>Total Accepted Bikes</MDBCardText>
           </MDBCardBody>
         </MDBCard>
         <MDBCard
@@ -73,12 +70,8 @@ function Dashboard() {
         >
           <MDBCardBody>
             <MDBCardTitle>Total Bookings</MDBCardTitle>
-            <MDBCardText>
-            {details?.totalBookings}
-            </MDBCardText>
-            <MDBCardText>
-            Total Bookings Made
-            </MDBCardText>
+            <MDBCardText>{details?.totalBookings}</MDBCardText>
+            <MDBCardText>Total Bookings Made</MDBCardText>
           </MDBCardBody>
         </MDBCard>
         <MDBCard
@@ -89,11 +82,39 @@ function Dashboard() {
         >
           <MDBCardBody>
             <MDBCardTitle>Total Rent Amount</MDBCardTitle>
-            <MDBCardText>
-              12
-            </MDBCardText>
+            <MDBCardText>12</MDBCardText>
           </MDBCardBody>
         </MDBCard>
+      </div>
+      {/* <RentRequestGraph /> */}
+      <div
+        className='mt-5 ms-5 col-10 col-md-4"  '
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <MDBRow className="ms-5  container  float-start ">
+          <MDBCol>
+            {" "}
+            <RentRequestGraph
+              pending={details ? details.totalPendingRequests : "-"}
+              rejected={details ? details.totalRejectedRequests : "-"}
+              accepted={details ? details.totalAcceptedRequests : "-"}
+              title={"Rent Requests Details"}
+            />
+          </MDBCol>
+          <MDBCol>
+            {" "}
+            <RentPaymentGraph
+              Wallet={details ? details.getWalletPayment : "-"}
+              Stripe={details ? details.getStripePayment : "-"}
+              // accepted={details ? details.totalAcceptedRequests : "-"}
+              title={"Rent Payment Details"}
+            />
+          </MDBCol>
+        </MDBRow>
       </div>
     </div>
   );

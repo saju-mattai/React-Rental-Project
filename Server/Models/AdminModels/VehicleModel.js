@@ -7,7 +7,7 @@ const vehicleSchema = new mongoose.Schema({
   Vbrand: { type: String },
   Vprice: { type: Number },
   Vcolor: { type: String },
-  // Vlocation:{type:String},
+  Vlocation:{type:String},
   Vfuel: { type: String },
   Vdesc: { type: String },
   Vstatus: { type: String, default: "Available" },
