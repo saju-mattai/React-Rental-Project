@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from 'redux-thunk'
-import Reducers from ".";
+import Reducers from "./index";
 
 
 const AdminInfo = JSON.parse(localStorage.getItem("AdminInfo"))

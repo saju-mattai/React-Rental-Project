@@ -27,6 +27,7 @@ import VeiwMoreRentRequest from './Pages/Admin/ViewRentRequestAccept/VeiwMoreRen
 import AddLocation from './Pages/Admin/Location/AddLocation';
 import Dashboard from './Pages/Admin/Dashboard/Dashboard';
 import SalesReport from './Pages/Admin/SalesReport/SalesReport';
+import Chat from './Pages/User/Chat/Chat';
 
 function App() {
   const UserData = useSelector((state) => state.UserLoginReducer.loginuserdata)
@@ -51,6 +52,8 @@ function App() {
           <Route path='/checkout-success' element={<CheckOutSuccess />} />
           <Route path='/singleview' element={<SingleViewBike />} />
           <Route path="/myrent" element={<Myrent />} />
+          <Route path="/chat" element={<Chat />} />
+
 
           {/* Admin */}
           {/* <Route path='/adminhome' element={<Adminhome></Adminhome>} /> */}

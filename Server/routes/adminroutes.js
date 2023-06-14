@@ -46,6 +46,8 @@ router.route("/getbookingdetails").get(getBookingDetails.getBookingDetails);
 
 router.route("/addlocation").post(addLocation.addLocation);
 router.route("/getlocation").get(addLocation.getLocation);
+router.route("/deletelocation").delete(addLocation.deleteLocation);
+
 router.route("/getdashboard").get(getAllDetails.getAllDetails);
 router.route("/getsalesreport").get(getSalesReport.getSalesReport);
 

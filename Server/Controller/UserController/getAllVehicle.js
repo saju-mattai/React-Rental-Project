@@ -14,7 +14,6 @@ exports.getAllVehicle = (req, res) => {
 };
 
 exports.searchVehicle = (req, res) => {
-  console.log(req.query.searchTerm);
   let searchdata = req.query.searchTerm;
   try {
     vehiclemodel

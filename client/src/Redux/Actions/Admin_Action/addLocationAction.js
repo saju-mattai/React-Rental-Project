@@ -40,3 +40,31 @@ export const getLocation = () => async (dispatch) => {
       });
     });
 };
+
+
+
+export const editLocationAction = (data) => async (dispatch) => {
+    // dispatch({
+    //     type: User_Action_Types.EDIT_USER_REQUEST
+    // })
+    try {
+        // EditUserApi(name, email, phone, place, id).then((data) => {
+            // localStorage.setItem('userInfo', JSON.stringify(data.data))
+            dispatch({
+                type: Admin_Action_Types.EDIT_LOCATION_SUCCESS,
+                payload: data
+            })
+
+        // })
+            // .catch((err) => {
+            //     dispatch({
+            //         type: User_Action_Types.EDIT_USER_FAIL,
+            //         payload: err.response
+
+            //     })
+            // })
+    } catch (error) {
+
+    }
+}
+

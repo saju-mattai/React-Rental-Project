@@ -49,6 +49,8 @@ export const GetBookingDetailsApi = (currentPage,limit) => API.get(`/getbookingd
 export const AddLocationApi = (data) => API.post('/addlocation', { data}, config)
 export const GetLocationApi = () => API.get('/getlocation', config)
 export const GetSalesReportApi = () => API.get('/getsalesreport', config)
+export const DeleteLocationApi = (id) => API.delete('/deletelocation?id='+id, config)
+export const EditLocationApi=(data)=>API.post('/editlocation',{data},config)
 
 
 export const getDashBoardDetailsApi = () =>

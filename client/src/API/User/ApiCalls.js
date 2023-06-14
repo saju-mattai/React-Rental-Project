@@ -53,15 +53,19 @@ export const GetWalletDetailsApi = (userId) =>
 export const GetRentedBikeApi = () => API.get("/getrentedbike", config);
 export const CancelMyRideApi = (id) =>
   API.put(`/cancelride?bookingid=${id}&userid=${ID}`, config);
-  export const GetCanceledBikeApi = () =>
-  API.get('/getcancelledbike', config);
-  export const GetOnrideBikeApi = () =>
-  API.get('/getonride', config);
+export const GetCanceledBikeApi = () => API.get("/getcancelledbike", config);
+export const GetOnrideBikeApi = () => API.get("/getonride", config);
 export const ApplyCouponApi = (data) =>
   API.post("/applycoupon", { data }, config);
 
 export const filterByBrandApi = (data) =>
   API.post("/filterbybrand", { data }, config);
 
-  export const filterByModelApi = (data) =>
+export const filterByModelApi = (data) =>
   API.post("/filterbymodel", { data }, config);
+
+export const GetAllUserApi = (id) => API.get("/getalluser?id=" + id, config);
+
+export const sendMessageApi = (data) => API.post("/addmsg", { data }, config);
+
+export const getMessageApi = () => API.post("/getmsg", config);

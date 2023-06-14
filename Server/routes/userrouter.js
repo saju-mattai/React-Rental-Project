@@ -20,6 +20,8 @@ const getMyRentedBikeDetails = require('../controller/UserController/GetRentedBi
 const CancelMyRide = require('../controller/UserController/CancelMyRide')
 const applyCoupon = require('../controller/UserController/applyCoupon')
 const getCancelledVehicle = require('../controller/UserController/getCancelledBike')
+const getAllUser = require('../controller/UserController/Chat/getAllUser')
+const Chat = require('../controller/UserController/Chat/messageController')
 
 
 /* GET users listing. */
@@ -50,6 +52,14 @@ router.route('/cancelride').put(CancelMyRide.CancelMyRide)
 router.route('/getcancelledbike').get(getCancelledVehicle.getCancelledVehicle)
 
 router.route('/applycoupon').post(applyCoupon.applyCoupon)
+
+router.route('/getalluser').get(getAllUser.getAllUser)
+
+router.route('/addmsg').post(Chat.addMessageController)
+router.route('/getmsg').post(Chat.getAllMessages)
+
+
+
 
 
 

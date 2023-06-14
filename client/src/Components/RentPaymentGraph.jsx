@@ -12,7 +12,7 @@ import { Bar } from 'react-chartjs-2'
 ChartJS.register(
   BarElement,
   CategoryScale,
-  LinearScale,
+  LinearScale, 
   Tooltip,
   Legend
 )
