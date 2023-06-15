@@ -74,7 +74,7 @@ function Dashboard() {
             <MDBCardText>Total Bookings Made</MDBCardText>
           </MDBCardBody>
         </MDBCard>
-        <MDBCard
+        {/* <MDBCard
           className="container w-25 h-25  ms-4 float-start  "
           style={{
             boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)", // Replace with desired shadow properties
@@ -84,7 +84,7 @@ function Dashboard() {
             <MDBCardTitle>Total Rent Amount</MDBCardTitle>
             <MDBCardText>12</MDBCardText>
           </MDBCardBody>
-        </MDBCard>
+        </MDBCard> */}
       </div>
       {/* <RentRequestGraph /> */}
       <div
@@ -105,6 +105,9 @@ function Dashboard() {
               title={"Rent Requests Details"}
             />
           </MDBCol>
+        </MDBRow>
+        <MDBRow className="ms-5  container  float-start ">
+
           <MDBCol>
             {" "}
             <RentPaymentGraph

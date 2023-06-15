@@ -216,7 +216,7 @@ export default function AdminDrawer() {
                   sx={{ opacity: open ? 1 : 0 }}
                   onClick={() => {
                     let text2 = text.name.toLowerCase();
-                    text2 === "dashboard" && navigate("/adminhome");
+                    text2 === "dashboard" && navigate("/dashboard");
                     text2 === "users" && navigate("/showalluser");
                     text2 === "bikes" && navigate("/showallvehicle");
                     text2 === "add bikes" && navigate("/addvehicle");

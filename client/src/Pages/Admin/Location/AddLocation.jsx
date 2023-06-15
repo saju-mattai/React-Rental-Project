@@ -42,6 +42,7 @@ function AddLocation() {
     dispatch(getLocation());
   }, []);
   const Location = useSelector((state) => state.AddLocationReducer.Data);
+  console.log(Location);
   const handle = () => {
     dispatch(AddLocationAction(addlocation));
   };
@@ -72,11 +73,9 @@ function AddLocation() {
     const newFilteredLocations = Location.filter((location) => {
       return location._id === id;
     });
-    console.log(newFilteredLocations);
     setFilteredLocations(newFilteredLocations);
     setModal(!modal);
   };
-
 
   return (
     <>

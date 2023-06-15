@@ -80,7 +80,7 @@ export default function ShowAllUser() {
 
   return (
     <div
-      className='mt-5  col-md-6"  container '
+      className=' mb-5 p-5 col-md-6"  container '
       style={{
         display: "flex",
         justifyContent: "center",

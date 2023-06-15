@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { GetAllUserApi } from "../../../API/User/ApiCalls";
+import { io } from "socket.io-client";
 import Contacts from "../../../Components/Chat/Contacts";
 import Welcome from "../../../Components/Chat/Welcome";
 import ChatContainer from "../../../Components/Chat/ChatContainer";
 function Chat() {
+  const socket = io("http://localhost:3000");
   const user = useSelector((state) => state.UserLoginReducer?.loginuserdata);
   const [contacts, setContacts] = useState([]);
   const [currentChat ,setCurrentChat] = useState(undefined)
@@ -26,6 +28,12 @@ function Chat() {
   const handleChatChange =(chat)=>{
     setCurrentChat(chat)
   }
+  useEffect(() => {
+    if (user) {
+      // socket.current = io(host)
+      socket.emit("add-user", user.id);
+    }
+  });
 
   return (
     <Container>
@@ -38,7 +46,7 @@ function Chat() {
             <ChatContainer
               currentUser={user}
               currentChat={currentChat}
-              // socket={socket}
+              socket={socket}
             />
           )}
         {/* <Welcome currentUser={user} /> */}

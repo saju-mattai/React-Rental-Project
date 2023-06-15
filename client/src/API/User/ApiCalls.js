@@ -68,4 +68,4 @@ export const GetAllUserApi = (id) => API.get("/getalluser?id=" + id, config);
 
 export const sendMessageApi = (data) => API.post("/addmsg", { data }, config);
 
-export const getMessageApi = () => API.post("/getmsg", config);
+export const getMessageApi = (from,to) => API.post("/getmsg",{from,to}, config);

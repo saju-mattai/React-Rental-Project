@@ -5,17 +5,17 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { MDBDataTable } from 'mdbreact';
 import {
-  SearchRentRequestBikesAction,
+  // SearchRentRequestBikesAction,
   ShowUserBikesAction,
 } from "../../../Redux/Actions/Admin_Action/ShowUserVehicleAction";
 import AdminDrawer from "../../../Components/AdminDashbored/AdminDrawer";
-import { BikeAcceptAction } from "../../../Redux/Actions/Admin_Action/UserBikeAcceptAction";
-import { BikeRejectAction } from "../../../Redux/Actions/Admin_Action/UserBikeRejectAction";
-import { MDBCol } from "mdb-react-ui-kit";
+// import { BikeAcceptAction } from "../../../Redux/Actions/Admin_Action/UserBikeAcceptAction";
+// import { BikeRejectAction } from "../../../Redux/Actions/Admin_Action/UserBikeRejectAction";
+// import { MDBCol } from "mdb-react-ui-kit";
 
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
-import { SearchUserVehicleApi } from "../../../API/Admin/ApiCalls";
+// import { SearchUserVehicleApi } from "../../../API/Admin/ApiCalls";
 
 function RentRequest() {
   const [show, setShow] = useState(false);

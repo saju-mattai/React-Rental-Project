@@ -15,7 +15,7 @@ exports.addMessageController = async (req, res) => {
         users: [from, to],
         sender: from,
       });
-  
+      console.log(data)
       if (data) {
         res.status(201).json(data);
         console.log("done it");
@@ -31,15 +31,16 @@ exports.addMessageController = async (req, res) => {
 
 exports.getAllMessages = async (req, res) => {
     try {
-      const { from, to } = req.body.data;
-      const messages = await chatSchema
+      const { from ,to} = req.body.from;
+      
+      const messages = await chatSchema 
         .find({
           users: {
             $all: [from, to],
           },
         })
         .sort({ updatedAt: 1 });
-  
+        console.log(messages)
       return res.status(200).json(messages);
     } catch (error) {
       console.log("error finding msgs", error);

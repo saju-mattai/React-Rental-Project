@@ -52,7 +52,9 @@ export default function Usernavbar() {
     const handleMyRide =()=>{
         navigate('/myrent')
     }
-
+    const handleChat =()=>{
+        navigate('/chat')
+    }
 
     const [showNavColorThird, setShowNavColorThird] = useState(false);
 
@@ -87,7 +89,7 @@ export default function Usernavbar() {
                                 <MDBNavbarLink  onClick={handleRentBike} style={{ marginLeft: '1rem' }}>Rent A Bike</MDBNavbarLink>
                             </MDBNavbarItem>
                             <MDBNavbarItem>
-                                <MDBNavbarLink href='#' style={{ marginLeft: '1rem' }}>Chat With US</MDBNavbarLink>
+                                <MDBNavbarLink onClick={handleChat} style={{ marginLeft: '1rem' }}>Chat With Users</MDBNavbarLink>
                             </MDBNavbarItem>
                         </MDBNavbarNav>
                         {/* <strong>Login</strong> */}

@@ -30,7 +30,7 @@ const schema = yup.object().shape({
 });
 
 function LocationEditModal({ closeModal, details }) {
-  console.log(details[0].Location);
+  console.log(details);
   const {
     register,
     handleSubmit,
@@ -50,14 +50,14 @@ function LocationEditModal({ closeModal, details }) {
   //   const [phone, setPhone] = useState(details.phone);
   //   const [place, setPlace] = useState(details.place);
   const submitHandler = async (data) => {
-        // setLoading(true);
-        const location = data.Location;
-       
-        // const handleEdit = (id) => {
-        EditLocationApi(location).then((data) => {
-          dispatch(editLocationAction(data.data));
-          setBasicModal(false);
-        });
+    // setLoading(true);
+    const location = data.location
+    const Id = details[0]._id;
+    // const handleEdit = (id) => {
+      EditLocationApi(Id,location).then((data) => {
+      dispatch(editLocationAction(data.data));
+      setBasicModal(false);
+    });
   };
   //   };
 
@@ -90,8 +90,7 @@ function LocationEditModal({ closeModal, details }) {
                   name="name"
                   type="text"
                   label=""
-                  value={details.filteredLocations}
-                    defaultValue={details[0].Location}
+                  defaultValue={details[0].Location}
                   error={!!errors.location}
                   helperText={errors.location ? errors.location.message : ""}
                   {...register("location")}

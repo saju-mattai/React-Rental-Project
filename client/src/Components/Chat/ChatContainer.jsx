@@ -6,9 +6,10 @@ import { v4 as uuidv4 } from "uuid";
 import Message from "./Message";
 import { getMessageApi, sendMessageApi } from "../../API/User/ApiCalls";
 
-function ChatContainer({ currentUser, currentChat }) {
+function ChatContainer({ currentUser, currentChat, socket }) {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
+  
 
   useEffect(() => {
     if (currentChat) {
@@ -16,19 +17,40 @@ function ChatContainer({ currentUser, currentChat }) {
         const response = await getMessageApi({
           from: currentUser.id,
           to: currentChat._id,
+        }).then((data) => {
+          setMessages(data.data);
         });
       };
       messages();
     }
   }, [currentChat]);
+ 
 
   const handleSendMsg = async (msg) => {
     sendMessageApi({
       from: currentUser.id,
       to: currentChat._id,
       message: msg,
+    }).then((data) => {
+      socket.emit("send-msg", {
+        to: currentChat._id,
+        from: currentUser.id,
+        message: data.data,
+      });
+      setMessages([...messages, data.data]);
     });
   };
+
+  useEffect(() => {
+    if (socket) {
+      socket.on("msg-receive", (msg) => {
+        setMessages((prevMessages) => [...prevMessages, msg]);
+      });
+    }
+  }, []);
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behaviour: "smooth" });
+  }, [messages]);
   return (
     <Container>
       <div className="chat-header">
@@ -42,9 +64,9 @@ function ChatContainer({ currentUser, currentChat }) {
         </div>
       </div>
       {/* <Message/> */}
-
       <div className="chat-messages">
         {messages.map((message) => {
+          console.log(message);
           return (
             <div ref={scrollRef} key={uuidv4()}>
               <div
@@ -53,7 +75,7 @@ function ChatContainer({ currentUser, currentChat }) {
                 }`}
               >
                 <div className="content">
-                  <p>{message.message?.text}</p>
+                  <p>{message?.message?.text}</p>
                 </div>
               </div>
             </div>

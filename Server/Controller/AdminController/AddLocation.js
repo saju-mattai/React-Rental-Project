@@ -36,10 +36,20 @@ exports.deleteLocation = async (req, res) => {
     });
   } catch (error) {}
 };
-exports.editLocation = async (req,res)=>{
+exports.editLocation = async (req, res) => {
   try {
-    
-  } catch (error) {
-    
-  }
-}
+    let id = req.body.data;
+    Location.updateOne(
+      { _id: id },
+      {
+        $set: {
+          Location: req.body.location,
+        },
+      }
+    ).then((response) => {
+      Location.find().then((data) => {
+        res.status(200).json(data);
+      });
+    });
+  } catch (error) {}
+};
