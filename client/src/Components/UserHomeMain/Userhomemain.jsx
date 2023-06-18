@@ -1,11 +1,20 @@
 import React from 'react'
 import './userhomemain.css'
+import Image from '../../../src/assets/1234.jpg'
+import Usernavbar from '../UserNavBar/Usernavbar'
+import Footer from '../Footer/Footer'
+
 
 function Userhomemain() {
     return (
-        <div className='container'>
-            <img src="https://img.freepik.com/free-psd/transportation-horizontal-banner-template_23-2149016055.jpg?w=1060&t=st=1682708183~exp=1682708783~hmac=51b82ae712c9509ec5f44041d5a818e4de1809959696d400759ed494be30ff2d" alt="" />
+        <>
+        <Usernavbar/>
+        <div>
+            <img src={Image} alt=""style={{ width:'70%' , height:"20%" ,marginLeft:"15%" }} />
         </div>
+        <Footer />
+        </>
+        
     )
 }
 

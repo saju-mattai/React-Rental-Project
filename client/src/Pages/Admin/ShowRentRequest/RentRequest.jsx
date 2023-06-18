@@ -35,22 +35,9 @@ function RentRequest() {
 
   useEffect(() => {
     dispatch(ShowUserBikesAction());
-    // handleSubmit()
   }, [show, searchTerm]);
 
-  // const handleSubmit = (e) => {
-  //   dispatch(SearchRentRequestBikesAction(searchTerm));
-  //   SearchUserVehicleApi(searchTerm).then((data) => {
-  //     setSearchedData(data.data);
-  //   });
-  // };
-
-  // const handleChange = (e) => {
-  //   const { value } = e.target;
-  //   setSearchTerm(value);
-  // };
-  // const tableData = searchTerm ? searchedData : Vehicledata;
-
+ 
   const data = {
     columns: [
       {
@@ -168,71 +155,7 @@ function RentRequest() {
           </h1>
         </div>
         <MDBDataTable striped bordered small data={data} />
-        {/* <MDBCol md="6">
-            <input
-              className="form-control "
-              value={searchTerm}
-              placeholder="Search"
-              aria-label="Search"
-              // onChange={handleChange}
-            /> */}
-        {/* </MDBCol> */}
-        {/* <MDBTable bordered>
-          <MDBTableHead>
-            <tr className="container ">
-              <th scope="col">No</th>
-              <th scope="col">Name</th>
-              <th scope="col">Model</th>
-              <th scope="col">Brand</th>
-              <th scope="col">Rent/Hour</th>
-              <th scope="col">Image</th>
-              <th scope="col">Colour</th>
-              <th scope="col">Number</th>
-              <th scope="col">Fuel</th>
-              <th scope="col">View More</th>
-            </tr>
-          </MDBTableHead>
-          <MDBTableBody>
-            {Vehicledata
-              ? Vehicledata.map((data, index) => {
-                  return (
-                    <tr>
-                      <th scope="row">{index + 1}</th>
-                      <td>{data.Vname}</td>
-                      <td>{data.Vmodel}</td>
-                      <td>{data.Vbrand}</td>
-                      <td>{data.Vprice}</td>
-                      <td>
-                        {data.Vphoto && data.Vphoto.length > 0 && (
-                          <img
-                            src={data.Vphoto[0].url}
-                            alt="image"
-                            style={{ height: "80px", width: "100px" }}
-                          />
-                        )}
-                      </td>
-
-                      <td>{data.Vcolor}</td>
-                      <td>{data.Vnumber}</td>
-                      <td>{data.Vfuel}</td>
-                    <td>
-                    <Button
-                          variant="outlined"
-                          onClick={() => {
-                            handleView(data._id);
-                          }}
-                        >
-                          View  
-                        </Button>
-                    </td>
-
-                 
-                    </tr>
-                  );
-                })
-              : ""}
-          </MDBTableBody>
-        </MDBTable> */}
+       
       </div>
     </div>
   );

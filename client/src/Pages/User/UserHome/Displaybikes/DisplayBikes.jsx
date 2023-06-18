@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import { searchVehicleApi } from "../../../../API/User/ApiCalls";
 import { filterByBrandAction, filterByModelAction } from "../../../../Redux/Actions/User_Action/FilterAction";
 import { height } from "@mui/system";
+import Footer from "../../../../Components/Footer/Footer";
 // import './DisplayBikes.css'
 
 function DisplayBikes() {
@@ -201,6 +202,7 @@ function DisplayBikes() {
         </div>
         <div className="col"></div>
       </div>
+
     </div>
   );
 }

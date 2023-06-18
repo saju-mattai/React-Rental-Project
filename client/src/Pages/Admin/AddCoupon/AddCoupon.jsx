@@ -1,17 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import AdminDrawer from "../../../Components/AdminDashbored/AdminDrawer";
-import {  MDBCol, MDBRow,  } from "mdb-react-ui-kit";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.css";
+import {
+  MDBCol,
+  MDBRow,
+  MDBTable,
+  MDBTableHead,
+  MDBTableBody,
+} from "mdb-react-ui-kit";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DatePicker } from "antd";
 import moment from "moment";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AddCouponAction } from "../../../Redux/Actions/Admin_Action/AddCouponAction";
+import { getCouponAction } from "../../../Redux/Actions/Admin_Action/GetCouponAction";
+import { deleteCouponAction } from "../../../Redux/Actions/Admin_Action/DeleteCouponAction";
 const { RangePicker } = DatePicker;
 
 const schema = yup.object().shape({
@@ -40,8 +50,6 @@ function AddCoupon() {
   };
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [startdate, setStartdate] = useState();
-  const [enddate, setEnddate] = useState();
 
   const {
     register,
@@ -51,140 +59,172 @@ function AddCoupon() {
     resolver: yupResolver(schema),
   });
 
-  const selectTimeSlot = (value) => {
-    setStartdate(moment(value[0].$d).format("MMMM Do YYYY, h:mm:ss a"));
-    setEnddate(moment(value[1].$d).format("MMMM Do YYYY, h:mm:ss a"));
-  };
-
   const submitHandler = async (data) => {
     const Coupon = {
       coupocode: data.couponcode,
       minprice: data.minprice,
       Amount: data.amount,
-      startdate,
-      enddate,
     };
-    console.log("data", data);
     dispatch(AddCouponAction(Coupon));
-    // setTimeout(() => {
-    navigate("/addcoupon");
-    // }, 1000);
+    setTimeout(() => {
+      navigate("/addcoupon");
+      dispatch(getCouponAction());
+    }, 1000);
+  };
+
+  useEffect(() => {
+    dispatch(getCouponAction());
+  }, []);
+  const Coupon = useSelector((state) => state.DeleteCouponReducer.Data);
+  console.log(Coupon);
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteCouponAction(id));
+        dispatch(getCouponAction());
+        Swal.fire("Deleted!", "Your vehicle has been deleted.", "success");
+      }
+    });
   };
 
   return (
-    <div
-      className='mt-5 ms-5 col-10 col-md-4"  '
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <AdminDrawer />
-      <MDBCol className="container  mt-4 ms-5" style={divStyle}>
-        <h3
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          Add Coupons
-        </h3>
-        <Box
-          component="form"
-          onSubmit={handleSubmit(submitHandler)}
-          sx={{ mt: 1 }}
-        >
-          <MDBRow className="mt-1  ">
-           
-            <MDBCol>
-              <TextField
-                id="couponcode"
-                name="couponcode"
-                type="text"
-                label="CouponCode"
-                error={!!errors.couponcode}
-                helperText={errors.couponcode ? errors.couponcode.message : ""}
-                {...register("couponcode")}
-                variant="outlined"
-              />
-            </MDBCol>
-            <MDBCol>
-              <TextField
-                id="minprice"
-                name="minprice"
-                type="number"
-                label="MinPrice"
-                error={!!errors.minprice}
-                helperText={errors.minprice ? errors.minprice.message : ""}
-                {...register("minprice")}
-                variant="outlined"
-              />
-            </MDBCol>
+    <>
+      <div
+        className='mt-5 ms-5 col-10 col-md-4"  '
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <AdminDrawer />
+        <MDBCol className="container  mt-4 ms-5" style={divStyle}>
+          <h3
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            Add Coupons
+          </h3>
+          <Box
+            component="form"
+            onSubmit={handleSubmit(submitHandler)}
+            sx={{ mt: 1 }}
+          >
+            <MDBRow className="mt-1  ">
+              <MDBCol>
+                <TextField
+                  id="couponcode"
+                  name="couponcode"
+                  type="text"
+                  label="CouponCode"
+                  error={!!errors.couponcode}
+                  helperText={
+                    errors.couponcode ? errors.couponcode.message : ""
+                  }
+                  {...register("couponcode")}
+                  variant="outlined"
+                />
+              </MDBCol>
+              <MDBCol>
+                <TextField
+                  id="minprice"
+                  name="minprice"
+                  type="number"
+                  label="MinPrice"
+                  error={!!errors.minprice}
+                  helperText={errors.minprice ? errors.minprice.message : ""}
+                  {...register("minprice")}
+                  variant="outlined"
+                />
+              </MDBCol>
 
-            <MDBCol>
-              <TextField
-                id="amount"
-                name="amount"
-                type="number"
-                label="Amount"
-                error={!!errors.amount}
-                helperText={errors.amount ? errors.amount.message : ""}
-                {...register("amount")}
-                variant="outlined"
-              />
-            </MDBCol>
+              <MDBCol>
+                <TextField
+                  id="amount"
+                  name="amount"
+                  type="number"
+                  label="Amount"
+                  error={!!errors.amount}
+                  helperText={errors.amount ? errors.amount.message : ""}
+                  {...register("amount")}
+                  variant="outlined"
+                />
+              </MDBCol>
+            </MDBRow>
 
-          </MDBRow>
+            <MDBRow className="mt-1  ">
+             
 
-          <MDBRow className="mt-1  ">
-            <MDBCol>
-              <div>
-                <label htmlFor="form3Example2" className="form-label">
-                  {/* StartingDate and EndingDate */}
-                </label>
-              </div>
-              <RangePicker
-                {...register("date", {
-                  required: true,
-                  minLength: 2,
-                })}
-                className="ms-5"
-                showTime={{
-                  format: "HH:mm",
-                }}
-                format="YYYY-MM-DD HH:mm"
-                onChange={selectTimeSlot}
-              />
-              {errors.date && (
-                <p style={{ color: "red" }}>Please enter a date</p>
-              )}
-            </MDBCol>
+              <MDBCol>
+                <Button
+                  type="submit"
+                  className="mt-4"
+                  style={{
+                    display: "flex",
+                  }}
+                  variant="outlined"
+                  size="small"
+                >
+                  Upload
+                </Button>
+              </MDBCol>
+            </MDBRow>
+          </Box>
+        </MDBCol>
+      </div>
+      <MDBTable
+        className="mt-5 container w-75 border   "
+      >
+        <MDBTableHead dark>
+          <tr>
+            <th scope="col">SI</th>
+            <th scope="col">CouponCode</th>
+            <th scope="col">MinPrice</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </MDBTableHead>
+        <MDBTableBody>
+          {Coupon
+            ? Coupon?.map((item, i) => {
+                return (
+                  <tr>
+                    <th scope="row">{i + 1}</th>
+                    <td>{item.coupocode}</td>
+                    <td>{item.minprice}</td>
+                    <td>{item.Amount}</td>
 
-            <MDBCol>
-              {/* <div>
-              <label htmlFor="form3Example2" className="form-label">
-                Amount
-              </label>
-            </div>
-            <MDBInput id="form3Example1" /> */}
-              <Button
-                type="submit"
-                className="mt-4"
-                style={{
-                  display: "flex",
-                }}
-                variant="outlined"
-                size="small"
-              >
-                Upload
-              </Button>
-            </MDBCol>
-          </MDBRow>
-        </Box>
-      </MDBCol>
-    </div>
+                    <td>
+                      {" "}
+                      <Button
+                        onClick={(e) => {
+                          handleDelete(item._id);
+                        }}
+                        color="error"
+                        variant="outlined"
+                      >
+                        Delete
+                      </Button>
+                    </td>
+                  </tr>
+                );
+              })
+            : ""}
+        </MDBTableBody>
+      </MDBTable>
+    </>
   );
 }
 

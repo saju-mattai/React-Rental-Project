@@ -28,6 +28,7 @@ import AddLocation from './Pages/Admin/Location/AddLocation';
 import Dashboard from './Pages/Admin/Dashboard/Dashboard';
 import SalesReport from './Pages/Admin/SalesReport/SalesReport';
 import Chat from './Pages/User/Chat/Chat';
+import Userhomemain from './Components/UserHomeMain/Userhomemain';
 
 function App() {
   const UserData = useSelector((state) => state.UserLoginReducer.loginuserdata)
@@ -41,7 +42,7 @@ function App() {
           <Route path="/signup" element={UserData ? <Navigate to='/' /> : <Signup />}> </Route>
           <Route path="/login" element={UserData ? <Navigate to='/' /> : <Userlogin />} />
           {/* <Route path="/" element={UserData ?<UserHome /> : <Navigate to='/login' /> } /> */}
-          <Route path="/" element={<UserHome />} />
+          <Route path="/" element={<Userhomemain />} />
           <Route path="/profile" element={UserData ? <Profile /> : <Navigate to='/' />} />
           <Route path='/edituser' element={<EditUser />} />
           <Route path='/otplogin' element={<OtpLogin />} />

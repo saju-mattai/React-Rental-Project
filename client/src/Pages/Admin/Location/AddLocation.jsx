@@ -42,7 +42,6 @@ function AddLocation() {
     dispatch(getLocation());
   }, []);
   const Location = useSelector((state) => state.AddLocationReducer.Data);
-  console.log(Location);
   const handle = () => {
     dispatch(AddLocationAction(addlocation));
   };

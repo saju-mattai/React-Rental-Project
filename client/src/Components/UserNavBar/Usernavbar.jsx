@@ -55,6 +55,9 @@ export default function Usernavbar() {
     const handleChat =()=>{
         navigate('/chat')
     }
+    const handleHome =()=>{
+        navigate('/')
+    }
 
     const [showNavColorThird, setShowNavColorThird] = useState(false);
 
@@ -77,7 +80,7 @@ export default function Usernavbar() {
                     <MDBCollapse show={showNavColorThird} navbar>
                         <MDBNavbarNav className='me-auto mb-4 mb-lg-0'   >
                             <MDBNavbarItem className='active'>
-                                <MDBNavbarLink aria-current='page' href='#' style={{ marginLeft: '22rem' }}>
+                                <MDBNavbarLink aria-current='page' onClick={handleHome} style={{ marginLeft: '22rem' }}>
                                     Home
                                 </MDBNavbarLink>
                             </MDBNavbarItem>

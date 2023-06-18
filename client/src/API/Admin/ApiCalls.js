@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API = axios.create({ baseURL: "http://localhost:3000/api/admin" })
+const API = axios.create({ baseURL: "http://localhost:8080/api/admin" })
 
 const Admin = JSON.parse(localStorage.getItem("AdminInfo"));
 
@@ -45,12 +45,16 @@ export const SearchUserVehicleApi = (searchdata)=>API.get(`/searchuservehicle?se
 export const BikeAcceptApi = (id) => API.put(`/bikeaccept?id=${id}`, config)
 export const BikeRejectApi = (id) => API.put(`/bikereject?id=${id}`, config)
 export const AddCouponApi = (Coupon) => API.post('/addcoupon', { Coupon}, config)
-export const GetBookingDetailsApi = (currentPage,limit) => API.get(`/getbookingdetails?page=${currentPage}&limit=${limit}`, config)
+export const GetBookingDetailsApi = () => API.get(`/getbookingdetails`, config)
 export const AddLocationApi = (data) => API.post('/addlocation', { data}, config)
 export const GetLocationApi = () => API.get('/getlocation', config)
 export const GetSalesReportApi = () => API.get('/getsalesreport', config)
 export const DeleteLocationApi = (id) => API.delete('/deletelocation?id='+id, config)
 export const EditLocationApi=(data,location)=>API.post('/editlocation',{data,location},config)
+export const GetCouponApi = () => API.get(`/getcoupon`, config)
+export const DeleteCouponApi = (id) => API.delete('/deletecoupon?id='+id, config)
+
+
 
 
 export const getDashBoardDetailsApi = () =>

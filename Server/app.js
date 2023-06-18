@@ -28,7 +28,7 @@ var app = express();
 
 //cors
 const corsOptions = {
-  origin: "http://localhost:3001",
+  origin: "http://localhost:3000",
   credentials: true,
   optioSuccessStatus: 200,
 };
@@ -58,13 +58,13 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 const server = app.listen(PORT, console.log("port", PORT));
 
 const io = socket(server, {
   cors: {
-    origin: "http://localhost:3001",
+    origin: "http://localhost:3000",
     credentials: true,
   },
 });
@@ -74,7 +74,7 @@ io.on("connection", (socket) => {
   global.chatSocket = socket;
   socket.on("add-user", (userId) => {
     onlineUsers.set(userId, socket.id);
-  });
+  }); 
 
   socket.on("send-msg", (data) => {
     

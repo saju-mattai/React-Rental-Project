@@ -43,6 +43,10 @@ router.route("/showuserbikes").get(ShowAllUserVehicle.ShowAllUserVehicle);
 router.route("/bikeaccept").put(userBikeAccept.userBikeAccept);
 router.route("/bikereject").put(userBikeReject.userBikeReject);
 router.route("/addcoupon").post(addCoupon.addCoupon);
+router.route("/getcoupon").get(addCoupon.getCoupon);
+router.route("/deletecoupon").delete(addCoupon.deleteCoupon);
+
+
 router.route("/getbookingdetails").get(getBookingDetails.getBookingDetails);
 
 router.route("/addlocation").post(addLocation.addLocation);
