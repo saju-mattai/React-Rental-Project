@@ -29,6 +29,7 @@ import Dashboard from './Pages/Admin/Dashboard/Dashboard';
 import SalesReport from './Pages/Admin/SalesReport/SalesReport';
 import Chat from './Pages/User/Chat/Chat';
 import Userhomemain from './Components/UserHomeMain/Userhomemain';
+import ErrorPage from './Components/ErrorPage/ErrorPage';
 
 function App() {
   const UserData = useSelector((state) => state.UserLoginReducer.loginuserdata)
@@ -74,7 +75,8 @@ function App() {
 
 
 
-
+        {/* 404 Page */}
+        <Route path="*" element={<ErrorPage />} />
 
 
 

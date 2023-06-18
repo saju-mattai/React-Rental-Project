@@ -5,10 +5,6 @@ const fs = require("fs");
 const cloudinary = require("../../Utils/cloudinary");
 
 exports.addBikeUser = async (req, res) => {
-  console.log(req.query.id);
-  console.log("sasasas", req.body);
-  console.log("file", req.files);
-
   try {
     const uploader = async (path) => await cloudinary.uploads(path, "Images");
     if (req.method === "POST") {
@@ -32,7 +28,7 @@ exports.addBikeUser = async (req, res) => {
         Vdesc,
         Vphoto,
         Vnumber,
-        Vlocation
+        Vlocation,
       } = req.body;
       const vehicleDetails = {
         Vname,
@@ -45,14 +41,20 @@ exports.addBikeUser = async (req, res) => {
         Vfuel,
         Vdesc,
         Vphoto: urls,
-        Vrequest:"Pending",
-        OwnerId:req.query.id
+        Vrequest: "Pending",
+        OwnerId: req.query.id,
       };
-      vehiclemodel.create(vehicleDetails).then((response) => {
-        res.status(200).json(response);
-      });
+      vehiclemodel
+        .create(vehicleDetails)
+        .then((response) => {
+          res.status(200).json(response);
+        })
+        .catch((error) => {
+          res.status(500).json(error);
+        });
     }
   } catch (error) {
     res.status(500).json(error);
+    console.log(error);
   }
 };

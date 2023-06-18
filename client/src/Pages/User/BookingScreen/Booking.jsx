@@ -38,6 +38,8 @@ function Booking() {
 
   const newtotalamount = useSelector((state) => state.applyCouponReducer.Data);
 
+  console.log(newtotalamount);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -66,7 +68,7 @@ function Booking() {
   };
   function disabledDate(current) {
     // Disable dates before today's date
-    return current && current < moment().startOf('day');
+    return current && current < moment().startOf("day");
   }
 
   useEffect(() => {
@@ -93,7 +95,6 @@ function Booking() {
   // if(!newtotalamount && helmet === true){
   //   totalAmount = totalAmount + 100;
   // }
-
   const handelSubmit = () => {
     setLoading(true);
     if (newtotalamount) {
@@ -109,7 +110,7 @@ function Booking() {
       BikeName: filteredData[0].Vname,
       BikePhoto: filteredData[0].Vphoto[0].url,
       Description: filteredData[0].Vdesc,
-      Location:filteredData[0].Vlocation,
+      Location: filteredData[0].Vlocation,
       totalHour,
       totalAmount,
       HelmetRequired: helmet,
@@ -151,8 +152,11 @@ function Booking() {
     <>
       <Usernavbar />
       <div>
-          <h3 className="text-center" > <b> Check Out</b> </h3>
-        </div>
+        <h3 className="text-center">
+          {" "}
+          <b> Check Out</b>{" "}
+        </h3>
+      </div>
       <div className="row  ms-5 mt-4">
         <div
           className="col-6 "
@@ -191,7 +195,7 @@ function Booking() {
           </div>
           <div className=" d-flex justify-content-end  w-75 ">
             <RangePicker
-              className=""
+              className="me-5"
               showTime={{
                 format: "HH:mm",
               }}
@@ -202,6 +206,7 @@ function Booking() {
           </div>
           {/* <div className="d-flex justify-content-end container ms-5 mt-2 me-2 w-50 "> */}
           <Checkbox
+          className="mt-2"
             onChange={(e) => {
               if (e.target.checked) {
                 setHelmet(true);
@@ -210,10 +215,10 @@ function Booking() {
               }
             }}
           >
-            Do you want a Helmet for riding
+           <strong> Do you want a Helmet for riding</strong>
           </Checkbox>
           {/* </div> */}
-          <div className="d-flex justify-content-start mt-2 w-50 ">
+          <div className="d-flex justify-content-start mt-4 w-50 ">
             <MDBInput
               className="mt-auto"
               onChange={(e) => {
@@ -250,6 +255,8 @@ function Booking() {
                   ) : (
                     ""
                   )}
+
+                 
                   <p className="d-flex justify-content-end">
                     Rent Per Hour : <b>Rs.{filteredData[0].Vprice}</b>{" "}
                   </p>

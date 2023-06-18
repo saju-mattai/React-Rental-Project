@@ -122,7 +122,6 @@ exports.booking = async (req, res) => {
               },
             }
           ).then((res) => {
-            console.log(res);
           });
         } else {
           res.status(400).json("Insufficient balance");

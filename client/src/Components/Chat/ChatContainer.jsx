@@ -3,7 +3,6 @@ import styled from "styled-components";
 import ChatInput from "./ChatInput";
 import { v4 as uuidv4 } from "uuid";
 
-import Message from "./Message";
 import { getMessageApi, sendMessageApi } from "../../API/User/ApiCalls";
 
 function ChatContainer({ currentUser, currentChat, socket }) {
@@ -168,5 +167,4 @@ const Container = styled.div`
     }
   }
 `;
-
 export default ChatContainer;

@@ -2,10 +2,11 @@ import React from "react";
 import MUIDataTable from "mui-datatables";
 
 function AllReport({ salesData }) {
+  console.log(salesData);
   const columns = [
     {
-      name: "bikeId",
-      label: "Bike ID",
+      name: "bike",
+      label: "Bike",
       options: {
         filter: true,
         sort: true,
@@ -19,6 +20,23 @@ function AllReport({ salesData }) {
         },
       },
     },
+    {
+      name: "image",
+      label: "Image",
+      options: {
+        filter: true,
+        sort: true,
+        customHeadLabelStyle: {
+          fontWeight: "bold",
+          fontSize: "16px",
+          textAlign: "center",
+        },
+        customBodyRender: (value, tableMeta, updateValue) => {
+          return <img src={value} alt="Bike" style={{ width: "100px" }} />;
+        },
+      },
+    },
+
     {
       name: "location",
       label: "Location",
@@ -120,7 +138,8 @@ function AllReport({ salesData }) {
 
   const data = Array.isArray(salesData)
     ? salesData.map((sale) => ({
-        bikeId: sale.BikeId,
+        bike: sale.BikeName,
+        image: sale.BikePhoto,
         location: sale.Location,
         bookedAt: sale.startdate,
         totalHours: sale.totalHour,

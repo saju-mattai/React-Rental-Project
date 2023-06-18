@@ -5,8 +5,8 @@ import moment from "moment";
 function WeeklyReport({ salesData }) {
   const columns = [
     {
-      name: "bikeId",
-      label: "Bike ID",
+      name: "bike",
+      label: "Bike",
       options: {
         filter: true,
         sort: true,
@@ -17,6 +17,22 @@ function WeeklyReport({ salesData }) {
         },
         customBodyRender: (value, tableMeta, updateValue) => {
           return <div style={{ textAlign: "center" }}>{value}</div>;
+        },
+      },
+    },
+    {
+      name: "image",
+      label: "Image",
+      options: {
+        filter: true,
+        sort: true,
+        customHeadLabelStyle: {
+          fontWeight: "bold",
+          fontSize: "16px",
+          textAlign: "center",
+        },
+        customBodyRender: (value, tableMeta, updateValue) => {
+          return <img src={value} alt="Bike" style={{ width: "100px" }} />;
         },
       },
     },
@@ -126,7 +142,8 @@ function WeeklyReport({ salesData }) {
       return daysDiff <= 7;
     })
     .map((sale) => ({
-      bikeId: sale.BikeId,
+      bike: sale.BikeName,
+      image: sale.BikePhoto,
       location: sale.Location,
       bookedAt: sale.startdate,
       totalHours: sale.totalHour,

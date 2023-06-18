@@ -7,7 +7,7 @@ exports.applyCoupon = (req, res) => {
     .then((data) => {
         if (data) {
       let NewTotalAmount = totalAmount - data.Amount;
-      res.status(200).json({msg:"Coupon Added SuccessFully",NewTotalAmount});
+      res.status(200).json(NewTotalAmount);
         } else {
           res.status(400).json("Invalid Coupon");
         }

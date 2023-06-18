@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -7,13 +7,12 @@ import { io } from "socket.io-client";
 import Contacts from "../../../Components/Chat/Contacts";
 import Welcome from "../../../Components/Chat/Welcome";
 import ChatContainer from "../../../Components/Chat/ChatContainer";
+import Usernavbar from "../../../Components/UserNavBar/Usernavbar";
 function Chat() {
   const socket = io("http://localhost:3000");
   const user = useSelector((state) => state.UserLoginReducer?.loginuserdata);
   const [contacts, setContacts] = useState([]);
-  const [currentChat ,setCurrentChat] = useState(undefined)
-
-  console.log(contacts);
+  const [currentChat, setCurrentChat] = useState(undefined);
 
   useEffect(() => {
     if (user) {
@@ -25,9 +24,9 @@ function Chat() {
       details();
     }
   }, []);
-  const handleChatChange =(chat)=>{
-    setCurrentChat(chat)
-  }
+  const handleChatChange = (chat) => {
+    setCurrentChat(chat);
+  };
   useEffect(() => {
     if (user) {
       // socket.current = io(host)
@@ -36,22 +35,29 @@ function Chat() {
   });
 
   return (
-    <Container>
-      <div className="container">
-        <Contacts contacts={contacts} currentUser={user} changeChat={ handleChatChange} />
-        {currentChat === undefined ? (
+    <>
+          <Usernavbar />
+
+      <Container>
+        <div className="container">
+          <Contacts
+            contacts={contacts}
+            currentUser={user}
+            changeChat={handleChatChange}
+          />
+          {currentChat === undefined ? (
             <Welcome currentUser={user} />
           ) : (
-
             <ChatContainer
               currentUser={user}
               currentChat={currentChat}
               socket={socket}
             />
           )}
-        {/* <Welcome currentUser={user} /> */}
-      </div>
-    </Container>
+          {/* <Welcome currentUser={user} /> */}
+        </div>
+      </Container>
+    </>
   );
 }
 const Container = styled.div`
@@ -62,7 +68,7 @@ const Container = styled.div`
   justify-content: center;
   gap: 1rem;
   align-items: center;
-  background-color: #131324;
+  background-color: #008080;
   .container {
     height: 85vh;
     width: 85vw;

@@ -5,8 +5,8 @@ import moment from "moment";
 function YearlyReport({ salesData }) {
   const columns = [
     {
-      name: "bikeId",
-      label: "Bike ID",
+      name: "bike",
+      label: "Bike",
       options: {
         filter: true,
         sort: true,
@@ -17,6 +17,22 @@ function YearlyReport({ salesData }) {
         },
         customBodyRender: (value, tableMeta, updateValue) => {
           return <div style={{ textAlign: "center" }}>{value}</div>;
+        },
+      },
+    },
+    {
+      name: "image",
+      label: "Image",
+      options: {
+        filter: true,
+        sort: true,
+        customHeadLabelStyle: {
+          fontWeight: "bold",
+          fontSize: "16px",
+          textAlign: "center",
+        },
+        customBodyRender: (value, tableMeta, updateValue) => {
+          return <img src={value} alt="Bike" style={{ width: "100px" }} />;
         },
       },
     },
@@ -126,13 +142,14 @@ function YearlyReport({ salesData }) {
       return daysDiff <= 365;
     })
     .map((sale) => ({
-        bikeId: sale.BikeId,
-        location: sale.Location,
-        bookedAt: sale.bookedAt,
-        totalHours: sale.totalHour,
-        totalAmount: sale.totalAmount,
-        paymentType: sale.paymentMethod,
-        status: sale.status,
+      bike: sale.BikeName,
+      image: sale.BikePhoto,
+      location: sale.Location,
+      bookedAt: sale.bookedAt,
+      totalHours: sale.totalHour,
+      totalAmount: sale.totalAmount,
+      paymentType: sale.paymentMethod,
+      status: sale.status,
     }));
 
   const options = {
