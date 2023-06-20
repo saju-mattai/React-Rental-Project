@@ -9,11 +9,12 @@ export const UserAddBikeAction = (formdata) => async (dispatch) => {
     dispatch({
       type: User_Action_Types.ADD_BIKE_USER_SUCCESS,
       payload: formdata,
-    }).catch((err) => {
+    }).catch((error) => {
       dispatch({
         type: User_Action_Types.ADD_BIKE_USER_FAIL,
-        payload: err.response,
+        payload: error.response.data,
       });
+      // alert(error.response.data)
     });
   } catch (error) {}
 };

@@ -17,6 +17,7 @@ function ProfileDetailSection() {
   const handlemodal = () => {
     setModal(!modal);
   };
+  
   return (
     <div
       className="container mt-4 mb-5 "

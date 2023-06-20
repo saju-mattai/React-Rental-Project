@@ -2,7 +2,7 @@ const bookingmodel = require("../../Models/BookingSchema");
 const WalletModel = require("../../Models/WalletSchema");
 const vehiclemodel = require("../../Models/AdminModels/VehicleModel");
 exports.CancelMyRide = (req, res) => {
- 
+  console.log(req.query.cancelReason);
 
   try {
     bookingmodel.find({ _id: req.query.bookingid }).then((response) => {
@@ -14,6 +14,7 @@ exports.CancelMyRide = (req, res) => {
           {
             $set: {
               status: "Cancelled",
+              cancelReason: req.query.cancelReason,
             },
           }
         )

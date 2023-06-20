@@ -1,47 +1,24 @@
-import React, { useEffect, useRef, useState } from "react";
-import NoDataImg from "../../../assets/2953962.jpg";
-import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
+import React, { useEffect } from "react";
 import AdminDrawer from "../../../Components/AdminDashbored/AdminDrawer";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getBookingAction } from "../../../Redux/Actions/Admin_Action/getBookingDetailsAction";
-import { GetBookingDetailsApi } from "../../../API/Admin/ApiCalls";
 import { MDBDataTable } from "mdbreact";
 
-import ReactPaginate from "react-paginate";
-
 function GetBookings() {
-  const [limit, setLimit] = useState(3);
-  const [pageCount, setPageCount] = useState(1);
-  const currentPage = useRef();
-  // const [data, setData] = useState("");
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const BookigData = useSelector(
     (state) => state.getBookingDetailsReducer.Data
   );
-  console.log('BookigData',BookigData);
+  console.log("BookigData", BookigData);
 
   useEffect(() => {
     dispatch(getBookingAction());
-    // currentPage.current = 1;
-    // getPaginatedVehicle();
   }, []);
-  // const handlePageClick = (e) => {
-  //   currentPage.current = e.selected + 1;
-  //   getPaginatedVehicle();
-  // };
 
-  // function getPaginatedVehicle() {
-  //   GetBookingDetailsApi(currentPage.current, limit).then((data) => {
-  //     setPageCount(data.data.pageCount);
-  //     setData(data.data.result);
-  //   });
-  // }
-
-  const data= {
+  const data = {
     columns: [
       {
         label: "Sl No",
@@ -98,6 +75,12 @@ function GetBookings() {
         width: 50,
       },
       {
+        label: "CancelReason",
+        field: "cancelReason",
+        sort: "asc",
+        width: 50,
+      },
+      {
         label: "Status",
         field: "status",
         sort: "asc",
@@ -110,11 +93,11 @@ function GetBookings() {
       bike: item.BikeName,
       image: (
         <div>
-            <img
-              src={item.BikePhoto}
-              alt="image"
-              style={{ height: "80px", width: "100px" }}
-            />
+          <img
+            src={item.BikePhoto}
+            alt="image"
+            style={{ height: "80px", width: "100px" }}
+          />
         </div>
       ),
       location: item.Location,
@@ -122,6 +105,7 @@ function GetBookings() {
       enddate: item.enddate,
       totalamount: item.totalAmount,
       payment: item.paymentMethod,
+      cancelReason: item.cancelReason,
       status: item.status,
     })),
   };
@@ -143,8 +127,7 @@ function GetBookings() {
             <b> Booking Details</b>{" "}
           </h1>
         </div>
-        <MDBDataTable  striped bordered small data={data} />
-
+        <MDBDataTable striped bordered small data={data} />
       </div>
     </div>
   );

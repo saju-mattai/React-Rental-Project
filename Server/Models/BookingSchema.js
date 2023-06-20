@@ -23,6 +23,8 @@ const bookingSchema = new mongoose.Schema(
     transactionId: { type: String },
     HelmetRequired: { type: Boolean },
     status: { type: String, default: "Booked" },
+    cancelReason: { type: String, default: "Nill" },
+
     paymentMethod: { type: String },
   },
   { timestamps: true }

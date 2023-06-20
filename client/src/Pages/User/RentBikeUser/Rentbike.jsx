@@ -9,6 +9,10 @@ import Usernavbar from "../../../Components/UserNavBar/Usernavbar";
 import { AddBikeApi } from "../../../API/User/ApiCalls";
 import { UserAddBikeAction } from "../../../Redux/Actions/User_Action/UserAddBikeAction";
 import { getLocation } from "../../../Redux/Actions/Admin_Action/addLocationAction";
+import { User_Action_Types } from "../../../Redux/Constants/User_Constants/UserConstants";
+import { message } from "antd";
+
+
 
 function Rentbike() {
   const [loading, setLoading] = useState(false);
@@ -25,7 +29,16 @@ function Rentbike() {
   const dispatch = useDispatch();
 
   const location = useSelector((state) => state.AddLocationReducer.Data);
-  console.log(location);
+
+  const locatssion = useSelector((state) => state.UserAddBikeReducer);
+  console.log(locatssion);
+
+
+  // const {AddBkeDataErr,addbikeloading,AddBkeData} = locatssion
+
+  // console.log(';;;;;;;;;;;',AddBkeDataErr)
+
+
 
   useEffect(() => {
     dispatch(getLocation());
@@ -71,7 +84,17 @@ function Rentbike() {
       setTimeout(() => {
         navigate("/mybikes");
       }, 1000);
-    });
+    }).catch((error)=>{
+      dispatch({
+        type: User_Action_Types.ADD_BIKE_USER_FAIL,
+        payload: error.response.data,
+      });
+      message.error(
+        error.response && error.response.data
+          ? error.response.data
+          : "Error occurred"
+      );
+    })
   };
 
   return (

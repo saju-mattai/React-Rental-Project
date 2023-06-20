@@ -43,18 +43,14 @@ router.route('/booking').post(protect,booking.booking)
 
 
 
-router.route('/adduserbike').post(upload.array('images'),addBikeUser.addBikeUser)
+router.route('/adduserbike').post(upload.array('images'),protect,addBikeUser.addBikeUser)
 router.route('/getwallet').get(getWalletDetails.getWalletDetails)
 router.route('/getrentedbike').get(getMyRentedBikeDetails.getMyRentedBikeDetails)
-router.route('/getonride').get(getMyRentedBikeDetails.getOnride)
 router.route('/savebooking').post(saveBooking.saveBooking)
 router.route('/cancelride').put(CancelMyRide.CancelMyRide)
 router.route('/getcancelledbike').get(getCancelledVehicle.getCancelledVehicle)
-
 router.route('/applycoupon').post(applyCoupon.applyCoupon)
-
 router.route('/getalluser').get(getAllUser.getAllUser)
-
 router.route('/addmsg').post(Chat.addMessageController)
 router.route('/getmsg').post(Chat.getAllMessages)
 
@@ -65,7 +61,25 @@ router.route('/getmsg').post(Chat.getAllMessages)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // router.route('/home').get(protect,home.home)
+// router.route('/getonride').get(getMyRentedBikeDetails.getOnride)
 
 
 

@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
 const upload = require("../Utils/multer");
+const protect = require('../Middleware/jwt')
+
 
 const adminsignup = require("../controller/AdminController/adminlogin");
 // const adminlogin = require('../controller/AdminController/adminlogin')
@@ -55,7 +57,7 @@ router.route("/deletelocation").delete(addLocation.deleteLocation);
 router.route("/editlocation").post(addLocation.editLocation);
 
 
-router.route("/getdashboard").get(getAllDetails.getAllDetails);
+router.route("/getdashboard").get(protect,getAllDetails.getAllDetails);
 router.route("/getsalesreport").get(getSalesReport.getSalesReport);
 
 

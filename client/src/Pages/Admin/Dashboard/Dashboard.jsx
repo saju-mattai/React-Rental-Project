@@ -13,6 +13,7 @@ import { getDashBoardDetailsAction } from "../../../Redux/Actions/Admin_Action/G
 import RentRequestGraph from "../../../Components/RentRequestGraph";
 import RentPaymentGraph from "../../../Components/RentPaymentGraph";
 
+
 function Dashboard() {
   const dispatch = useDispatch();
 

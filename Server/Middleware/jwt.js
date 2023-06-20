@@ -11,6 +11,7 @@ const protect = asynhandler((req, res, next) => {
     try {
       token = req.headers.authorization.split(" ")[1];
       const decoded = jwt.verify(token, process.env.TOKEN_CODE);
+      console.log('decoded',decoded);
 
       next();
     } catch (error) {

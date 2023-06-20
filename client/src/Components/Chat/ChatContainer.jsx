@@ -36,13 +36,15 @@ function ChatContainer({ currentUser, currentChat, socket }) {
         from: currentUser.id,
         message: data.data,
       });
+      console.log('oiojojiji',data.data)
       setMessages([...messages, data.data]);
+      
     });
   };
 
   useEffect(() => {
     if (socket) {
-      socket.on("msg-receive", (msg) => {
+      socket.on("msg-recieve", (msg) => {
         setMessages((prevMessages) => [...prevMessages, msg]);
       });
     }

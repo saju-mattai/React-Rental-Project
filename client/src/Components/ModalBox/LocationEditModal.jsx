@@ -16,8 +16,7 @@ import {
   MDBModalFooter,
 } from "mdb-react-ui-kit";
 import { TextField } from "@mui/material";
-import { EditUserApi } from "../../API/User/ApiCalls";
-import { editUserAction } from "../../Redux/Actions/User_Action/EditUserAction";
+
 import { Box } from "@mantine/core";
 import { EditLocationApi } from "../../API/Admin/ApiCalls";
 import { editLocationAction } from "../../Redux/Actions/Admin_Action/addLocationAction";

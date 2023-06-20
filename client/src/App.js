@@ -30,6 +30,7 @@ import SalesReport from './Pages/Admin/SalesReport/SalesReport';
 import Chat from './Pages/User/Chat/Chat';
 import Userhomemain from './Components/UserHomeMain/Userhomemain';
 import ErrorPage from './Components/ErrorPage/ErrorPage';
+import BikeOrder from './Pages/test';
 
 function App() {
   const UserData = useSelector((state) => state.UserLoginReducer.loginuserdata)
@@ -45,16 +46,16 @@ function App() {
           {/* <Route path="/" element={UserData ?<UserHome /> : <Navigate to='/login' /> } /> */}
           <Route path="/" element={<Userhomemain />} />
           <Route path="/profile" element={UserData ? <Profile /> : <Navigate to='/' />} />
-          <Route path='/edituser' element={<EditUser />} />
+          <Route path='/edituser' element={UserData ? <EditUser /> : <Navigate to='/' />} />
           <Route path='/otplogin' element={<OtpLogin />} />
-          <Route path='/bikes' element={<DisplayBikes />} />
-          <Route path='/booking' element={<Booking />} />
-          <Route path='/rentbike' element={<Rentbike />} />
-          <Route path='/mybikes' element={<ShowMyBikes />} />
-          <Route path='/checkout-success' element={<CheckOutSuccess />} />
-          <Route path='/singleview' element={<SingleViewBike />} />
-          <Route path="/myrent" element={<Myrent />} />
-          <Route path="/chat" element={<Chat />} />
+          <Route path='/bikes' element={  <DisplayBikes /> } />
+          <Route path='/booking' element={UserData ?  <Booking />  : <Navigate to='/' />} />
+          <Route path='/rentbike' element={UserData ? <Rentbike />  : <Navigate to='/' />} />
+          <Route path='/mybikes' element={UserData ? <ShowMyBikes /> : <Navigate to='/' />} />
+          <Route path='/checkout-success' element={UserData ?  <CheckOutSuccess /> : <Navigate to='/' />} />
+          <Route path='/singleview' element={UserData ? <SingleViewBike />  : <Navigate to='/' /> } />
+          <Route path="/myrent" element={UserData ? <Myrent /> : <Navigate to='/' /> } />
+          <Route path="/chat" element={UserData ? <Chat /> : <Navigate to='/' />} />
 
 
           {/* Admin */}
@@ -64,14 +65,14 @@ function App() {
           <Route path='/showalluser' element={Admindata ? <ShowAllUser /> : <Navigate to='/adminlogin' />} />
           <Route path='/addvehicle' element={Admindata ? <AddVehicle /> :<Navigate to='/adminlogin' /> } />
           <Route path='/showallvehicle' element={Admindata ? <ShowVehicles/> :<Navigate to='/adminlogin' /> } />
-          <Route path='/editvehicle' element={<EditVehicle/> } />
-          <Route path='/rentrequest' element={<RentRequest/> } />
-          <Route path='/addcoupon' element={<AddCoupon/> } />
-          <Route path='/getbookings' element={<GetBookings/> } />
-          <Route path='/viewmore-rentrequest' element={<VeiwMoreRentRequest/> } />
-          <Route path='/addlocation' element={<AddLocation/> } />
-          <Route path='/dashboard' element={<Dashboard/> } />
-          <Route path='/salesreport' element={<SalesReport/> } />
+          <Route path='/editvehicle' element={Admindata ? <EditVehicle/> :<Navigate to='/adminlogin' />  } />
+          <Route path='/rentrequest' element={Admindata ? <RentRequest/> :<Navigate to='/adminlogin' /> } />
+          <Route path='/addcoupon' element={Admindata ? <AddCoupon/>:<Navigate to='/adminlogin' />  } />
+          <Route path='/getbookings' element={Admindata ? <GetBookings/> :<Navigate to='/adminlogin' /> } />
+          <Route path='/viewmore-rentrequest' element={Admindata ? <VeiwMoreRentRequest/> :<Navigate to='/adminlogin' />  } />
+          <Route path='/addlocation' element={Admindata ? <AddLocation/> :<Navigate to='/adminlogin' />  } />
+          <Route path='/dashboard' element={Admindata ? <Dashboard/> :<Navigate to='/adminlogin' /> } />
+          <Route path='/salesreport' element={Admindata ? <SalesReport/> :<Navigate to='/adminlogin' /> } />
 
 
 
@@ -79,6 +80,7 @@ function App() {
         <Route path="*" element={<ErrorPage />} />
 
 
+        {/* <Route path="/test" element={<BikeOrder />} /> */}
 
 
 
