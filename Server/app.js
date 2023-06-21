@@ -9,7 +9,8 @@ const socket = require("socket.io");
 require("dotenv").config();
 //database
 mongoose
-  .connect("mongodb://127.0.0.1:27017/RENTAL-DATABASE")
+  // .connect("mongodb://127.0.0.1:27017/RENTAL-DATABASE")
+  .connect("mongodb+srv://msaju:msaju123@cluster0.j7apdkx.mongodb.net/BikeRental")
   .then((data) => {
     console.log("connected");
   })
