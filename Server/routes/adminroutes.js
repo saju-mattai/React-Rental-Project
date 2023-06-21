@@ -4,7 +4,7 @@ const upload = require("../Utils/multer");
 const protect = require('../Middleware/jwt')
 
 
-const adminsignup = require("../controller/AdminController/adminlogin");
+const adminsignup = require("../controller/AdminController/adminSignup");
 const adminlogin = require('../controller/AdminController/adminlogin')
 const blockunblock = require("../controller/AdminController/blockandunblockuser");
 const addvehicle = require("../controller/AdminController/addvehicle");
@@ -24,7 +24,7 @@ const getSalesReport = require("../controller/AdminController/SalesReport")
 
 /* GET users listing. */
 router.route("/adminsignup").post(adminsignup.Adminsignup);
-router.route("/adminlogin").post(adminsignup.Adminlogin);
+router.route("/adminlogin").post(adminlogin.Adminlogin);
 router.route("/blockunblock").put(blockunblock.blockunblock);
 router
   .route("/addvehicle")
