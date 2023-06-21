@@ -4,23 +4,23 @@ const upload = require("../Utils/multer");
 const protect = require('../Middleware/jwt')
 
 
-const adminsignup = require("../controller/AdminController/adminsignup");
-const adminlogin = require('../controller/AdminController/adminlogin')
-const blockunblock = require("../controller/AdminController/blockandunblockuser");
-const addvehicle = require("../controller/AdminController/addvehicle");
-const ShowAllUSer = require("../controller/AdminController/ShowAllUser");
-const ShowAllVehicle = require("../controller/AdminController/showAllVehicles");
-const deleteVehicle = require("../controller/AdminController/DeleteVehicle");
-const editVehicle = require("../controller/AdminController/editVehicle");
-const ShowAllUserVehicle = require("../controller/AdminController/ShowAllUserVehicle");
-const userBikeAccept = require("../controller/AdminController/userBikeAccept");
-const userBikeReject = require("../controller/AdminController/userBikeReject");
-const addCoupon = require("../controller/AdminController/addCoupon");
-const getBookingDetails = require("../controller/AdminController/getBookingDetails");
-const addLocation = require("../controller/AdminController/AddLocation");
+const adminsignup = require("../Controller/AdminController/adminsignup");
+const adminlogin = require('../Controller/AdminController/adminlogin')
+const blockunblock = require("../Controller/AdminController/blockandunblockuser");
+const addvehicle = require("../Controller/AdminController/addvehicle");
+const ShowAllUSer = require("../Controller/AdminController/ShowAllUser");
+const ShowAllVehicle = require("../Controller/AdminController/showAllVehicles");
+const deleteVehicle = require("../Controller/AdminController/DeleteVehicle");
+const editVehicle = require("../Controller/AdminController/editVehicle");
+const ShowAllUserVehicle = require("../Controller/AdminController/ShowAllUserVehicle");
+const userBikeAccept = require("../Controller/AdminController/userBikeAccept");
+const userBikeReject = require("../Controller/AdminController/userBikeReject");
+const addCoupon = require("../Controller/AdminController/addCoupon");
+const getBookingDetails = require("../Controller/AdminController/getBookingDetails");
+const addLocation = require("../Controller/AdminController/AddLocation");
 
-const getAllDetails = require("../controller/AdminController/Dashboard")
-const getSalesReport = require("../controller/AdminController/SalesReport")
+const getAllDetails = require("../Controller/AdminController/Dashboard")
+const getSalesReport = require("../Controller/AdminController/SalesReport")
 
 /* GET users listing. */
 router.route("/adminsignup").post(adminsignup.Adminsignup);
