@@ -4,7 +4,7 @@ const upload = require("../Utils/multer");
 const protect = require('../Middleware/jwt')
 
 
-const adminsignup = require("../controller/AdminController/adminSignup");
+const adminsignup = require("../controller/AdminController/adminsignup");
 const adminlogin = require('../controller/AdminController/adminlogin')
 const blockunblock = require("../controller/AdminController/blockandunblockuser");
 const addvehicle = require("../controller/AdminController/addvehicle");
