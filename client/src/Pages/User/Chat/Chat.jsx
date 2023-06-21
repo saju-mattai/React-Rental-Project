@@ -9,7 +9,7 @@ import Welcome from "../../../Components/Chat/Welcome";
 import ChatContainer from "../../../Components/Chat/ChatContainer";
 import Usernavbar from "../../../Components/UserNavBar/Usernavbar";
 function Chat() {
-  const socket = io("http://localhost:8080");
+  const socket = io("https://bikerental.store/");
   const user = useSelector((state) => state.UserLoginReducer?.loginuserdata);
   const [contacts, setContacts] = useState([]);
   const [currentChat, setCurrentChat] = useState(undefined);

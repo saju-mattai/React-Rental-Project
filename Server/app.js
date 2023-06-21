@@ -29,10 +29,14 @@ var app = express();
 
 //cors
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "https://rent-a-drive.netlify.app",
   credentials: true,
   optioSuccessStatus: 200,
 };
+
+app.get('/',(req,res)=>{
+  res.send("working fineeeee..........")
+})
 app.use(cors(corsOptions));
 
 app.use(logger("dev"));
@@ -65,7 +69,7 @@ const server = app.listen(PORT, console.log("port", PORT));
 
 const io = socket(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://rent-a-drive.netlify.app",
     credentials: true,
   },
 });
