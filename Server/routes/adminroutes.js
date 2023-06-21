@@ -5,7 +5,7 @@ const protect = require('../Middleware/jwt')
 
 
 const adminsignup = require("../controller/AdminController/adminlogin");
-// const adminlogin = require('../controller/AdminController/adminlogin')
+const adminlogin = require('../controller/AdminController/adminlogin')
 const blockunblock = require("../controller/AdminController/blockandunblockuser");
 const addvehicle = require("../controller/AdminController/addvehicle");
 const ShowAllUSer = require("../controller/AdminController/ShowAllUser");
