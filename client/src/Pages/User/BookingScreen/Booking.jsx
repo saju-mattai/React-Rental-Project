@@ -167,7 +167,6 @@ function Booking() {
           <img
             src={filteredData[0].Vphoto[0].url}
             alt=""
-            srcset=""
             className="bikeimg"
           />
         </div>

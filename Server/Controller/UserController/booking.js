@@ -146,11 +146,11 @@ exports.booking = async (req, res) => {
           },
         ],
         mode: "payment",
-        success_url: `${process.env.CLIENT_URL}/checkout-success?userId=${userId}
+        success_url: `https://rent-a-drive.netlify.app/checkout-success?userId=${userId}
       &BikeName=${BikeName}&Location=${Location}
       &Description=${Description}&BikeId=${BikeId}&totalAmount=${totalAmount}&paymentMethod=${paymentMethod}
       &totalHour=${totalHour}&HelmetRequired=${HelmetRequired}&enddate=${enddate}&startdate=${startdate}&BikePhoto=${BikePhoto}&UserName=${UserName}`,
-        cancel_url: `${process.env.CLIENT_URL}/booking`,
+        cancel_url: `https://rent-a-drive.netlify.app/booking`,
         metadata: {
           bike_id: BikeId,
         },

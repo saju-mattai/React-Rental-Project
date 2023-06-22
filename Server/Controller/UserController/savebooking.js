@@ -18,7 +18,6 @@ exports.saveBooking = (req, res) => {
     Location,
     paymentMethod
   } = req.body.Obj;
-  console.log('req.body.Obj',req.body.Obj);
   const details = {
     userId,
     UserName,
