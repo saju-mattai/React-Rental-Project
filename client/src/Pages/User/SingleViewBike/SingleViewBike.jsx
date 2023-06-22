@@ -1,6 +1,8 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { MDBRow, MDBCol } from "mdb-react-ui-kit";
+import {
+  MDBCardImage,
+} from "mdb-react-ui-kit";
 import Usernavbar from "../../../Components/UserNavBar/Usernavbar";
 import { Button } from "antd";
 
@@ -29,7 +31,7 @@ function SingleViewBike() {
             boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.5)",
           }}
         >
-          <img
+           <MDBCardImage
             src={filteredData[0].Vphoto[0].url}
             alt=""
             srcset=""
