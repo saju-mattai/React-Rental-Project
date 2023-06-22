@@ -30,6 +30,7 @@ var app = express();
 //cors
 const corsOptions = {
   origin: "https://rent-a-drive.netlify.app",
+  // origin: " http://localhost:3000",
   credentials: true,
   optioSuccessStatus: 200,
 };
