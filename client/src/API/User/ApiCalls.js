@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const API = axios.create({ baseURL: "https://bikerental.store/api/user" });
-const API = axios.create({ baseURL: "http://localhost:8080/api/user" })
+const API = axios.create({ baseURL: "https://bikerental.store/api/user" });
+// const API = axios.create({ baseURL: "http://localhost:8080/api/user" })
 
 
 const user = JSON.parse(localStorage.getItem("UserInfo"));
