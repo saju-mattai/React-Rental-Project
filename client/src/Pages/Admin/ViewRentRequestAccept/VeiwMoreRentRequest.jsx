@@ -31,7 +31,6 @@ export default function VeiwMoreRentRequest() {
   const [show, setShow] = useState(false);
   const location = useLocation();
   const { filteredData } = location.state;
-  console.log(filteredData);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -55,7 +54,6 @@ export default function VeiwMoreRentRequest() {
           setShow(false);
         });
 
-        Swal.fire("Accepted!", "Your vehicle has been Accepted.", "success");
       }
     });
   };

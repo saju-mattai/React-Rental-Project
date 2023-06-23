@@ -19,7 +19,6 @@ import { useNavigate } from "react-router-dom";
 import { searchVehicleApi } from "../../../../API/User/ApiCalls";
 import { filterByBrandAction, filterByModelAction } from "../../../../Redux/Actions/User_Action/FilterAction";
 import Footer from "../../../../Components/Footer/Footer";
-import Loading from "../../../Loading";
 
 function DisplayBikes() {
   const dispatch = useDispatch();
@@ -146,9 +145,6 @@ function DisplayBikes() {
               />
             </MDBCol>
 
-            {loading ? (
-              <Loading />
-            ) : (
               <MDBRow className="row-cols-1 row-cols-md-3 g-4">
                 {Data && Data.length ? (
                   Data.map((item, i) => (
@@ -209,7 +205,6 @@ function DisplayBikes() {
                   </div>
                 )}
               </MDBRow>
-            )}
           </MDBContainer>
         </div>
         <div className="col"></div>

@@ -15,6 +15,7 @@ import { MDBCol } from "mdb-react-ui-kit";
 
 import "sweetalert2/dist/sweetalert2.css";
 import {
+  DeleteVehicleApi,
   SearchVehicelApi,
   ShowAllVehicleApi,
 } from "../../../API/Admin/ApiCalls";
@@ -48,8 +49,13 @@ function ShowVehicles() {
     }).then((result) => {
       if (result.isConfirmed) {
         // Dispatch deleteVehicleAction and ShowAllVehicleAction here
-        dispatch(deleteVehicleAction(id));
-        dispatch(ShowAllVehicleAction());
+        DeleteVehicleApi(id).then((data) => {
+          dispatch(ShowAllVehicleAction());
+          currentPage.current = 1;
+          getPaginatedVehicle();
+          handleSubmit();
+        });
+        // dispatch(deleteVehicleAction(id));
 
         Swal.fire("Deleted!", "Your vehicle has been deleted.", "success");
       }
@@ -82,7 +88,7 @@ function ShowVehicles() {
       setSearchedData(data.data);
     });
   };
-  
+
   const handleChange = (e) => {
     const { value } = e.target;
     setSearchTerm(value);

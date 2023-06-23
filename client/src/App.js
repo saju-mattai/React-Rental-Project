@@ -61,7 +61,7 @@ function App() {
           {/* Admin */}
           {/* <Route path='/adminhome' element={<Adminhome></Adminhome>} /> */}
           <Route path="/adminlogin" element={Admindata ? <Navigate to='/adminhome' /> : <Login />} />
-          <Route path='/adminhome' element={Admindata ? <Adminhome /> : <Login />} />
+          <Route path='/adminhome' element={Admindata ? <Dashboard /> : <Login />} />
           <Route path='/showalluser' element={Admindata ? <ShowAllUser /> : <Navigate to='/adminlogin' />} />
           <Route path='/addvehicle' element={Admindata ? <AddVehicle /> :<Navigate to='/adminlogin' /> } />
           <Route path='/showallvehicle' element={Admindata ? <ShowVehicles/> :<Navigate to='/adminlogin' /> } />

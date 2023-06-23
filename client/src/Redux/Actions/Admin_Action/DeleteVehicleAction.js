@@ -8,6 +8,7 @@ export const deleteVehicleAction = (id) => async (dispatch)=>{
     })
     try {
         DeleteVehicleApi(id).then((data)=>{
+            console.log(data.data);
            dispatch({
             type:Admin_Action_Types.DELETE_VEHICLE_REQUEST,
             payload:data.data

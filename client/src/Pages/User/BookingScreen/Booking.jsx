@@ -52,6 +52,10 @@ function Booking() {
   const [coupon, setCoupon] = useState("");
   const [paymentMethod, setpaymentMethod] = useState(false);
 
+  const [heltedapplied, setHeltedapplied] = useState(false)
+  const [appliedCoupon, setAppliedCoupon] = useState(false)
+
+
   // const {
   //   register,
   //   handleSubmit,
@@ -73,10 +77,10 @@ function Booking() {
 
   useEffect(() => {
     setTotalAmount(totalHour * filteredData[0].Vprice);
-    if (helmet) {
-      setTotalAmount(totalAmount + 100);
-      setHelmet(true);
-    }
+    // if (helmet) {
+    //   setTotalAmount(totalAmount + 100);
+    //   setHelmet(true);
+    // }
   }, [helmet, totalHour]);
 
   let CouponDetails = {
@@ -89,12 +93,14 @@ function Booking() {
   if (newtotalamount) {
     totalAmount = newtotalamount;
   }
-  if (newtotalamount && helmet) {
+   if (newtotalamount && helmet) {
     totalAmount = newtotalamount + 100;
   }
-  // if(!newtotalamount && helmet === true){
-  //   totalAmount = totalAmount + 100;
-  // }
+
+  if(!newtotalamount && helmet === true){
+    totalAmount = totalAmount + 100;
+  }
+ 
   const handelSubmit = () => {
     setLoading(true);
     if (newtotalamount) {

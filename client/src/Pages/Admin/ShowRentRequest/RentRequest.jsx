@@ -3,7 +3,7 @@ import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import { MDBDataTable } from 'mdbreact';
+import { MDBDataTable } from "mdbreact";
 import {
   // SearchRentRequestBikesAction,
   ShowUserBikesAction,
@@ -15,6 +15,7 @@ import AdminDrawer from "../../../Components/AdminDashbored/AdminDrawer";
 
 // import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
+import { ShowUSerVehicleApi } from "../../../API/Admin/ApiCalls";
 // import { SearchUserVehicleApi } from "../../../API/Admin/ApiCalls";
 
 function RentRequest() {
@@ -22,22 +23,25 @@ function RentRequest() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const [searchedData, setSearchedData] = useState([]);
-  const Vehicledata = useSelector(
-    (state) => state.ShowUserVehicleReducer.VehicleData
-  );
+  const Vdata = useSelector((state) => state.ShowUserVehicleReducer);
+  const { VehicleData, loading } = Vdata;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleView = (id) => {
-    const filteredData = Vehicledata.filter((item) => item._id === id);
+    const filteredData = VehicleData.filter((item) => item._id === id);
     navigate("/viewmore-rentrequest", { state: { filteredData } });
   };
 
   useEffect(() => {
-    dispatch(ShowUserBikesAction());
-  }, [show, searchTerm]);
+      ShowUSerVehicleApi().then((data)=>{
+      dispatch(ShowUserBikesAction(data.data));
 
- 
+      })
+   
+  }, []);
+
   const data = {
     columns: [
       {
@@ -101,7 +105,7 @@ function RentRequest() {
         width: 50,
       },
     ],
-    rows: Vehicledata?.map((item, index) => ({
+    rows: VehicleData?.map((item, index) => ({
       no: index + 1,
       name: item.Vname,
       model: item.Vmodel,
@@ -155,7 +159,6 @@ function RentRequest() {
           </h1>
         </div>
         <MDBDataTable striped bordered small data={data} />
-       
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import { Admin_Action_Types } from "../../Constants/Admin_Constants/AdminConstants";
 
 export const ShowUserVehicleReducer = (state = {}, { type, payload }) => {
+  console.log(payload,'payloadpayloadpayloadpayload');
   switch (type) {
     case Admin_Action_Types.SHOW_USER_VEHICLE_REQUEST:
       return {
